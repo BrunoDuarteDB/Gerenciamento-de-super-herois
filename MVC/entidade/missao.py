@@ -11,43 +11,43 @@ class Missao:
         self.__viloes = [] # MUDAR NO DIAGRAMA
         self.__resultado = resultado
 
-        @property
-        def titulo(self):
-            return self.__titulo
+    @property
+    def titulo(self):
+        return self.__titulo
 
-        @property
-        def data(self):
-            return self.__data
+    @property
+    def data(self):
+        return self.__data
 
-        @property
-        def local(self):
-            return self.__local
+    @property
+    def local(self):
+        return self.__local
 
-        @property
-        def conflito(self):
-            return self.__conflito
+    @property
+    def conflito(self):
+        return self.__conflito
 
-        @property
-        def resultado(self):
-            return self.__resultado
+    @property
+    def resultado(self):
+        return self.__resultado
 
-        @titulo.setter
-        def titulo(self, titulo: str):
-            self.__titulo = titulo
+    @titulo.setter
+    def titulo(self, titulo: str):
+        self.__titulo = titulo
 
-        @data.setter
-        def data(self, data: str):
-            self.__data = data
+    @data.setter
+    def data(self, data: str):
+        self.__data = data
 
-        @local.setter
-        def local(self, local: str):
-            self.__local = local
+    @local.setter
+    def local(self, local: str):
+        self.__local = local
 
-        @conflito.setter
-        def conflito(self, conflito: str):
-            self.__conflito = conflito
+    @conflito.setter
+    def conflito(self, conflito: str):
+        self.__conflito = conflito
 
-        @resultado.setter
-        def resultado(self, resultado: str):
-            self.__resultado = resultado
+    @resultado.setter
+    def resultado(self, resultado: str):
+        self.__resultado = resultado
 
