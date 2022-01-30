@@ -48,38 +48,38 @@ class Poder:
         return self.__controle_natureza
 
     @velocidade.setter
-    def velocidade(self, velocidade: str):
+    def velocidade(self, velocidade: int):
         self.__velocidade = velocidade
 
     @forca.setter
-    def forca(self, forca: str):
+    def forca(self, forca: int):
         self.__forca = forca
 
     @poder_magico.setter
-    def poder_magico(self, poder_magico: str):
+    def poder_magico(self, poder_magico: int):
         self.__poder_magico = poder_magico
 
     @resistencia.setter
-    def resistencia(self, resistencia: str):
+    def resistencia(self, resistencia: int):
         self.__resistencia = resistencia
 
     @inteligencia.setter
-    def inteligencia(self, inteligencia: str):
+    def inteligencia(self, inteligencia: int):
         self.__inteligencia = inteligencia
 
     @artes_marciais.setter
-    def artes_marciais(self, artes_marciais: str):
+    def artes_marciais(self, artes_marciais: int):
         self.__artes_marciais = artes_marciais
 
     @fator_cura.setter
-    def fator_cura(self, fator_cura: str):
+    def fator_cura(self, fator_cura: int):
         self.__fator_cura = fator_cura
 
     @expertise.setter
-    def expertise(self, expertise: str):
+    def expertise(self, expertise: int):
         self.__expertise = expertise
 
     @controle_natureza.setter
-    def controle_natureza(self, controle_natureza: str):
+    def controle_natureza(self, controle_natureza: int):
         self.__controle_natureza = controle_natureza
 
