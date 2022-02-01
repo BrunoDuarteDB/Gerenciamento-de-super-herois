@@ -1,6 +1,6 @@
 
 
-class TelaMissao()
+class TelaMissao():
     # fazer aqui tratamento dos dados, caso a entrada seja diferente do esperado
     def tela_opcoes(self):
         print('----- MISSÃO -----')

@@ -14,7 +14,7 @@ class TelaSenciente():
         return opcao
 
     # fazer aqui tratamento dos dados, caso a entrada seja diferente do esperado
-    def cadastrar_senciente(self):
+    def pega_dados_senciente(self):
         print('----- DADOS SENCIENTE -----')
         heroi_ou_vilao = int(input('Herói ou vilão? Digite 1 para Herói ou 2 para Vilão: '))
         nome = input('Nome: ')
@@ -25,5 +25,11 @@ class TelaSenciente():
 
         return {"heroi_ou_vilao": heroi_ou_vilao, "nome": nome, "poder": poder, "fraqueza": fraqueza, "empresa": empresa, "local_moradia": local_moradia}
 
+    def alterar_senciente(self):
+        pass
+
     def listar_sencientes(self):
+        pass
+
+    def excluir_senciente(self):
         pass
