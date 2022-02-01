@@ -23,13 +23,35 @@ class TelaSenciente():
         empresa = input('Empresa: ')
         local_moradia = ('Onde mora: ')
 
-        return {"heroi_ou_vilao": heroi_ou_vilao, "nome": nome, "poder": poder, "fraqueza": fraqueza, "empresa": empresa, "local_moradia": local_moradia}
+        if heroi_ou_vilao == 1:
+            alterego = input('Alterego: ')
+            return {"nome": nome, "poder": poder, "fraqueza": fraqueza, "empresa": empresa,
+                    "local_moradia": local_moradia, "alterego": alterego}
 
-    def alterar_senciente(self):
-        pass
+        elif heroi_ou_vilao == 2:
+            periculosidade = input('Periculosidade: ')
+            return {"nome": nome, "poder": poder, "fraqueza": fraqueza, "empresa": empresa,
+                    "local_moradia": local_moradia, "periculosidade": periculosidade}
 
-    def listar_sencientes(self):
-        pass
+    # fazer aqui tratamento dos dados, caso a entrada seja diferente do esperado
+    def mostra_senciente(self, dados_senciente):
+        if isinstance(super_heroi, SuperHeroi):
+            print('Nome do Super-Herói: ', dados_senciente['nome'])
+            print('Fraqueza do Super-Herói: ', dados_senciente['fraqueza'])
+            print('Empresa do Super-Herói: ', dados_senciente['empresa'])
+            print('Local onde mora: ', dados_senciente['local_moradia'])
+            print('Alterego do Super-Herói: ', dados_senciente['alterego'])
+        elif isinstance(vilao, Vilao):
+            print('Nome do Vilão: ', dados_senciente['nome'])
+            print('Fraqueza do Vilão: ', dados_senciente['fraqueza'])
+            print('Empresa do Vilão: ', dados_senciente['empresa'])
+            print('Local onde mora: ', dados_senciente['local_moradia'])
+            print('Periculosidade do Vilão: ', dados_senciente['periculosidade'])
+        print('\n')
 
-    def excluir_senciente(self):
-        pass
+    def seleciona_senciente(self):
+        nome = input('Nome do senciente (Super-Herói ou Vilão) que deseja selecionar: ')
+        return nome
+
+    def mostra_mensagem(self, mensagem):
+        print(mensagem)
