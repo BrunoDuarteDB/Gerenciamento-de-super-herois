@@ -9,11 +9,15 @@ class ControladorMissao():
         self.__tela_missao = TelaMissao()
         self.__controlador_sistema = controlador_sistema
 
-    def incluir_missao(self, missao: Missao):
-        missoes.append(missao)
+    def incluir_missao(self):
+        dados_missao = self.__tela_missao.pega_dados_missao()
+        missao = Missao(dados_missao['titulo'], dados_missao['data'], dados_missao['local'],
+                        dados_missao['conflito'], dados_missao['clientes'], dados_missao['tarefas'],
+                        dados_missao['super_herois'], dados_missao['vilao'])
+        self.__missoes.append(missao)
 
     def alterar_missao(self):
-        pass
+
 
     def gerar_resultado(self):
         pass
