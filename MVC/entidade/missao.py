@@ -9,7 +9,7 @@ class Missao:
         self.__tarefas = []
         self.__super_herois = []
         self.__viloes = [] # MUDAR NO DIAGRAMA
-        self.__resultado = resultado
+        self.__resultado = None
 
     @property
     def titulo(self):
@@ -51,3 +51,32 @@ class Missao:
     def resultado(self, resultado: str):
         self.__resultado = resultado
 
+    def incluir_cliente(self, cliente: Cliente):
+        pass
+
+    def excluir_cliente(self, cliente: Cliente):
+        pass
+
+    def listar_tarefas(self):
+        pass
+
+    def incluir_super_heroi(self, super_heroi: SuperHeroi):
+        pass
+
+    def excluir_super_heroi(self, super_heroi: SuperHeroi):
+        pass
+
+    def listar_super_herois(self):
+        pass
+
+    def incluir_vilao(self, vilao: Vilao):
+        pass
+
+    def excluir_vilao(self, vilao: Vilao):
+        pass
+
+    def listar_viloes(self):
+        pass
+
+    def listar_detalhes(self):
+        pass

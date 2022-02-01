@@ -1,5 +1,5 @@
-#from
-#from
+from limite.tela_missao import TelaMissao
+from entidade.missao import Missao
 
 class ControladorMissao():
 
@@ -24,35 +24,11 @@ class ControladorMissao():
     def alterar_tarefa(self): # deixei o verbo no infinitivo
         pass
 
-# Adições de métodos que estão na classe "Missao"
-
-    def incluir_cliente(self, cliente: Cliente):
-        pass
-
-    def excluir_cliente(self, cliente: Cliente):
-        pass
-
     def listar_tarefas(self):
         pass
 
-    def incluir_super_heroi(self, super_heroi: SuperHeroi):
+    def listar_missao_fracasso(self):
         pass
 
-    def excluir_super_heroi(self, super_heroi: SuperHeroi):
+    def listar_missao_sucesso(self):
         pass
-
-    def listar_super_herois(self):
-        pass
-
-    def incluir_vilao(self, vilao: Vilao):
-        pass
-
-    def excluir_vilao(self, vilao: Vilao):
-        pass
-
-    def listar_viloes(self):
-        pass
-
-    def listar_detalhes(self):
-        pass
-

@@ -1,7 +1,7 @@
 class TelaSistema:
     # fazer aqui tratamento dos dados se a entrada de dados for diferente do esperado
     def tela_opcoes(self):
-        print('Sistema de Gerenciamento de Super-Heróis')
+        print('----- Sistema de Gerenciamento de Super-Heróis -----')
         print('Opções:')
         print('1 - Super-Herói')
         print('2 - Vilão')
