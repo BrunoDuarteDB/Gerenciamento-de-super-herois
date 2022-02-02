@@ -33,9 +33,19 @@ class TelaMissao():
     def pega_dados_tarefa(self):
         pass
 
-    def mostra_missao(self, dados_missao):
-        print('Título da missão: ', dados_missao['titulo'])
-        print('Data da missão: ', dados_missao['data'])
-        print('Local da missão: ', dados_missao['local'])
-        print('Conflito da missão: ', dados_missao['conflito'])
-        #[...]
+    def mostrar_missao(self, dados_missao):
+        print("TÍTULO: ", dados_missao["titulo"])
+        print("DATA: ", dados_missao["data"])
+        print("LOCAL: ", dados_missao["local"])
+        print("CONFLITO: ", dados_missao["conflito"])
+        print("CLIENTES: ", dados_missao["clientes"])
+        print("TAREFAS: ", dados_missao["tarefas"])
+        print("SUPER HERÓIS: ", dados_missao["super_heroi"])
+        print("VILÃO: ", dados_missao["vilao"])
+
+    def selecionar_missao(self):
+        titulo = input("Título da missão que deseja selecionar: ")
+        return titulo
+
+    def mostrar_mensagem(self, msg):
+        print(msg)
