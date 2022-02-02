@@ -17,7 +17,7 @@ class TelaMissao():
 
     # fazer aqui tratamento dos dados, caso a entrada seja diferente do esperado
     def pega_dados_missao(self):
-        print('------DADOS MISSÃO ------')
+        print('------ DADOS MISSÃO ------')
         titulo = input('Título: ')
         data = input('Data: ')
         local = input('Local: ')
@@ -29,3 +29,13 @@ class TelaMissao():
 
         return {'titulo': titulo, 'data': data, 'local': local, 'conflito': conflito, 'clientes': clientes,
                 'tarefas': tarefas, 'super_herois': super_herois, 'vilao': vilao}
+
+    def pega_dados_tarefa(self):
+        pass
+
+    def mostra_missao(self, dados_missao):
+        print('Título da missão: ', dados_missao['titulo'])
+        print('Data da missão: ', dados_missao['data'])
+        print('Local da missão: ', dados_missao['local'])
+        print('Conflito da missão: ', dados_missao['conflito'])
+        #[...]

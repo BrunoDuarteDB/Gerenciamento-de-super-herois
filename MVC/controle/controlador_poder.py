@@ -1,7 +1,6 @@
 from MVC.entidade.poder import Poder
 from MVC.limite.tela_poder import TelaPoder
 
-
 class ControladorPoder:
     def __init__(self, controlador_sistema):
         self.__poderes = []

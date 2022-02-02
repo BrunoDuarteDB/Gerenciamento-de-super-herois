@@ -1,4 +1,4 @@
-from senciente import Senciente
+from entidade.senciente import Senciente
 
 class SuperHeroi(Senciente):
     def __init__(self, nome: str, poder: Poder, fraqueza: str, empresa: str, local_moradia: str, alterego: str):

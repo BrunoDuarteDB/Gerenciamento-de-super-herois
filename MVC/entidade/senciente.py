@@ -1,5 +1,8 @@
+from abc import ABC, abstractmethod
+from entidade.poder import Poder
 
-class Senciente:
+class Senciente(ABC):
+    @abstractmethod
     def __init__(self, nome: str, poder: Poder, fraqueza: str, empresa: str, local_moradia: str):
         self.__nome = nome
         self.__poder = poder

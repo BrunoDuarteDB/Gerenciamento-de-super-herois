@@ -1,6 +1,5 @@
-from senciente import Senciente
-from poder import Poder
-
+from entidade.senciente import Senciente
+from entidade.poder import Poder
 
 class Vilao(Senciente):
     def __init__(self, nome: str, poder: Poder, fraqueza: str, empresa: str, local_moradia: str, periculosidade: int):

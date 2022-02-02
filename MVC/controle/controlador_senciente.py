@@ -3,9 +3,9 @@ from entidade.senciente import Senciente
 from entidade.super_heroi import SuperHeroi
 from entidade.vilao import Vilao
 
-class ControladorSenciente():
+class ControladorSenciente:
 
-    def __init__(self):
+    def __init__(self, controlador_sistema):
         self.__super_herois = []
         self.__viloes = []
         self.__tela_senciente = TelaSenciente()
@@ -85,6 +85,10 @@ class ControladorSenciente():
 
     def retornar(self):
         self.__controlador_sistema.abre_tela()
+
+    def inclui_poder_em_senciente(self):
+        poder = self.__cadastra_poder()
+        return poder
 
     def abre_tela(self):
         lista_opcoes = {1: self.incluir_senciente, 2: self.alterar_senciente, 3: self.listar_senciente,

@@ -1,7 +1,7 @@
 from limite.tela_missao import TelaMissao
 from entidade.missao import Missao
 
-class ControladorMissao():
+class ControladorMissao:
 
     def __init__(self, controlador_sistema):
         self.__missoes = []
@@ -15,6 +15,7 @@ class ControladorMissao():
                         dados_missao['conflito'], dados_missao['clientes'], dados_missao['tarefas'],
                         dados_missao['super_herois'], dados_missao['vilao'])
         self.__missoes.append(missao)
+        self.__listar_missoes()
 
     def alterar_missao(self):
         pass
@@ -61,5 +62,6 @@ class ControladorMissao():
     def listar_viloes(self):
         pass
 
-    def listar_detalhes(self):
-        pass
+    def listar_missoes(self):
+        for missao in self.__missoes:
+            self.__tela_missao.mostra_missao({'titulo': missao.titulo, '...'})

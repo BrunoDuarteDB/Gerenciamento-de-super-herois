@@ -1,5 +1,10 @@
+from MVC.controle.controlador_senciente import ControladorSenciente
 
 class TelaSenciente():
+
+    def __init__(self, controlador_senciente):
+        self.__controlador_senciente = controlador_senciente
+
     # fazer aqui tratamento dos dados, caso a entrada seja diferente do esperado
     def tela_opcoes(self):
         print('---------- SENCIENTE ----------')
@@ -18,7 +23,7 @@ class TelaSenciente():
         print('----- DADOS SENCIENTE -----')
         heroi_ou_vilao = int(input('Herói ou vilão? Digite 1 para Herói ou 2 para Vilão: '))
         nome = input('Nome: ')
-        poder = None # COMO???
+        poder = self.__inclui_poder_em_senciente()
         fraqueza = input('Fraqueza: ')
         empresa = input('Empresa: ')
         local_moradia = ('Onde mora: ')
