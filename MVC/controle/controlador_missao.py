@@ -17,7 +17,7 @@ class ControladorMissao():
         self.__missoes.append(missao)
 
     def alterar_missao(self):
-
+        pass
 
     def gerar_resultado(self):
         pass
@@ -35,4 +35,31 @@ class ControladorMissao():
         pass
 
     def listar_missao_sucesso(self):
+        pass
+
+    def incluir_cliente(self, cliente: Cliente):
+        pass
+
+    def excluir_cliente(self, cliente: Cliente):
+        pass
+
+    def incluir_super_heroi(self, super_heroi: SuperHeroi):
+        pass
+
+    def excluir_super_heroi(self, super_heroi: SuperHeroi):
+        pass
+
+    def listar_super_herois(self):
+        pass
+
+    def incluir_vilao(self, vilao: Vilao):
+        pass
+
+    def excluir_vilao(self, vilao: Vilao):
+        pass
+
+    def listar_viloes(self):
+        pass
+
+    def listar_detalhes(self):
         pass
