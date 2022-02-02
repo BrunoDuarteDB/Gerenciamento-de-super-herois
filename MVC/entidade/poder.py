@@ -14,6 +14,7 @@ class Poder:
         self.__controle_natureza=controle_natureza
         self.__detentor= detentor.nome
 
+    #Criar getter e setter para detentor?
 
     @property
     def velocidade(self):

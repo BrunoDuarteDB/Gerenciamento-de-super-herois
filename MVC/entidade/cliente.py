@@ -1,8 +1,9 @@
 class Cliente:
-    def __init__(self, nome: str, pais_origem: str, local_sede: str):
+    def __init__(self, nome: str, pais_origem: str, local_sede: str, codigo: int):
         self.__nome = nome
         self.__pais_origem = pais_origem
         self.__local_sede = local_sede
+        self.__codigo = codigo
 
     @property
     def nome(self):
@@ -27,3 +28,11 @@ class Cliente:
     @local_sede.setter
     def local_sede(self, local_sede: str):
         self.__local_sede = local_sede
+
+    @property
+    def codigo(self):
+        return self.__codigo
+
+    @codigo.setter
+    def codigo(self, codigo:int):
+        self.__codigo = codigo
