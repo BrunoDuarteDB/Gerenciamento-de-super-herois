@@ -51,6 +51,22 @@ class TelaMissao():
         print("SUPER HERÓIS: ", dados_missao["super_heroi"])
         print("VILÃO: ", dados_missao["vilao"])
 
+    def mostrar_super_heroi(self, dados_super_heroi):
+        print('NOME: ', dados_super_heroi['nome'])
+        print('PODER: ', dados_super_heroi['poder'])
+        print('FRAQUEZA: ', dados_super_heroi['fraqueza'])
+        print('EMPRESA: ', dados_super_heroi['empresa'])
+        print('LOCAL ONDE MORA: ', dados_super_heroi['local_moradia'])
+        print('ALTEREGO: ', dados_super_heroi['alterego'])
+
+    def mostrar_vilao(self, dados_vilao):
+        print('NOME: ', dados_vilao['nome'])
+        print('PODER: ', dados_vilao['poder'])
+        print('FRAQUEZA: ', dados_vilao['fraqueza'])
+        print('EMPRESA: ', dados_vilao['empresa'])
+        print('LOCAL ONDE MORA: ', dados_vilao['local_moradia'])
+        print('PERICULOSIDADE: ', dados_vilao['periculosidade'])
+
     def mostrar_tarefa(self, dados_tarefa):
         print('ID DA TAREFA: ', dados_tarefa['id_tarefa'])
         print('DESCRIÇÃO DA TAREFA: ', dados_tarefa['descricao'])

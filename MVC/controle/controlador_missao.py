@@ -158,9 +158,6 @@ class ControladorMissao:
     def excluir_super_heroi(self, super_heroi: SuperHeroi):
         pass
 
-    def listar_super_herois(self):
-        pass
-
     def incluir_vilao(self, vilao: Vilao):
         pass
 
@@ -168,12 +165,25 @@ class ControladorMissao:
         pass
 
     def listar_viloes(self):
-        pass
+        for vilao in missao.viloes:
+            self.__tela_missao.mostrar_vilao({'nome': vilao.nome,
+                                              'poder': vilao.poder,
+                                              'fraqueza': vilao.fraqueza,
+                                              'empresa': vilao.empresa,
+                                              'local_moradia', vilao.local_moradia,
+                                              'periculosidade': vilao.periculosidade})
 
+    def listar_super_herois(self):
+        for super_heroi in missao.super_herois:
+            self.__tela_missao.mostrar_super_heroi({'nome': super_heroi.nome,
+                                                    'poder': super_heroi.poder,
+                                                    'fraqueza': super_heroi.fraqueza,
+                                                    'empresa': super_heroi.empresa,
+                                                    'local_moradia', super_heroi.local_moradia,
+                                                    'alterego': super_heroi.alterego})
 
     def retornar(self):
         self.__controlador_sistema.abre_tela()
-
 
     def abrir_tela(self):
         lista_opcoes= {
@@ -187,5 +197,4 @@ class ControladorMissao:
         continua=True
         while continua:
             lista_opcoes[self.__tela_missao.tela_opcoes()]()
-
 
