@@ -81,16 +81,55 @@ class ControladorMissao:
             self.__tarefas.append(tarefa)
 
     def alterar_tarefa(self): # deixei o verbo no infinitivo
-        pass
+        self.listar_tarefas()
+        id_tarefa = self.__tela_missao.selecionar_tarefa()
+        tarefa = self.pega_tarefa_por_id(id_tarefa)
+
+        if tarefa is not None:
+            novos_dados_tarefa = self.__tela_missao.pega_dados_tarefa()
+            tarefa.id_tarefa = novos_dados_tarefa['id_tarefa']
+            tarefa.descricao = novos_dados_tarefa['descricao']
+            self.listar_tarefas()
+        else:
+            self.__tela_missao.mostrar_mensagem("Atenção: tarefa não existente!")
 
     def listar_tarefas(self):
-        pass
+        for tarefa in self.__tarefas:
+            self.__tela_missao.mostrar_tarefa({'id_tarefa': tarefa.id_tarefa, 'descricao': tarefa.descricao})
+
+    def pega_tarefa_por_id(self, id_tarefa: str):
+        for tarefa in self.__tarefas:
+            if tarefa.id_tarefa == id_tarefa:
+                return tarefa
+        return None
 
     def listar_missao_fracasso(self):
-        pass
+        for missao in self.__missoes:
+            if missao.resultado == 'fracasso':
+                self.__tela_missao.mostrar_missao({
+                "titulo": m.titulo,
+                "data": m.data,
+                "local": m.local,
+                "conflito": m.conflito,
+                "clientes": m.clientes,
+                "tarefas": m.tarefas,
+                "super_herois": m.super_herois,
+                "vilao": m.vilao
+            })
 
     def listar_missao_sucesso(self):
-        pass
+        for missao in self.__missoes:
+            if missao.resultado == 'sucesso':
+                self.__tela_missao.mostrar_missao({
+                    "titulo": m.titulo,
+                    "data": m.data,
+                    "local": m.local,
+                    "conflito": m.conflito,
+                    "clientes": m.clientes,
+                    "tarefas": m.tarefas,
+                    "super_herois": m.super_herois,
+                    "vilao": m.vilao
+                })
 
     def incluir_cliente(self, cliente: Cliente):
         pass

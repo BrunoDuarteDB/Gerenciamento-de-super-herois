@@ -31,7 +31,15 @@ class TelaMissao():
                 'tarefas': tarefas, 'super_herois': super_herois, 'vilao': vilao}
 
     def pega_dados_tarefa(self):
-        pass
+        print('------ DADOS TAREFA ------')
+        id_tarefa = input('Id da tarefa: ')
+        descricao = input('Descrição da tarefa: ')
+
+        return {'id_tarefa': id_tarefa, 'descricao': descricao}
+
+    def selecionar_tarefa(self):
+        id_tarefa = input('Id da tarefa que deseja selecionar: ')
+        return id_tarefa
 
     def mostrar_missao(self, dados_missao):
         print("TÍTULO: ", dados_missao["titulo"])
@@ -42,6 +50,10 @@ class TelaMissao():
         print("TAREFAS: ", dados_missao["tarefas"])
         print("SUPER HERÓIS: ", dados_missao["super_heroi"])
         print("VILÃO: ", dados_missao["vilao"])
+
+    def mostrar_tarefa(self, dados_tarefa):
+        print('ID DA TAREFA: ', dados_tarefa['id_tarefa'])
+        print('DESCRIÇÃO DA TAREFA: ', dados_tarefa['descricao'])
 
     def selecionar_missao(self):
         titulo = input("Título da missão que deseja selecionar: ")

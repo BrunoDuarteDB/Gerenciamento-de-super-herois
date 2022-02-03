@@ -1,8 +1,8 @@
-from limite.tela_sistema import TelaSistema
-from controle.controlador_missao import ControladorMissao
-from controle.controlador_senciente import ControladorSenciente
-from controle.controlador_poder import ControladorPoder
-from controle.controlador_cliente import ControladorCliente
+from MVC.limite.tela_sistema import TelaSistema
+from MVC.controle.controlador_missao import ControladorMissao
+from MVC.controle.controlador_senciente import ControladorSenciente
+from MVC.controle.controlador_poder import ControladorPoder
+from MVC.controle.controlador_cliente import ControladorCliente
 
 class ControladorSistema:
 
