@@ -1,4 +1,4 @@
-from MVC.controle.controlador_senciente import ControladorSenciente
+
 
 class TelaSenciente():
 

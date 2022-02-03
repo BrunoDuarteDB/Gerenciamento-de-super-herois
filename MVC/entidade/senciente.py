@@ -1,5 +1,5 @@
 from abc import ABC, abstractmethod
-from entidade.poder import Poder
+from MVC.entidade.poder import Poder
 
 class Senciente(ABC):
     @abstractmethod

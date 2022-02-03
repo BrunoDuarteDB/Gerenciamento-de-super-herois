@@ -1,7 +1,7 @@
-from limite.tela_senciente import TelaSenciente
-from entidade.senciente import Senciente
-from entidade.super_heroi import SuperHeroi
-from entidade.vilao import Vilao
+from MVC.limite.tela_senciente import TelaSenciente
+from MVC.entidade.senciente import Senciente
+from MVC.entidade.super_heroi import SuperHeroi
+from MVC.entidade.vilao import Vilao
 
 class ControladorSenciente:
 

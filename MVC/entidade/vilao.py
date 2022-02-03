@@ -1,5 +1,5 @@
-from entidade.senciente import Senciente
-from entidade.poder import Poder
+from MVC.entidade.senciente import Senciente
+from MVC.entidade.poder import Poder
 
 class Vilao(Senciente):
     def __init__(self, nome: str, poder: Poder, fraqueza: str, empresa: str, local_moradia: str, periculosidade: int):
