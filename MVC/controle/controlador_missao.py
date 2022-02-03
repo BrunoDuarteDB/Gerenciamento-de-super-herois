@@ -1,5 +1,6 @@
 from limite.tela_missao import TelaMissao
 from entidade.missao import Missao
+from random import randint
 
 class ControladorMissao:
 
@@ -68,7 +69,21 @@ class ControladorMissao:
             self.__tela_missao.mostrar_mensagem("ATENÇÃO: Missão não existente. Verifique se digitou corretamente.")
 
     def gerar_resultado(self):
-        pass
+        for super_heroi in self.__missoes.__super_herois:
+            media_super_herois += self.poder
+        for vilao in self.__missoes.__viloes:
+            media_viloes += self.poder
+
+        aleatorio_super_heroi = randint(1, 10)
+        aleatorio_vilao = randint(1, 10)
+
+        total_super_herois = media_super_herois * aleatorio_super_heroi
+        total_viloes = media_viloes * aleatorio_vilao
+
+        if total_super_herois > total_viloes:
+            self.__missao.resultado = 'sucesso'
+        elif total_viloes > total_super_herois:
+            self.__missao.resultado = 'fracasso'
 
     def incluir_tarefa(self): # deixei o verbo no infinitivo
         self.listar_missao()

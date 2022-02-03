@@ -64,13 +64,23 @@ class ControladorPoder:
             self.__tela_poder.mostra_mensagem("ATENÇÃO: Poder não existente.")
 
     def mostra_media_poder(self):
-        detentor_do_poder = self.__tela_poder.seleciona_poder()
-        poder = self.pega_poder_por_detentor(detentor_do_poder)
-        media = (poder.velocidade + poder.forca + poder.poder_magico
-        + poder.resistencia + poder.inteligencia + poder.artes_marciais + poder.fator_cura
-        + poder.expertise + poder.controle_natureza)/9
+        if isinstance(super_heroi, SuperHeroi):
+            detentor_do_poder = self.__tela_poder.seleciona_poder()
+            poder = self.pega_poder_por_detentor(detentor_do_poder)
+            media = (poder.velocidade + poder.forca + poder.poder_magico
+                     + poder.resistencia + poder.inteligencia + poder.artes_marciais + poder.fator_cura
+                     + poder.expertise + poder.controle_natureza) / 9
 
-        return self.__tela_poder.mostra_mensagem(f"A média de poder do detentor escolhido é: {media} ")
+            return self.__tela_poder.mostra_mensagem(f"A média de poder do detentor escolhido é: {media} ")
+
+        elif isinstace(vilao, Vilao):
+            detentor_do_poder = self.__tela_poder.seleciona_poder()
+            poder = self.pega_poder_por_detentor(detentor_do_poder)
+            media = (poder.velocidade + poder.forca + poder.poder_magico
+                     + poder.resistencia + poder.inteligencia + poder.artes_marciais + poder.fator_cura
+                     + poder.expertise + poder.controle_natureza + vilao.periculosidade) / 10
+
+            return self.__tela_poder.mostra_mensagem(f"A média de poder do detentor escolhido é: {media} ")
 
     def retornar(self):
         self.__controlador_sistema.abre_tela()
