@@ -1,4 +1,10 @@
-class TelaCliente:
+
+
+class TelaCliente():
+
+    def __init__(self, controlador_cliente):
+        self.__controlador_cliente = controlador_cliente
+
     def tela_opcoes(self):
         print("-------- CLIENTES ----------")
         print("Escolha a opção: ")
@@ -27,13 +33,22 @@ class TelaCliente:
         print("NOME DO CLIENTE: ", dados_cliente["nome"])
         print("PAÍS DE ORIGEM DO CLIENTE: ", dados_cliente["pais_origem"])
         print("LOCAL DA SEDE DO CLIENTE: ", dados_cliente["local_sede"])
+        print("CÓDIGO DO CLIENTE: ", dados_cliente['codigo'])
         print("\n")
+
+    def mostra_lista_clientes(self, clientes):
+        for cliente in clientes:
+            print("NOME DO CLIENTE: ", cliente["nome"])
+            print("PAÍS DE ORIGEM DO CLIENTE: ", cliente["pais_origem"])
+            print("LOCAL DA SEDE DO CLIENTE: ", cliente["local_sede"])
+            print("CÓDIGO DO CLIENTE: ", dados_cliente['codigo'])
+            print("\n")
 
         # fazer aqui tratamento dos dados, caso a entrada seja diferente do esperado
 
     def seleciona_cliente(self):
-        nome = input("Nome do cliente que deseja selecionar: ")
-        return nome
+        codigo = input("Codigo do cliente que deseja selecionar: ")
+        return codigo
 
     def mostra_mensagem(self, msg):
         print(msg)

@@ -1,4 +1,10 @@
-class TelaPoder:
+
+
+class TelaPoder():
+
+    def __init__(self, controlador_poder):
+        self.__controlador_poder = controlador_poder
+
     # Fazer tratamento de erros
     def tela_opcoes(self):
         print("-------- PODER --------")

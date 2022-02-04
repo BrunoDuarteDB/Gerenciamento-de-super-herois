@@ -1,6 +1,10 @@
 
 
 class TelaMissao():
+
+    def __init__(self, controlador_missao):
+        self.__controlador_missao = controlador_missao
+
     # fazer aqui tratamento dos dados, caso a entrada seja diferente do esperado
     def tela_opcoes(self):
         print('----- MISSÃO -----')
@@ -22,13 +26,8 @@ class TelaMissao():
         data = input('Data: ')
         local = input('Local: ')
         conflito = input('Conflito: ')
-        clientes = None # COMO???
-        tarefas = None # COMO???
-        super_herois = None # COMO???
-        vilao = None # COMO???
 
-        return {'titulo': titulo, 'data': data, 'local': local, 'conflito': conflito, 'clientes': clientes,
-                'tarefas': tarefas, 'super_herois': super_herois, 'vilao': vilao}
+        return {'titulo': titulo, 'data': data, 'local': local, 'conflito': conflito}
 
     def pega_dados_tarefa(self):
         print('------ DADOS TAREFA ------')

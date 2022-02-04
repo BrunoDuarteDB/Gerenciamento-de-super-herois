@@ -23,7 +23,7 @@ class TelaSenciente():
         print('----- DADOS SENCIENTE -----')
         heroi_ou_vilao = int(input('Herói ou vilão? Digite 1 para Herói ou 2 para Vilão: '))
         nome = input('Nome: ')
-        poder = self.__inclui_poder_em_senciente()
+        poder = self.__controlador_senciente.pede_cadastro_poder()
         fraqueza = input('Fraqueza: ')
         empresa = input('Empresa: ')
         local_moradia = ('Onde mora: ')
@@ -54,8 +54,34 @@ class TelaSenciente():
             print('Periculosidade do Vilão: ', dados_senciente['periculosidade'])
         print('\n')
 
+    def mostra_lista_super_herois(self, super_herois):
+        for super_heroi in super_herois:
+            print('Nome do Super-Herói: ', super_heroi['nome'])
+            print('Fraqueza do Super-Herói: ', super_heroi['fraqueza'])
+            print('Empresa do Super-Herói: ', super_heroi['empresa'])
+            print('Local onde mora: ', super_heroi['local_moradia'])
+            print('Alterego do Super-Herói: ', super_heroi['alterego'])
+            print("\n")
+
+    def mostra_lista_viloes(self, viloes):
+        for vilao in viloes:
+            print('Nome do Vilão: ', vilao['nome'])
+            print('Fraqueza do Vilão: ', vilao['fraqueza'])
+            print('Empresa do Vilão: ', vilao['empresa'])
+            print('Local onde mora: ', vilao['local_moradia'])
+            print('Periculosidade do Vilão: ', vilao['periculosidade'])
+            print("\n")
+
     def seleciona_senciente(self):
         nome = input('Nome do senciente (Super-Herói ou Vilão) que deseja selecionar: ')
+        return nome
+
+    def seleciona_super_heroi(self):
+        nome = input('Nome do Super-Herói que deseja selecionar: ')
+        return nome
+
+    def seleciona_vilao(self):
+        nome = input('Nome do Vilão que deseja selecionar: ')
         return nome
 
     def mostra_mensagem(self, mensagem):

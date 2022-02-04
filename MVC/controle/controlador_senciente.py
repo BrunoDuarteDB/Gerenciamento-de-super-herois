@@ -8,7 +8,7 @@ class ControladorSenciente:
     def __init__(self, controlador_sistema):
         self.__super_herois = []
         self.__viloes = []
-        self.__tela_senciente = TelaSenciente()
+        self.__tela_senciente = TelaSenciente(self)
         self.__controlador_sistema = controlador_sistema
 
     def pega_senciente_por_nome(self, nome: str):
@@ -20,6 +20,9 @@ class ControladorSenciente:
                 return senciente
         return None
 
+    def pede_cadastro_poder(self):
+        self.__controlador_sistema.controlador_poder.inclui_poder()
+
     def incluir_senciente(self):
         dados_senciente = self.__tela_senciente.pega_dados_senciente()
         if dados_senciente['heroi_ou_vilao'] == 1:
@@ -30,6 +33,20 @@ class ControladorSenciente:
             senciente = Vilao(dados_senciente['nome'], dados_senciente['poder'], dados_senciente['fraqueza'],
                                    dados_senciente['empresa'], dados_senciente['local_moradia'])
             self.__viloes.append(senciente)
+
+    def seleciona_super_heroi(self):
+        self.__tela_senciente.mostra_lista_super_herois(self.__super_herois)
+        nome = self.__tela_senciente.seleciona_super_heroi()
+        super_heroi = self.__controlador_senciente.pega_senciente_por_nome(nome)
+        if super_heroi is not None:
+            return super_heroi
+
+    def seleciona_vilao(self):
+        self.__tela_senciente.mostra_lista_viloes(self.__viloes)
+        nome = self.__tela_senciente.seleciona_vilao()
+        vilao = self.__controlador_senciente.pega_senciente_por_nome(nome)
+        if vilao is not None:
+            return vilao
 
     def alterar_senciente(self):
         self.listar_senciente()

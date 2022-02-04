@@ -1,4 +1,5 @@
 
+
 class Missao:
     def __init__(self, titulo: str, data: str, local: str, conflito: str, resultado=None):  # aqui já não deveria gerar o resultado? MUDAR NO DIAGRAMA
         self.__titulo = titulo

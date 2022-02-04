@@ -1,8 +1,10 @@
-from MVC.entidade.vilao import Vilao
-from MVC.entidade.super_heroi import SuperHeroi
+
 class Poder:
     def __init__(self, velocidade: int, forca: int, poder_magico: int, resistencia: int, inteligencia: int, artes_marciais: int,
-                 fator_cura: int, expertise:int, controle_natureza: int, detentor:SuperHeroi or Vilao ):
+                 fator_cura: int, expertise:int, controle_natureza: int, detentor):
+        from MVC.entidade.vilao import Vilao
+        if isinstance(detentor, Vilao):
+            self.__detentor = detentor
         self.__velocidade= velocidade
         self.__forca=forca
         self.__poder_magico=poder_magico
@@ -12,7 +14,7 @@ class Poder:
         self.__fator_cura=fator_cura
         self.__expertise=expertise
         self.__controle_natureza=controle_natureza
-        self.__detentor= detentor.nome
+
 
     #Criar getter e setter para detentor?
 

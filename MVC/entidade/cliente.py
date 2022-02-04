@@ -1,3 +1,5 @@
+
+
 class Cliente:
     def __init__(self, nome: str, pais_origem: str, local_sede: str, codigo: int):
         self.__nome = nome

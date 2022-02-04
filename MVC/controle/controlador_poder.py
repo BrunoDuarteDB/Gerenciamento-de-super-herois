@@ -4,7 +4,7 @@ from MVC.limite.tela_poder import TelaPoder
 class ControladorPoder:
     def __init__(self, controlador_sistema):
         self.__poderes = []
-        self.__tela_poder = TelaPoder()
+        self.__tela_poder = TelaPoder(self)
         self.__controlador_sistema = controlador_sistema
 
     def pega_poder_por_detentor(self, detentor: str):
@@ -20,6 +20,7 @@ class ControladorPoder:
                       dados_poder["inteligencia"], dados_poder["artes_marciais"], dados_poder["fator_cura"],
                       dados_poder["expertise"], dados_poder["controle_natureza"], dados_poder["detentor"])
         self.__poderes.append(poder)
+        return poder
 
     def altera_poder(self):
         self.lista_poderes()

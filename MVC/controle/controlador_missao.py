@@ -1,5 +1,5 @@
-from limite.tela_missao import TelaMissao
-from entidade.missao import Missao
+from MVC.limite.tela_missao import TelaMissao
+from MVC.entidade.missao import Missao
 from random import randint
 
 class ControladorMissao:
@@ -7,7 +7,7 @@ class ControladorMissao:
     def __init__(self, controlador_sistema):
         self.__missoes = []
         self.__tarefas = []
-        self.__tela_missao = TelaMissao()
+        self.__tela_missao = TelaMissao(self)
         self.__controlador_sistema = controlador_sistema
 
     def pegar_missao_por_titulo(self, titulo: str):
@@ -18,9 +18,12 @@ class ControladorMissao:
 
     def incluir_missao(self):
         dados_missao = self.__tela_missao.pega_dados_missao()
+        clientes = self.__controlador_missao.pede_seleciona_cliente()
+        tarefas = self.__controlador_missao.pede_seleciona_tarefa()
+        super_herois = self.__controlador_missao.pede_seleciona_super_heroi()
+        vilao = self.__controlador_missao.pede_seleciona_vilao() # FALTA
         missao = Missao(dados_missao['titulo'], dados_missao['data'], dados_missao['local'],
-                        dados_missao['conflito'], dados_missao['clientes'], dados_missao['tarefas'],
-                        dados_missao['super_herois'], dados_missao['vilao'])
+                        dados_missao['conflito'], clientes, tarefas, super_herois, vilao)
         self.__missoes.append(missao)
         self.__listar_missoes()
 
@@ -43,7 +46,7 @@ class ControladorMissao:
         titulo_missao= self.__tela_missao.selecionar_missao()
         missao=self.pegar_missao_por_titulo(titulo_missao)
 
-        if(missao is not None):
+        if missao is not None:
             self.__missoes.remove(missao)
             self.listar_missao()
         else:
@@ -146,7 +149,26 @@ class ControladorMissao:
                     "vilao": m.vilao
                 })
 
-    def incluir_cliente(self, cliente: Cliente):
+    def pede_seleciona_cliente(self):
+        cliente = self.__controlador_sistema.controlador_cliente.seleciona_cliente()
+        return cliente
+
+    def pede_seleciona_tarefa(self):
+        self.__listar_tarefas()
+        id_tarefa = self.__tela_missao.selecionar_tarefa()
+        tarefa = self.__pega_tarefa_por_id(id_tarefa)
+        if tarefa is not None:
+            return tarefa
+
+    def pede_seleciona_super_heroi(self):
+        super_heroi = self.__controlador_sistema.controlador_senciente.seleciona_super_heroi()
+        return super_heroi
+
+    def pede_seleciona_vilao(self):
+        vilao = self.__controlador_sistema.controlador_senciente.seleciona_vilao()
+        return vilao
+
+    '''def incluir_cliente(self, cliente: Cliente):
         pass
 
     def excluir_cliente(self, cliente: Cliente):
@@ -162,7 +184,7 @@ class ControladorMissao:
         pass
 
     def excluir_vilao(self, vilao: Vilao):
-        pass
+        pass'''
 
     def listar_viloes(self):
         for vilao in missao.viloes:
@@ -170,7 +192,7 @@ class ControladorMissao:
                                               'poder': vilao.poder,
                                               'fraqueza': vilao.fraqueza,
                                               'empresa': vilao.empresa,
-                                              'local_moradia', vilao.local_moradia,
+                                              'local_moradia': vilao.local_moradia,
                                               'periculosidade': vilao.periculosidade})
 
     def listar_super_herois(self):
@@ -179,7 +201,7 @@ class ControladorMissao:
                                                     'poder': super_heroi.poder,
                                                     'fraqueza': super_heroi.fraqueza,
                                                     'empresa': super_heroi.empresa,
-                                                    'local_moradia', super_heroi.local_moradia,
+                                                    'local_moradia': super_heroi.local_moradia,
                                                     'alterego': super_heroi.alterego})
 
     def retornar(self):
