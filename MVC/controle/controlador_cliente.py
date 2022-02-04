@@ -17,7 +17,7 @@ class ControladorCliente:
     def seleciona_cliente(self):
         self.__tela_cliente.mostra_lista_clientes(self.__clientes)
         codigo = self.__tela_cliente.seleciona_cliente()
-        cliente = self.__controlador_cliente.pega_cliente_por_codigo(codigo)
+        cliente = self.pega_cliente_por_codigo(codigo)
         if cliente is not None:
             return cliente
         ''' 1) mandar a tela printar todos os clientes (código e nome)

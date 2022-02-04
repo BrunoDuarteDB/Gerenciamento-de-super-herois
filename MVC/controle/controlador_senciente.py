@@ -27,24 +27,26 @@ class ControladorSenciente:
         dados_senciente = self.__tela_senciente.pega_dados_senciente()
         if dados_senciente['heroi_ou_vilao'] == 1:
             senciente = SuperHeroi(dados_senciente['nome'], dados_senciente['poder'], dados_senciente['fraqueza'],
-                                   dados_senciente['empresa'], dados_senciente['local_moradia'])
+                                   dados_senciente['empresa'], dados_senciente['local_moradia'],
+                                   dados_senciente['alterego'])
             self.__super_herois.append(senciente)
         elif dados_senciente['heroi_ou_vilao'] == 2:
             senciente = Vilao(dados_senciente['nome'], dados_senciente['poder'], dados_senciente['fraqueza'],
-                                   dados_senciente['empresa'], dados_senciente['local_moradia'])
+                              dados_senciente['empresa'], dados_senciente['local_moradia'],
+                              dados_senciente['periculosidade'])
             self.__viloes.append(senciente)
 
     def seleciona_super_heroi(self):
         self.__tela_senciente.mostra_lista_super_herois(self.__super_herois)
         nome = self.__tela_senciente.seleciona_super_heroi()
-        super_heroi = self.__controlador_senciente.pega_senciente_por_nome(nome)
+        super_heroi = self.pega_senciente_por_nome(nome)
         if super_heroi is not None:
             return super_heroi
 
     def seleciona_vilao(self):
         self.__tela_senciente.mostra_lista_viloes(self.__viloes)
         nome = self.__tela_senciente.seleciona_vilao()
-        vilao = self.__controlador_senciente.pega_senciente_por_nome(nome)
+        vilao = self.pega_senciente_por_nome(nome)
         if vilao is not None:
             return vilao
 
@@ -104,7 +106,7 @@ class ControladorSenciente:
         self.__controlador_sistema.abre_tela()
 
     def inclui_poder_em_senciente(self):
-        poder = self.__cadastra_poder()
+        poder = self.__controlador_sistema.controlador_poder.inclui_poder()
         return poder
 
     def abre_tela(self):

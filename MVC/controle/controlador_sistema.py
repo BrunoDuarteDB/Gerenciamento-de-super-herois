@@ -25,6 +25,10 @@ class ControladorSistema:
     def controlador_poder(self):
         return self.__controlador_poder
 
+    @property
+    def controlador_cliente(self):
+        return self.__controlador_cliente
+
     def inicializa_sistema(self):
         self.abre_tela()
 

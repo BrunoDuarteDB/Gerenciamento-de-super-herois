@@ -8,7 +8,7 @@ class SuperHeroi(Senciente):
 
     @property
     def alterego(self):
-        return alterego
+        return self.__alterego
 
     @alterego.setter
     def alterego(self, alterego):

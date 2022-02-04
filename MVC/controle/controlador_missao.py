@@ -18,14 +18,14 @@ class ControladorMissao:
 
     def incluir_missao(self):
         dados_missao = self.__tela_missao.pega_dados_missao()
-        clientes = self.__controlador_missao.pede_seleciona_cliente()
-        tarefas = self.__controlador_missao.pede_seleciona_tarefa()
-        super_herois = self.__controlador_missao.pede_seleciona_super_heroi()
-        vilao = self.__controlador_missao.pede_seleciona_vilao() # FALTA
+        clientes = self.pede_seleciona_cliente()
+        tarefas = self.pede_seleciona_tarefa()
+        super_herois = self.pede_seleciona_super_heroi()
+        viloes = self.pede_seleciona_vilao()
         missao = Missao(dados_missao['titulo'], dados_missao['data'], dados_missao['local'],
-                        dados_missao['conflito'], clientes, tarefas, super_herois, vilao)
+                        dados_missao['conflito'], clientes, tarefas, super_herois, viloes)
         self.__missoes.append(missao)
-        self.__listar_missoes()
+        self.listar_missao()
 
         # Sugestão: se a lista estiver vazia, mostrar a mensagem de lista vazia
     def listar_missao(self):
@@ -57,7 +57,7 @@ class ControladorMissao:
         titulo= self.__tela_missao.selecionar_missao()
         missao= self.pegar_missao_por_titulo(titulo)
 
-        if (missao is not None):
+        if missao is not None:
             novos_dados_missao= self.__tela_missao.pegar_dados_missao()
             missao.titulo = novos_dados_missao["titulo"]
             missao.data= novos_dados_missao["data"]
@@ -154,9 +154,9 @@ class ControladorMissao:
         return cliente
 
     def pede_seleciona_tarefa(self):
-        self.__listar_tarefas()
+        self.listar_tarefas()
         id_tarefa = self.__tela_missao.selecionar_tarefa()
-        tarefa = self.__pega_tarefa_por_id(id_tarefa)
+        tarefa = self.pega_tarefa_por_id(id_tarefa)
         if tarefa is not None:
             return tarefa
 
@@ -207,7 +207,7 @@ class ControladorMissao:
     def retornar(self):
         self.__controlador_sistema.abre_tela()
 
-    def abrir_tela(self):
+    def abre_tela(self):
         lista_opcoes= {
             1: self.incluir_missao,
             2: self.alterar_missao(),
