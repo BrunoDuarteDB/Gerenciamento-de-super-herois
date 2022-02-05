@@ -72,21 +72,23 @@ class ControladorSenciente:
 
     # Sugestão: se a lista estiver vazia, mostrar a mensagem de lista vazia
     def listar_senciente(self):
-        self.__tela_senciente.mostra_mensagem("----- Lista de Super-Heróis -----")
-        for senciente in self.__super_herois:
-            self.__tela_senciente.mostra_senciente({'nome': senciente.nome,
-                                                    'fraqueza': senciente.fraqueza,
-                                                    'empresa': senciente.empresa,
-                                                    'local_moradia': senciente.local_moradia,
-                                                    'alterego': senciente.alterego})
+        if self.__super_herois is not None:
+            self.__tela_senciente.mostra_mensagem("----- Lista de Super-Heróis -----")
+            for senciente in self.__super_herois:
+                self.__tela_senciente.mostra_senciente({'nome': senciente.nome,
+                                                        'fraqueza': senciente.fraqueza,
+                                                        'empresa': senciente.empresa,
+                                                        'local_moradia': senciente.local_moradia,
+                                                        'alterego': senciente.alterego})
         print('\n')
-        self.__tela_senciente.mostra_mensagem("----- Lista de Vilões -----")
-        for senciente in self.__viloes:
-            self.__tela_senciente.mostra_senciente({'nome': senciente.nome,
-                                                    'fraqueza': senciente.fraqueza,
-                                                    'empresa': senciente.empresa,
-                                                    'local_moradia': senciente.local_moradia,
-                                                    'periculosidade': senciente.periculosidade})
+        if self.__viloes is not None:
+            self.__tela_senciente.mostra_mensagem("----- Lista de Vilões -----")
+            for senciente in self.__viloes:
+                self.__tela_senciente.mostra_senciente({'nome': senciente.nome,
+                                                        'fraqueza': senciente.fraqueza,
+                                                        'empresa': senciente.empresa,
+                                                        'local_moradia': senciente.local_moradia,
+                                                        'periculosidade': senciente.periculosidade})
 
     def excluir_senciente(self):
         self.listar_senciente()
@@ -104,6 +106,10 @@ class ControladorSenciente:
 
     def retornar(self):
         self.__controlador_sistema.abre_tela()
+
+    def checar_lista_super_herois(self):
+        if self.__super_herois is None:
+            return None
 
     def inclui_poder_em_senciente(self):
         poder = self.__controlador_sistema.controlador_poder.inclui_poder()

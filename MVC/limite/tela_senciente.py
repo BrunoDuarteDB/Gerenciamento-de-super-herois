@@ -25,9 +25,9 @@ class TelaSenciente():
         heroi_ou_vilao = int(input('Herói ou vilão? Digite 1 para Herói ou 2 para Vilão: '))
         nome = input('Nome: ')
         poder = self.__controlador_senciente.pede_cadastro_poder()
-        fraqueza = input('Fraqueza: ')
+        fraqueza = input('Fraqueza ("kryptonita, por exemplo"): ')
         empresa = input('Empresa: ')
-        local_moradia = ('Onde mora: ')
+        local_moradia = input('Onde mora: ')
 
         if heroi_ou_vilao == 1:
             alterego = input('Alterego: ')

@@ -33,7 +33,11 @@ class ControladorSistema:
         self.abre_tela()
 
     def cadastra_missao(self):
-        self.__controlador_missao.abre_tela()
+        checagem = self.__controlador_senciente.checar_lista_super_herois()
+        if checagem is None:
+            self.__tela_sistema.mostrar_mensagem('Ops, você primeiro deve cadastrar pelo menos um Super-Herói!')
+        else:
+            self.__controlador_missao.abre_tela()
 
     def cadastra_senciente(self):
         self.__controlador_senciente.abre_tela()
@@ -41,12 +45,15 @@ class ControladorSistema:
     def cadastra_poder(self):
         self.__controlador_poder.abre_tela()
 
+    def cadastra_cliente(self):
+        self.__controlador_cliente.abre_tela()
+
     def encerra_sistema(self):
         exit(0)
 
     def abre_tela(self):
         lista_opcoes = {1: self.cadastra_missao, 2: self.cadastra_senciente, 3: self.cadastra_poder,
-                        0: self.encerra_sistema}
+                        4: self.cadastra_cliente, 0: self.encerra_sistema}
 
         while True:
             opcao_escolhida = self.__tela_sistema.tela_opcoes()
