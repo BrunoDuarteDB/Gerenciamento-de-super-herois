@@ -53,7 +53,7 @@ class ControladorCliente:
     def lista_clientes(self):
         for cliente in self.__clientes:
             self.__tela_cliente.mostra_cliente({"nome": cliente.nome, "pais_origem": cliente.pais_origem,
-                                                "local_sede": cliente.local_sede, "codigo": cliente.codigo})
+                                                 "local_sede": cliente.local_sede, "codigo": cliente.codigo})
 
     def excluir_cliente(self):
         self.lista_clientes()
@@ -70,7 +70,8 @@ class ControladorCliente:
         self.__controlador_sistema.abre_tela()
 
     def abre_tela(self):
-        lista_opcoes = {1: self.incluir_cliente, 2: self.alterar_cliente, 3: self.lista_clientes, 4: self.excluir_cliente,
+        lista_opcoes = {1: self.incluir_cliente, 2: self.alterar_cliente, 3: self.lista_clientes,
+                        4: self.excluir_cliente,
                         0: self.retornar}
 
         continua = True

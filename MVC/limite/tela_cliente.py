@@ -24,12 +24,14 @@ class TelaCliente():
         nome = input("Titulo: ")
         pais_origem = input("País de Origem: ")
         local_sede = input("Local da Sede: ")
+        codigo= input("Código: ")
 
-        return {"nome": nome, "pais_origem": pais_origem, "local_sede": local_sede}
+        return {"nome": nome, "pais_origem": pais_origem, "local_sede": local_sede, "codigo": codigo}
 
         # fazer aqui tratamento dos dados, caso a entrada seja diferente do esperado
 
     def mostra_cliente(self, dados_cliente):
+        print("------ CLIENTE ------")
         print("NOME DO CLIENTE: ", dados_cliente["nome"])
         print("PAÍS DE ORIGEM DO CLIENTE: ", dados_cliente["pais_origem"])
         print("LOCAL DA SEDE DO CLIENTE: ", dados_cliente["local_sede"])
@@ -37,11 +39,12 @@ class TelaCliente():
         print("\n")
 
     def mostra_lista_clientes(self, clientes):
+        print("------ LISTA DE CLIENTES ------")
         for cliente in clientes:
             print("NOME DO CLIENTE: ", cliente["nome"])
             print("PAÍS DE ORIGEM DO CLIENTE: ", cliente["pais_origem"])
             print("LOCAL DA SEDE DO CLIENTE: ", cliente["local_sede"])
-            print("CÓDIGO DO CLIENTE: ", dados_cliente['codigo'])
+            print("CÓDIGO DO CLIENTE: ", cliente['codigo'])
             print("\n")
 
         # fazer aqui tratamento dos dados, caso a entrada seja diferente do esperado
