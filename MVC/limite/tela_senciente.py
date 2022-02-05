@@ -58,21 +58,21 @@ class TelaSenciente():
     def mostra_lista_super_herois(self, super_herois):
         for super_heroi in super_herois:
             print('----- Lista de Super-Heróis -----')
-            print('Nome do Super-Herói: ', super_heroi['nome'])
-            print('Fraqueza do Super-Herói: ', super_heroi['fraqueza'])
-            print('Empresa do Super-Herói: ', super_heroi['empresa'])
-            print('Local onde mora: ', super_heroi['local_moradia'])
-            print('Alterego do Super-Herói: ', super_heroi['alterego'])
+            print('Nome do Super-Herói: ', super_heroi.nome)
+            print('Fraqueza do Super-Herói: ', super_heroi.fraqueza)
+            print('Empresa do Super-Herói: ', super_heroi.empresa)
+            print('Local onde mora: ', super_heroi.local_moradia)
+            print('Alterego do Super-Herói: ', super_heroi.alterego)
             print("\n")
 
     def mostra_lista_viloes(self, viloes):
         for vilao in viloes:
             print('----- Lista de Vilões -----')
-            print('Nome do Vilão: ', vilao['nome'])
-            print('Fraqueza do Vilão: ', vilao['fraqueza'])
-            print('Empresa do Vilão: ', vilao['empresa'])
-            print('Local onde mora: ', vilao['local_moradia'])
-            print('Periculosidade do Vilão: ', vilao['periculosidade'])
+            print('Nome do Vilão: ', vilao.nome)
+            print('Fraqueza do Vilão: ', vilao.fraqueza)
+            print('Empresa do Vilão: ', vilao.empresa)
+            print('Local onde mora: ', vilao.local_moradia)
+            print('Periculosidade do Vilão: ', vilao.periculosidade)
             print("\n")
 
     def seleciona_senciente(self):

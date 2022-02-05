@@ -30,7 +30,6 @@ class ControladorSenciente:
                                    dados_senciente['empresa'], dados_senciente['local_moradia'],
                                    dados_senciente['alterego'])
             self.__super_herois.append(senciente)
-            print(self.__super_herois)
         elif dados_senciente['heroi_ou_vilao'] == 2:
             senciente = Vilao(dados_senciente['nome'], dados_senciente['poder'], dados_senciente['fraqueza'],
                               dados_senciente['empresa'], dados_senciente['local_moradia'],

@@ -55,6 +55,10 @@ class ControladorCliente:
             self.__tela_cliente.mostra_cliente({"nome": cliente.nome, "pais_origem": cliente.pais_origem,
                                                  "local_sede": cliente.local_sede, "codigo": cliente.codigo})
 
+    def checar_lista_clientes(self):
+        if len(self.__clientes) == 0:
+            return 0
+
     def excluir_cliente(self):
         self.lista_clientes()
         codigo_cliente = self.__tela_cliente.seleciona_cliente()

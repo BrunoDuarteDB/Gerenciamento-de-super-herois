@@ -1,7 +1,8 @@
 
 
 class Missao:
-    def __init__(self, titulo: str, data: str, local: str, conflito: str, resultado=None):  # aqui já não deveria gerar o resultado? MUDAR NO DIAGRAMA
+    def __init__(self, titulo: str, data: str, local: str, conflito: str, clientes: list, tarefas: list,
+                 super_herois: list, viloes: list, resultado=None):  # aqui já não deveria gerar o resultado? MUDAR NO DIAGRAMA
         self.__titulo = titulo
         self.__data = data
         self.__local = local

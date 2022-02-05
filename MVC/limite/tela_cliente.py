@@ -41,10 +41,10 @@ class TelaCliente():
     def mostra_lista_clientes(self, clientes):
         print("------ LISTA DE CLIENTES ------")
         for cliente in clientes:
-            print("NOME DO CLIENTE: ", cliente["nome"])
-            print("PAÍS DE ORIGEM DO CLIENTE: ", cliente["pais_origem"])
-            print("LOCAL DA SEDE DO CLIENTE: ", cliente["local_sede"])
-            print("CÓDIGO DO CLIENTE: ", cliente['codigo'])
+            print("NOME DO CLIENTE: ", cliente.nome)
+            print("PAÍS DE ORIGEM DO CLIENTE: ", cliente.pais_origem)
+            print("LOCAL DA SEDE DO CLIENTE: ", cliente.local_sede)
+            print("CÓDIGO DO CLIENTE: ", cliente.codigo)
             print("\n")
 
         # fazer aqui tratamento dos dados, caso a entrada seja diferente do esperado

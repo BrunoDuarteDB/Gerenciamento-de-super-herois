@@ -1,5 +1,6 @@
 from MVC.limite.tela_missao import TelaMissao
 from MVC.entidade.missao import Missao
+from MVC.entidade.tarefa import Tarefa
 from random import randint
 
 class ControladorMissao:
@@ -89,14 +90,9 @@ class ControladorMissao:
             self.__missao.resultado = 'fracasso'
 
     def incluir_tarefa(self): # deixei o verbo no infinitivo
-        self.listar_missao()
-        titulo = self.__tela_missao.selecionar_missao()
-        codigo= self.__tela_tarefa.selecionar_tarefa()
-        missao = self.pegar_missao_por_titulo(titulo)
-
-        if missao is not None:
-            tarefa=input()
-            self.__tarefas.append(tarefa)
+        dados_tarefa = self.__tela_missao.pega_dados_tarefa()
+        tarefa = Tarefa(dados_tarefa['id_tarefa'], dados_tarefa['descricao'])
+        self.__tarefas.append(tarefa)
 
     def alterar_tarefa(self): # deixei o verbo no infinitivo
         self.listar_tarefas()
@@ -114,6 +110,10 @@ class ControladorMissao:
     def listar_tarefas(self):
         for tarefa in self.__tarefas:
             self.__tela_missao.mostrar_tarefa({'id_tarefa': tarefa.id_tarefa, 'descricao': tarefa.descricao})
+
+    def checar_lista_tarefas(self):
+        if len(self.__tarefas) == 0:
+            return 0
 
     def pega_tarefa_por_id(self, id_tarefa: str):
         for tarefa in self.__tarefas:
@@ -154,11 +154,13 @@ class ControladorMissao:
         return cliente
 
     def pede_seleciona_tarefa(self):
-        self.listar_tarefas()
-        id_tarefa = self.__tela_missao.selecionar_tarefa()
-        tarefa = self.pega_tarefa_por_id(id_tarefa)
-        if tarefa is not None:
+        if len(self.__tarefas) != 0:
+            self.listar_tarefas()
+            id_tarefa = self.__tela_missao.selecionar_tarefa()
+            tarefa = self.pega_tarefa_por_id(id_tarefa)
             return tarefa
+        else:
+            self.incluir_tarefa()
 
     def pede_seleciona_super_heroi(self):
         super_heroi = self.__controlador_sistema.controlador_senciente.seleciona_super_heroi()
@@ -210,7 +212,7 @@ class ControladorMissao:
     def abre_tela(self):
         lista_opcoes= {
             1: self.incluir_missao,
-            2: self.alterar_missao(),
+            2: self.alterar_missao,
             3: self.excluir_missao,
             4: self.listar_missao_sucesso,
             5: self.listar_missao_fracasso,
