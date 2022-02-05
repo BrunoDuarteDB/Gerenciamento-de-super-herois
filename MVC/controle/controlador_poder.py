@@ -74,7 +74,7 @@ class ControladorPoder:
 
             return self.__tela_poder.mostra_mensagem(f"A média de poder do detentor escolhido é: {media} ")
 
-        elif isinstace(vilao, Vilao):
+        elif isinstance(vilao, Vilao):
             detentor_do_poder = self.__tela_poder.seleciona_poder()
             poder = self.pega_poder_por_detentor(detentor_do_poder)
             media = (poder.velocidade + poder.forca + poder.poder_magico
