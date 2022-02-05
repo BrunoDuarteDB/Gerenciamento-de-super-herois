@@ -30,6 +30,7 @@ class ControladorSenciente:
                                    dados_senciente['empresa'], dados_senciente['local_moradia'],
                                    dados_senciente['alterego'])
             self.__super_herois.append(senciente)
+            print(self.__super_herois)
         elif dados_senciente['heroi_ou_vilao'] == 2:
             senciente = Vilao(dados_senciente['nome'], dados_senciente['poder'], dados_senciente['fraqueza'],
                               dados_senciente['empresa'], dados_senciente['local_moradia'],
@@ -75,7 +76,8 @@ class ControladorSenciente:
         if self.__super_herois is not None:
             self.__tela_senciente.mostra_mensagem("----- Lista de Super-Heróis -----")
             for senciente in self.__super_herois:
-                self.__tela_senciente.mostra_senciente({'nome': senciente.nome,
+                self.__tela_senciente.mostra_senciente({'codigo': 1,
+                                                        'nome': senciente.nome,
                                                         'fraqueza': senciente.fraqueza,
                                                         'empresa': senciente.empresa,
                                                         'local_moradia': senciente.local_moradia,
@@ -84,7 +86,8 @@ class ControladorSenciente:
         if self.__viloes is not None:
             self.__tela_senciente.mostra_mensagem("----- Lista de Vilões -----")
             for senciente in self.__viloes:
-                self.__tela_senciente.mostra_senciente({'nome': senciente.nome,
+                self.__tela_senciente.mostra_senciente({'codigo': 2,
+                                                        'nome': senciente.nome,
                                                         'fraqueza': senciente.fraqueza,
                                                         'empresa': senciente.empresa,
                                                         'local_moradia': senciente.local_moradia,

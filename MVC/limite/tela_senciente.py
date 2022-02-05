@@ -41,13 +41,13 @@ class TelaSenciente():
 
     # fazer aqui tratamento dos dados, caso a entrada seja diferente do esperado
     def mostra_senciente(self, dados_senciente):
-        if isinstance(dados_senciente, SuperHeroi):
+        if dados_senciente['codigo'] == 1:
             print('Nome do Super-Herói: ', dados_senciente['nome'])
             print('Fraqueza do Super-Herói: ', dados_senciente['fraqueza'])
             print('Empresa do Super-Herói: ', dados_senciente['empresa'])
             print('Local onde mora: ', dados_senciente['local_moradia'])
             print('Alterego do Super-Herói: ', dados_senciente['alterego'])
-        elif isinstance(dados_senciente, Vilao):
+        elif dados_senciente['codigo'] == 2:
             print('Nome do Vilão: ', dados_senciente['nome'])
             print('Fraqueza do Vilão: ', dados_senciente['fraqueza'])
             print('Empresa do Vilão: ', dados_senciente['empresa'])
@@ -57,6 +57,7 @@ class TelaSenciente():
 
     def mostra_lista_super_herois(self, super_herois):
         for super_heroi in super_herois:
+            print('----- Lista de Super-Heróis -----')
             print('Nome do Super-Herói: ', super_heroi['nome'])
             print('Fraqueza do Super-Herói: ', super_heroi['fraqueza'])
             print('Empresa do Super-Herói: ', super_heroi['empresa'])
@@ -66,6 +67,7 @@ class TelaSenciente():
 
     def mostra_lista_viloes(self, viloes):
         for vilao in viloes:
+            print('----- Lista de Vilões -----')
             print('Nome do Vilão: ', vilao['nome'])
             print('Fraqueza do Vilão: ', vilao['fraqueza'])
             print('Empresa do Vilão: ', vilao['empresa'])
