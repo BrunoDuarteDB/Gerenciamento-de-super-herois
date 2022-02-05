@@ -34,7 +34,7 @@ class ControladorSistema:
 
     def cadastra_missao(self):
         checagem = self.__controlador_senciente.checar_lista_super_herois()
-        if checagem is None:
+        if checagem == 0:
             self.__tela_sistema.mostrar_mensagem('Ops, você primeiro deve cadastrar pelo menos um Super-Herói!')
         else:
             self.__controlador_missao.abre_tela()

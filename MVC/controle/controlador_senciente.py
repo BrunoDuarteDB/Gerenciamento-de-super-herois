@@ -111,8 +111,8 @@ class ControladorSenciente:
         self.__controlador_sistema.abre_tela()
 
     def checar_lista_super_herois(self):
-        if self.__super_herois is None:
-            return None
+        if len(self.__super_herois) == 0:
+            return 0
 
     def inclui_poder_em_senciente(self):
         poder = self.__controlador_sistema.controlador_poder.inclui_poder()
