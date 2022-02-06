@@ -9,8 +9,17 @@ class TelaSistema:
         print('3 - Poder')
         print('4 - Cliente')
         print('0 - Finalizar sistema')
-        opcao = int(input('Escolha uma opção: '))
-        return opcao
+
+        while True:
+
+            try:
+                opcoes_validas = [0, 1, 2, 3, 4]
+                opcao = int(input("Escolha uma opção: "))
+                if opcao not in opcoes_validas:
+                    raise ValueError
+                return opcao
+            except ValueError:
+                print('Opção inválida!')
 
     def mostrar_mensagem(self, mensagem):
         print(mensagem)

@@ -16,8 +16,16 @@ class TelaSenciente():
         print('4 - Excluir Senciente')
         print('0 - Retornar')
 
-        opcao = int(input('Escolha uma opção: '))
-        return opcao
+        while True:
+
+            try:
+                opcoes_validas = [0, 1, 2, 3, 4]
+                opcao = int(input("Escolha uma opção: "))
+                if opcao not in opcoes_validas:
+                    raise ValueError
+                return opcao
+            except ValueError:
+                print('Opção inválida!')
 
     # fazer aqui tratamento dos dados, caso a entrada seja diferente do esperado
     def pega_dados_senciente(self):

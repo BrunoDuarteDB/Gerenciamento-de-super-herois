@@ -23,10 +23,6 @@ class ControladorMissao:
         tarefas = self.pede_seleciona_tarefa()
         super_herois = self.pede_seleciona_super_heroi()
         viloes = self.pede_seleciona_vilao()
-        print(clientes)
-        print(tarefas)
-        print(super_herois)
-        print(viloes)
         missao = Missao(dados_missao['titulo'], dados_missao['data'], dados_missao['local'],
                         dados_missao['conflito'], clientes, tarefas, super_herois, viloes)
         self.__missoes.append(missao)
@@ -34,16 +30,31 @@ class ControladorMissao:
 
         # Sugestão: se a lista estiver vazia, mostrar a mensagem de lista vazia
     def listar_missao(self):
+        clientes = []
+        tarefas = []
+        super_herois = []
+        viloes = []
+
+        for a in self.__missoes:
+            for b in a.clientes:
+                clientes.append(b.nome)
+            for c in a.tarefas:
+                tarefas.append(c.descricao)
+            for d in a.super_herois:
+                super_herois.append(d.nome)
+            for e in a.viloes:
+                viloes.append(e.nome)
+
         for m in self.__missoes:
             self.__tela_missao.mostrar_missao({
                 "titulo": m.titulo,
                 "data": m.data,
                 "local": m.local,
                 "conflito": m.conflito,
-                "clientes": m.clientes,
-                "tarefas": m.tarefas,
-                "super_herois": m.super_herois,
-                "viloes": m.viloes
+                "clientes": clientes,
+                "tarefas": tarefas,
+                "super_herois": super_herois,
+                "viloes": viloes
             })
 
     def excluir_missao(self):

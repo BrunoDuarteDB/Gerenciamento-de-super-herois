@@ -28,7 +28,7 @@ class TelaCliente():
 
     def pega_dados_cliente(self):
         print("-------- DADOS CLIENTE ----------")
-        nome = input("Titulo: ")
+        nome = input("Título: ")
         pais_origem = input("País de Origem: ")
         local_sede = input("Local da Sede: ")
         codigo= input("Código: ")
