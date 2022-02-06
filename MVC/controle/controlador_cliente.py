@@ -48,9 +48,11 @@ class ControladorCliente:
         else:
             self.__tela_cliente.mostra_mensagem("ATENCAO: Livro não existente")
 
-        # Sugestão: se a lista estiver vazia, mostrar a mensagem de lista vazia
+
 
     def lista_clientes(self):
+        if len(self.__clientes)== 0:
+            return self.__tela_cliente.mostra_mensagem("\033[1;31mATENÇÃO: A lista de clientes está vazia\033[0m")
         for cliente in self.__clientes:
             self.__tela_cliente.mostra_cliente({"nome": cliente.nome, "pais_origem": cliente.pais_origem,
                                                  "local_sede": cliente.local_sede, "codigo": cliente.codigo})

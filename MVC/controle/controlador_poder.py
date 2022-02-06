@@ -86,7 +86,7 @@ class ControladorPoder:
     def retornar(self):
         self.__controlador_sistema.abre_tela()
 
-    def mostra_tela_poder(self):
+    def abre_tela(self):
         lista_opcoes = {
             1: self.inclui_poder,
             2: self.altera_poder,

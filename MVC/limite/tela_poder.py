@@ -16,7 +16,15 @@ class TelaPoder():
         print("5- Mostrar a o valor médio de poder")
         print("0- Retornar")
 
-        return int(input("Escolha a opção: "))
+        while True:
+            try:
+                opcoes_validas=[0,1,2,3,4,5]
+                opcao= int(input("Escolha a opção: "))
+                if opcao not in opcoes_validas:
+                    raise ValueError
+                return opcao
+            except ValueError:
+                print("\033[1;31mOPÇÃO INVÁLIDA! \033[0m")
 
     def pega_dados_poder(self):
         print("-------- DADOS PODER --------")

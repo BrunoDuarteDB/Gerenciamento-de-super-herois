@@ -14,8 +14,15 @@ class TelaCliente():
         print("4 - Excluir Cliente")
         print("0 - Retornar")
 
-        opcao = int(input("Escolha a opção: "))
-        return opcao
+        while True:
+            try:
+                opcoes_validas=[0,1,2,3,4]
+                opcao= int(input("Escolha a opção: "))
+                if opcao not in opcoes_validas:
+                    raise ValueError
+                return opcao
+            except ValueError:
+                print("\033[1;31mOPÇÃO INVÁLIDA! \033[0m")
 
         # fazer aqui tratamento dos dados, caso a entrada seja diferente do esperado
 
