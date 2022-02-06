@@ -8,22 +8,24 @@ class TelaPoder():
     def tela_opcoes(self):
         print("-------- PODER --------")
         print("Escolha a opção")
-        print("1- Incluir poder")
-        print("2- Alterar poder")
-        print("3- Listar poderes")
-        print("4- Excluir poder")
-        print("5- Mostrar a o valor médio de poder")
-        print("0- Retornar")
+        print("1 - Incluir poder")
+        print("2 - Alterar poder")
+        print("3 - Listar poderes")
+        print("4 - Excluir poder")
+        print("5 - Mostrar a o valor médio de poder")
+        print("0 - Retornar")
 
         while True:
             try:
                 opcoes_validas=[0,1,2,3,4,5]
                 opcao= int(input("Escolha a opção: "))
+                print('\n')
                 if opcao not in opcoes_validas:
                     raise ValueError
                 return opcao
             except ValueError:
                 print("\033[1;31mOPÇÃO INVÁLIDA! \033[0m")
+                print('\n')
 
     def pega_dados_poder(self):
         print("-------- DADOS PODER --------")
@@ -37,6 +39,7 @@ class TelaPoder():
         fator_cura = int(input("Fator Cura: "))
         expertise = int(input("Expertise: "))
         controle_natureza = int(input("Controle da Natureza: "))
+        print('\n')
 
         return {"detentor": detentor, "velocidade": velocidade, "forca": forca, "poder_magico": poder_magico,
                 "resistencia": resistencia,
@@ -55,10 +58,10 @@ class TelaPoder():
         print("FATOR CURA: ", dados_poder["fator_cura"])
         print("EXPERTISE: ", dados_poder["expertise"])
         print("CONTROLE DA NATUREZA: ", dados_poder["controle_natureza"])
-        print("\n")
 
     def seleciona_poder(self):
         detentor = input("Nome do detentor do poder que deseja selecionar: ")
+        print('\n')
         return detentor
 
     def mostra_mensagem(self, msg):

@@ -15,7 +15,6 @@ class Poder:
         self.__expertise=expertise
         self.__controle_natureza=controle_natureza
         self.__media_poder = media_poder
-        print(self.__media_poder)
 
     #Criar getter e setter para detentor? Sim
 

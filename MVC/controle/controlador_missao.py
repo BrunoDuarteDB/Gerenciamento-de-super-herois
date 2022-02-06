@@ -28,42 +28,40 @@ class ControladorMissao:
         resultado = self.gerar_resultado(super_herois, viloes)
         missao.resultado = resultado
         self.__missoes.append(missao)
-        self.listar_missao()
+        self.listar_missao(missao)
 
         # Sugestão: se a lista estiver vazia, mostrar a mensagem de lista vazia
-    def listar_missao(self):
+    def listar_missao(self, missao):
         clientes = []
         tarefas = []
         super_herois = []
         viloes = []
 
-        for a in self.__missoes:
-            for b in a.clientes:
-                clientes.append(b.nome)
-            for c in a.tarefas:
-                tarefas.append(c.descricao)
-            for d in a.super_herois:
-                super_herois.append(d.nome)
-            for e in a.viloes:
-                viloes.append(e.nome)
+        for b in missao.clientes:
+            clientes.append(b.nome)
+        for c in missao.tarefas:
+            tarefas.append(c.descricao)
+        for d in missao.super_herois:
+            super_herois.append(d.nome)
+        for e in missao.viloes:
+            viloes.append(e.nome)
 
-        for m in self.__missoes:
-            self.__tela_missao.mostrar_missao({
-                "titulo": m.titulo,
-                "data": m.data,
-                "local": m.local,
-                "conflito": m.conflito,
-                "clientes": clientes,
-                "tarefas": tarefas,
-                "super_herois": super_herois,
-                "viloes": viloes,
-                "resultado": m.resultado
+        self.__tela_missao.mostrar_missao({
+            "titulo": missao.titulo,
+            "data": missao.data,
+            "local": missao.local,
+            "conflito": missao.conflito,
+            "clientes": clientes,
+            "tarefas": tarefas,
+            "super_herois": super_herois,
+            "viloes": viloes,
+            "resultado": missao.resultado
             })
 
     def excluir_missao(self):
         self.listar_missao()
-        titulo_missao= self.__tela_missao.selecionar_missao()
-        missao=self.pegar_missao_por_titulo(titulo_missao)
+        titulo_missao = self.__tela_missao.selecionar_missao()
+        missao = self.pegar_missao_por_titulo(titulo_missao)
 
         if missao is not None:
             self.__missoes.remove(missao)
@@ -73,19 +71,19 @@ class ControladorMissao:
 
     def alterar_missao(self):
         self.listar_missao()
-        titulo= self.__tela_missao.selecionar_missao()
-        missao= self.pegar_missao_por_titulo(titulo)
+        titulo = self.__tela_missao.selecionar_missao()
+        missao = self.pegar_missao_por_titulo(titulo)
 
         if missao is not None:
-            novos_dados_missao= self.__tela_missao.pegar_dados_missao()
+            novos_dados_missao= self.__tela_missao.pega_dados_missao()
             missao.titulo = novos_dados_missao["titulo"]
-            missao.data= novos_dados_missao["data"]
-            missao.local= novos_dados_missao["local"]
-            missao.conflito= novos_dados_missao["conflito"]
-            missao.clientes= novos_dados_missao["clientes"]
-            missao.tarefas= novos_dados_missao["tarefas"]
-            missao.super_herois= novos_dados_missao["super_herois"]
-            missao.viloes= novos_dados_missao["viloes"]
+            missao.data = novos_dados_missao["data"]
+            missao.local = novos_dados_missao["local"]
+            missao.conflito = novos_dados_missao["conflito"]
+            missao.clientes = novos_dados_missao["clientes"]
+            missao.tarefas = novos_dados_missao["tarefas"]
+            missao.super_herois = novos_dados_missao["super_herois"]
+            missao.viloes = novos_dados_missao["viloes"]
             self.listar_missao()
         else:
             self.__tela_missao.mostrar_mensagem("ATENÇÃO: Missão não existente. Verifique se digitou corretamente.")
@@ -143,32 +141,70 @@ class ControladorMissao:
         return None
 
     def listar_missao_fracasso(self):
-        for missao in self.__missoes:
-            if missao.resultado == 'fracasso':
-                self.__tela_missao.mostrar_missao({
+        fracassadas = []
+        for m in self.__missoes:
+            if m.resultado == 'fracasso':
+                fracassadas.append(m)
+
+        for m in fracassadas:
+            clientes = []
+            tarefas = []
+            super_herois = []
+            viloes = []
+
+            for b in m.clientes:
+                clientes.append(b.nome)
+            for c in m.tarefas:
+                tarefas.append(c.descricao)
+            for d in m.super_herois:
+                super_herois.append(d.nome)
+            for e in m.viloes:
+                viloes.append(e.nome)
+
+            self.__tela_missao.mostrar_missao({
                 "titulo": m.titulo,
                 "data": m.data,
                 "local": m.local,
                 "conflito": m.conflito,
-                "clientes": m.clientes,
-                "tarefas": m.tarefas,
-                "super_herois": m.super_herois,
-                "vilao": m.vilao
+                "clientes": clientes,
+                "tarefas": tarefas,
+                "super_herois": super_herois,
+                "viloes": viloes,
+                "resultado": m.resultado
             })
 
     def listar_missao_sucesso(self):
-        for missao in self.__missoes:
-            if missao.resultado == 'sucesso':
-                self.__tela_missao.mostrar_missao({
-                    "titulo": m.titulo,
-                    "data": m.data,
-                    "local": m.local,
-                    "conflito": m.conflito,
-                    "clientes": m.clientes,
-                    "tarefas": m.tarefas,
-                    "super_herois": m.super_herois,
-                    "vilao": m.vilao
-                })
+        bem_sucedidas = []
+        for m in self.__missoes:
+            if m.resultado == 'sucesso':
+                bem_sucedidas.append(m)
+
+        for m in bem_sucedidas:
+            clientes = []
+            tarefas = []
+            super_herois = []
+            viloes = []
+
+            for b in m.clientes:
+                clientes.append(b.nome)
+            for c in m.tarefas:
+                tarefas.append(c.descricao)
+            for d in m.super_herois:
+                super_herois.append(d.nome)
+            for e in m.viloes:
+                viloes.append(e.nome)
+
+            self.__tela_missao.mostrar_missao({
+                "titulo": m.titulo,
+                "data": m.data,
+                "local": m.local,
+                "conflito": m.conflito,
+                "clientes": clientes,
+                "tarefas": tarefas,
+                "super_herois": super_herois,
+                "viloes": viloes,
+                "resultado": m.resultado
+            })
 
     def pede_seleciona_cliente(self):
         clientes = []

@@ -15,11 +15,13 @@ class TelaSistema:
             try:
                 opcoes_validas = [0, 1, 2, 3, 4]
                 opcao = int(input("Escolha uma opção: "))
+                print('\n')
                 if opcao not in opcoes_validas:
                     raise ValueError
                 return opcao
             except ValueError:
                 print('Opção inválida!')
+                print('\n')
 
     def mostrar_mensagem(self, mensagem):
         print(mensagem)

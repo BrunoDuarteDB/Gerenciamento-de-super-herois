@@ -21,11 +21,13 @@ class TelaSenciente():
             try:
                 opcoes_validas = [0, 1, 2, 3, 4]
                 opcao = int(input("Escolha uma opção: "))
+                print('\n')
                 if opcao not in opcoes_validas:
                     raise ValueError
                 return opcao
             except ValueError:
                 print('Opção inválida!')
+                print('\n')
 
     # fazer aqui tratamento dos dados, caso a entrada seja diferente do esperado
     def pega_dados_senciente(self):
@@ -39,11 +41,13 @@ class TelaSenciente():
 
         if heroi_ou_vilao == 1:
             alterego = input('Alterego: ')
+            print('\n')
             return {'heroi_ou_vilao': heroi_ou_vilao, "nome": nome, "poder": poder, "fraqueza": fraqueza, "empresa": empresa,
                     "local_moradia": local_moradia, "alterego": alterego}
 
         elif heroi_ou_vilao == 2:
             periculosidade = input('Periculosidade: ')
+            print('\n')
             return {'heroi_ou_vilao': heroi_ou_vilao, "nome": nome, "poder": poder, "fraqueza": fraqueza, "empresa": empresa,
                     "local_moradia": local_moradia, "periculosidade": periculosidade}
 
@@ -55,44 +59,49 @@ class TelaSenciente():
             print('Empresa do Super-Herói: ', dados_senciente['empresa'])
             print('Local onde mora: ', dados_senciente['local_moradia'])
             print('Alterego do Super-Herói: ', dados_senciente['alterego'])
+            print('\n')
         elif dados_senciente['codigo'] == 2:
             print('Nome do Vilão: ', dados_senciente['nome'])
             print('Fraqueza do Vilão: ', dados_senciente['fraqueza'])
             print('Empresa do Vilão: ', dados_senciente['empresa'])
             print('Local onde mora: ', dados_senciente['local_moradia'])
             print('Periculosidade do Vilão: ', dados_senciente['periculosidade'])
+            print('\n')
         print('\n')
 
     def mostra_lista_super_herois(self, super_herois):
+        print('----- Lista de Super-Heróis -----')
         for super_heroi in super_herois:
-            print('----- Lista de Super-Heróis -----')
             print('Nome do Super-Herói: ', super_heroi.nome)
             print('Fraqueza do Super-Herói: ', super_heroi.fraqueza)
             print('Empresa do Super-Herói: ', super_heroi.empresa)
             print('Local onde mora: ', super_heroi.local_moradia)
             print('Alterego do Super-Herói: ', super_heroi.alterego)
-            print("\n")
+            print('\n')
 
     def mostra_lista_viloes(self, viloes):
+        print('----- Lista de Vilões -----')
         for vilao in viloes:
-            print('----- Lista de Vilões -----')
             print('Nome do Vilão: ', vilao.nome)
             print('Fraqueza do Vilão: ', vilao.fraqueza)
             print('Empresa do Vilão: ', vilao.empresa)
             print('Local onde mora: ', vilao.local_moradia)
             print('Periculosidade do Vilão: ', vilao.periculosidade)
-            print("\n")
+            print('\n')
 
     def seleciona_senciente(self):
         nome = input('Nome do senciente (Super-Herói ou Vilão) que deseja selecionar: ')
+        print('\n')
         return nome
 
     def seleciona_super_heroi(self):
         nome = input('Nome do Super-Herói que deseja selecionar: ')
+        print('\n')
         return nome
 
     def seleciona_vilao(self):
         nome = input('Nome do Vilão que deseja selecionar: ')
+        print('\n')
         return nome
 
     def mostra_mensagem(self, mensagem):

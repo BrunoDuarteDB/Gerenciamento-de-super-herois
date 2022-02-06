@@ -18,12 +18,13 @@ class TelaCliente():
             try:
                 opcoes_validas=[0,1,2,3,4]
                 opcao= int(input("Escolha a opção: "))
+                print('\n')
                 if opcao not in opcoes_validas:
                     raise ValueError
                 return opcao
             except ValueError:
                 print("\033[1;31mOPÇÃO INVÁLIDA! \033[0m")
-
+                print('\n')
         # fazer aqui tratamento dos dados, caso a entrada seja diferente do esperado
 
     def pega_dados_cliente(self):
@@ -32,6 +33,7 @@ class TelaCliente():
         pais_origem = input("País de Origem: ")
         local_sede = input("Local da Sede: ")
         codigo= input("Código: ")
+        print('\n')
 
         return {"nome": nome, "pais_origem": pais_origem, "local_sede": local_sede, "codigo": codigo}
 
@@ -43,7 +45,7 @@ class TelaCliente():
         print("PAÍS DE ORIGEM DO CLIENTE: ", dados_cliente["pais_origem"])
         print("LOCAL DA SEDE DO CLIENTE: ", dados_cliente["local_sede"])
         print("CÓDIGO DO CLIENTE: ", dados_cliente['codigo'])
-        print("\n")
+        print('\n')
 
     def mostra_lista_clientes(self, clientes):
         print("------ LISTA DE CLIENTES ------")
@@ -52,16 +54,19 @@ class TelaCliente():
             print("PAÍS DE ORIGEM DO CLIENTE: ", cliente.pais_origem)
             print("LOCAL DA SEDE DO CLIENTE: ", cliente.local_sede)
             print("CÓDIGO DO CLIENTE: ", cliente.codigo)
-            print("\n")
+            print('\n')
+
 
         # fazer aqui tratamento dos dados, caso a entrada seja diferente do esperado
 
     def seleciona_cliente(self):
         codigo = input("Codigo do cliente que deseja selecionar: ")
+        print('\n')
         return codigo
 
     def deseja_mais(self):
         pergunta = input('Deseja adicionar mais um cliente? (S/N): ')
+        print('\n')
         return pergunta
 
     def mostra_mensagem(self, msg):
