@@ -15,10 +15,13 @@ class ControladorPoder:
 
     def inclui_poder(self):
         dados_poder = self.__tela_poder.pega_dados_poder()
+        media_poder = (dados_poder["velocidade"] + dados_poder["forca"] + dados_poder["poder_magico"] +
+                       dados_poder["resistencia"] + dados_poder["inteligencia"] + dados_poder["artes_marciais"] +
+                       dados_poder["fator_cura"] + dados_poder["expertise"] + dados_poder["controle_natureza"]) / 9
         poder = Poder(dados_poder["velocidade"], dados_poder["forca"], dados_poder["poder_magico"],
-                      dados_poder["resistencia"],
-                      dados_poder["inteligencia"], dados_poder["artes_marciais"], dados_poder["fator_cura"],
-                      dados_poder["expertise"], dados_poder["controle_natureza"], dados_poder["detentor"])
+                      dados_poder["resistencia"], dados_poder["inteligencia"], dados_poder["artes_marciais"],
+                      dados_poder["fator_cura"], dados_poder["expertise"], dados_poder["controle_natureza"],
+                      dados_poder["detentor"], media_poder)
         self.__poderes.append(poder)
         return poder
 
@@ -45,7 +48,7 @@ class ControladorPoder:
 
     def lista_poderes(self):
         if (len(self.__poderes) == 0):
-            print("A lista de poderes está vazia.")
+            self.__tela_poder.mostra_mensagem("A lista de poderes está vazia.")
         for poder in self.__poderes:
             self.__tela_poder.mostra_poder({"velocidade": poder.velocidade, "forca": poder.forca,
                                             "poder_magico": poder.poder_magico, "resistencia": poder.resistencia,
@@ -65,21 +68,11 @@ class ControladorPoder:
             self.__tela_poder.mostra_mensagem("ATENÇÃO: Poder não existente.")
 
     def mostra_media_poder(self):
-        from MVC.entidade.super_heroi import SuperHeroi
-        from MVC.entidade.vilao import Vilao
         detentor_do_poder = self.__tela_poder.seleciona_poder()
         poder = self.pega_poder_por_detentor(detentor_do_poder)
-        if isinstance(detentor_do_poder, SuperHeroi):
-            media = (poder.velocidade + poder.forca + poder.poder_magico
-                     + poder.resistencia + poder.inteligencia + poder.artes_marciais + poder.fator_cura
-                     + poder.expertise + poder.controle_natureza) / 9
-            return self.__tela_poder.mostra_mensagem(f"A média de poder do detentor escolhido é: {media} ")
-        elif isinstance(detentor_do_poder, Vilao):
-            media = (poder.velocidade + poder.forca + poder.poder_magico
-                     + poder.resistencia + poder.inteligencia + poder.artes_marciais + poder.fator_cura
-                     + poder.expertise + poder.controle_natureza + vilao.periculosidade) / 10
-            return self.__tela_poder.mostra_mensagem(f"A média de poder do detentor escolhido é: {media} ")
-
+        media = (poder.velocidade + poder.forca + poder.poder_magico + poder.resistencia + poder.inteligencia +
+                 poder.artes_marciais + poder.fator_cura + poder.expertise + poder.controle_natureza) / 9
+        return self.__tela_poder.mostra_mensagem(f"A média de poder do detentor escolhido é: {media} ")
 
     def retornar(self):
         self.__controlador_sistema.abre_tela()

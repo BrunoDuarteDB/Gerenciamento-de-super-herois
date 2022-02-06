@@ -28,15 +28,15 @@ class TelaPoder():
     def pega_dados_poder(self):
         print("-------- DADOS PODER --------")
         detentor= input("Detentor: ")
-        velocidade = input("Velocidade: ")
-        forca = input("Força: ")
-        poder_magico = input("Poder Mágico: ")
-        resistencia = input("Resistência: ")
-        inteligencia = input("Inteligência: ")
-        artes_marciais = input("Artes Marciais: ")
-        fator_cura = input("Fator Cura: ")
-        expertise = input("Expertise: ")
-        controle_natureza = input("Controle da Natureza: ")
+        velocidade = int(input("Velocidade: "))
+        forca = int(input("Força: "))
+        poder_magico = int(input("Poder Mágico: "))
+        resistencia = int(input("Resistência: "))
+        inteligencia = int(input("Inteligência: "))
+        artes_marciais = int(input("Artes Marciais: "))
+        fator_cura = int(input("Fator Cura: "))
+        expertise = int(input("Expertise: "))
+        controle_natureza = int(input("Controle da Natureza: "))
 
         return {"detentor": detentor, "velocidade": velocidade, "forca": forca, "poder_magico": poder_magico,
                 "resistencia": resistencia,

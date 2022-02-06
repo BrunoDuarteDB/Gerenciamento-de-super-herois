@@ -25,6 +25,8 @@ class ControladorMissao:
         viloes = self.pede_seleciona_vilao()
         missao = Missao(dados_missao['titulo'], dados_missao['data'], dados_missao['local'],
                         dados_missao['conflito'], clientes, tarefas, super_herois, viloes)
+        resultado = self.gerar_resultado(super_herois, viloes)
+        missao.resultado = resultado
         self.__missoes.append(missao)
         self.listar_missao()
 
@@ -54,7 +56,8 @@ class ControladorMissao:
                 "clientes": clientes,
                 "tarefas": tarefas,
                 "super_herois": super_herois,
-                "viloes": viloes
+                "viloes": viloes,
+                "resultado": m.resultado
             })
 
     def excluir_missao(self):
@@ -87,11 +90,13 @@ class ControladorMissao:
         else:
             self.__tela_missao.mostrar_mensagem("ATENÇÃO: Missão não existente. Verifique se digitou corretamente.")
 
-    def gerar_resultado(self):
-        for super_heroi in self.__missoes.__super_herois:
-            media_super_herois += self.poder
-        for vilao in self.__missoes.__viloes:
-            media_viloes += self.poder
+    def gerar_resultado(self, super_herois, viloes):
+        media_super_herois = 0
+        media_viloes = 0
+        for super_heroi in super_herois:
+            media_super_herois += super_heroi.poder.media_poder
+        for vilao in viloes:
+            media_viloes += vilao.poder.media_poder
 
         aleatorio_super_heroi = randint(1, 10)
         aleatorio_vilao = randint(1, 10)
@@ -100,9 +105,9 @@ class ControladorMissao:
         total_viloes = media_viloes * aleatorio_vilao
 
         if total_super_herois > total_viloes:
-            self.__missao.resultado = 'sucesso'
+            return 'sucesso'
         elif total_viloes > total_super_herois:
-            self.__missao.resultado = 'fracasso'
+            return 'fracasso'
 
     def incluir_tarefa(self): # deixei o verbo no infinitivo
         dados_tarefa = self.__tela_missao.pega_dados_tarefa()

@@ -21,7 +21,8 @@ class ControladorSenciente:
         return None
 
     def pede_cadastro_poder(self):
-        self.__controlador_sistema.controlador_poder.inclui_poder()
+        poder = self.__controlador_sistema.controlador_poder.inclui_poder()
+        return poder
 
     def incluir_senciente(self):
         dados_senciente = self.__tela_senciente.pega_dados_senciente()
@@ -81,7 +82,7 @@ class ControladorSenciente:
                                                         'empresa': senciente.empresa,
                                                         'local_moradia': senciente.local_moradia,
                                                         'alterego': senciente.alterego})
-        print('\n')
+
         if self.__viloes is not None:
             self.__tela_senciente.mostra_mensagem("----- Lista de Vilões -----")
             for senciente in self.__viloes:

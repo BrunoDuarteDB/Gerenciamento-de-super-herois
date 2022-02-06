@@ -60,6 +60,7 @@ class TelaMissao():
         print("Tarefas: ", dados_missao["tarefas"])
         print("Super-Heróis: ", dados_missao["super_herois"])
         print("Vilões: ", dados_missao["viloes"])
+        print("Resultado: ", dados_missao["resultado"])
 
     def mostrar_super_heroi(self, dados_super_heroi):
         print('NOME: ', dados_super_heroi['nome'])

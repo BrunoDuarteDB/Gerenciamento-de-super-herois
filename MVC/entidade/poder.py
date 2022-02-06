@@ -1,10 +1,10 @@
 
 class Poder:
     def __init__(self, velocidade: int, forca: int, poder_magico: int, resistencia: int, inteligencia: int, artes_marciais: int,
-                 fator_cura: int, expertise:int, controle_natureza: int, detentor):
-        from MVC.entidade.vilao import Vilao
-        if isinstance(detentor, Vilao):
-            self.__detentor = detentor
+                 fator_cura: int, expertise:int, controle_natureza: int, detentor, media_poder: int):
+        '''from MVC.entidade.vilao import Vilao
+        if isinstance(detentor, Vilao):'''
+        self.__detentor = detentor
         self.__velocidade= velocidade
         self.__forca=forca
         self.__poder_magico=poder_magico
@@ -14,9 +14,10 @@ class Poder:
         self.__fator_cura=fator_cura
         self.__expertise=expertise
         self.__controle_natureza=controle_natureza
+        self.__media_poder = media_poder
+        print(self.__media_poder)
 
-
-    #Criar getter e setter para detentor?
+    #Criar getter e setter para detentor? Sim
 
     @property
     def velocidade(self):
@@ -54,6 +55,10 @@ class Poder:
     def controle_natureza(self):
         return self.__controle_natureza
 
+    @property
+    def media_poder(self):
+        return self.__media_poder
+
     @velocidade.setter
     def velocidade(self, velocidade: int):
         self.__velocidade = velocidade
@@ -90,3 +95,6 @@ class Poder:
     def controle_natureza(self, controle_natureza: int):
         self.__controle_natureza = controle_natureza
 
+    @media_poder.setter
+    def media_poder(self, media_poder: int):
+        self.__media_poder = media_poder
