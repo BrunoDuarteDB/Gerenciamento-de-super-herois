@@ -35,15 +35,15 @@ class ControladorCliente:
 
     def alterar_cliente(self):
         self.lista_clientes()
-        codigo_livro = self.__tela_cliente.seleciona_cliente()
-        livro = self.pega_cliente_por_codigo(codigo_livro)
+        codigo_cliente = self.__tela_cliente.seleciona_cliente()
+        cliente = self.pega_cliente_por_codigo(codigo_cliente)
 
-        if livro is not None:
-            novos_dados_livro = self.__tela_cliente.pega_dados_cliente()
-            livro.nome = novos_dados_livro["nome"]
-            livro.pais_origem = novos_dados_livro["pais_origem"]
-            livro.local_sede = novos_dados_livro["local_sede"]
-            livro.codigo = novos_dados_livro["codigo"]
+        if cliente is not None:
+            novos_dados_cliente = self.__tela_cliente.pega_dados_cliente()
+            cliente.nome = novos_dados_cliente["nome"]
+            cliente.pais_origem = novos_dados_cliente["pais_origem"]
+            cliente.local_sede = novos_dados_cliente["local_sede"]
+            cliente.codigo = novos_dados_cliente["codigo"]
             self.lista_clientes()
         else:
             self.__tela_cliente.mostra_mensagem("ATENCAO: Livro não existente")
