@@ -61,6 +61,10 @@ class ControladorCliente:
         if len(self.__clientes) == 0:
             return 0
 
+    def deseja_mais(self):
+        pergunta = self.__tela_cliente.deseja_mais()
+        return pergunta
+
     def excluir_cliente(self):
         self.lista_clientes()
         codigo_cliente = self.__tela_cliente.seleciona_cliente()

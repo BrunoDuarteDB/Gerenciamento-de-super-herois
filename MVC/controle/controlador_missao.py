@@ -23,6 +23,10 @@ class ControladorMissao:
         tarefas = self.pede_seleciona_tarefa()
         super_herois = self.pede_seleciona_super_heroi()
         viloes = self.pede_seleciona_vilao()
+        print(clientes)
+        print(tarefas)
+        print(super_herois)
+        print(viloes)
         missao = Missao(dados_missao['titulo'], dados_missao['data'], dados_missao['local'],
                         dados_missao['conflito'], clientes, tarefas, super_herois, viloes)
         self.__missoes.append(missao)
@@ -39,7 +43,7 @@ class ControladorMissao:
                 "clientes": m.clientes,
                 "tarefas": m.tarefas,
                 "super_herois": m.super_herois,
-                "vilao": m.vilao
+                "viloes": m.viloes
             })
 
     def excluir_missao(self):
@@ -93,6 +97,7 @@ class ControladorMissao:
         dados_tarefa = self.__tela_missao.pega_dados_tarefa()
         tarefa = Tarefa(dados_tarefa['id_tarefa'], dados_tarefa['descricao'])
         self.__tarefas.append(tarefa)
+        return tarefa
 
     def alterar_tarefa(self): # deixei o verbo no infinitivo
         self.listar_tarefas()
@@ -150,25 +155,48 @@ class ControladorMissao:
                 })
 
     def pede_seleciona_cliente(self):
+        clientes = []
         cliente = self.__controlador_sistema.controlador_cliente.seleciona_cliente()
-        return cliente
+        clientes.append(cliente)
+        resposta = self.__controlador_sistema.controlador_cliente.deseja_mais()
+        while resposta == "S":
+            cliente = self.__controlador_sistema.controlador_cliente.seleciona_cliente()
+            clientes.append(cliente)
+            resposta = self.__controlador_sistema.controlador_cliente.deseja_mais()
+        return clientes
 
     def pede_seleciona_tarefa(self):
-        if len(self.__tarefas) != 0:
-            self.listar_tarefas()
-            id_tarefa = self.__tela_missao.selecionar_tarefa()
-            tarefa = self.pega_tarefa_por_id(id_tarefa)
-            return tarefa
-        else:
-            self.incluir_tarefa()
+        tarefas = []
+        tarefa = self.incluir_tarefa()
+        tarefas.append(tarefa)
+        resposta = self.__tela_missao.deseja_mais_tarefa()
+        while resposta == 'S':
+            tarefa = self.incluir_tarefa()
+            tarefas.append(tarefa)
+            resposta = self.__tela_missao.deseja_mais_tarefa()
+        return tarefas
 
     def pede_seleciona_super_heroi(self):
+        super_herois = []
         super_heroi = self.__controlador_sistema.controlador_senciente.seleciona_super_heroi()
-        return super_heroi
+        super_herois.append(super_heroi)
+        resposta = self.__tela_missao.deseja_mais_super_heroi()
+        while resposta == 'S':
+            super_heroi = self.__controlador_sistema.controlador_senciente.seleciona_super_heroi()
+            super_herois.append(super_heroi)
+            resposta = self.__tela_missao.deseja_mais_super_heroi()
+        return super_herois
 
     def pede_seleciona_vilao(self):
+        viloes = []
         vilao = self.__controlador_sistema.controlador_senciente.seleciona_vilao()
-        return vilao
+        viloes.append(vilao)
+        resposta = self.__tela_missao.deseja_mais_vilao()
+        while resposta == 'S':
+            vilao = self.__controlador_sistema.controlador_senciente.seleciona_vilao()
+            viloes.append(vilao)
+            resposta = self.__tela_missao.deseja_mais_vilao()
+        return viloes
 
     '''def incluir_cliente(self, cliente: Cliente):
         pass

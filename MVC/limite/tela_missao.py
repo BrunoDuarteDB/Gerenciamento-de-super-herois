@@ -84,5 +84,17 @@ class TelaMissao():
         titulo = input("Título da missão que deseja selecionar: ")
         return titulo
 
+    def deseja_mais_tarefa(self):
+        pergunta = input('Deseja adicionar mais uma tarefa? (S/N): ')
+        return pergunta
+
+    def deseja_mais_super_heroi(self):
+        pergunta = input('Deseja adicionar mais um Super-Herói? (S/N): ')
+        return pergunta
+
+    def deseja_mais_vilao(self):
+        pergunta = input('Deseja adicionar mais um Vilão? (S/N): ')
+        return pergunta
+
     def mostrar_mensagem(self, msg):
         print(msg)

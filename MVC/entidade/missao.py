@@ -1,17 +1,17 @@
 
 
 class Missao:
-    def __init__(self, titulo: str, data: str, local: str, conflito: str, clientes: list, tarefas: list,
-                 super_herois: list, viloes: list, resultado=None):  # aqui já não deveria gerar o resultado? MUDAR NO DIAGRAMA
+    def __init__(self, titulo: str, data: str, local: str, conflito: str, clientes, tarefas,
+                 super_herois, viloes, resultado=None):  # aqui já não deveria gerar o resultado? MUDAR NO DIAGRAMA
         self.__titulo = titulo
         self.__data = data
         self.__local = local
         self.__conflito = conflito
-        self.__clientes = []
-        self.__tarefas = []
-        self.__super_herois = []
-        self.__viloes = [] # MUDAR NO DIAGRAMA
-        self.__resultado = None
+        self.__clientes = clientes
+        self.__tarefas = tarefas
+        self.__super_herois = super_herois
+        self.__viloes = viloes # MUDAR NO DIAGRAMA
+        self.__resultado = resultado
 
     @property
     def titulo(self):

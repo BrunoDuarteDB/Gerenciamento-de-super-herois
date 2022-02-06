@@ -60,5 +60,9 @@ class TelaCliente():
         codigo = input("Codigo do cliente que deseja selecionar: ")
         return codigo
 
+    def deseja_mais(self):
+        pergunta = input('Deseja adicionar mais um cliente? (S/N): ')
+        return pergunta
+
     def mostra_mensagem(self, msg):
         print(msg)
