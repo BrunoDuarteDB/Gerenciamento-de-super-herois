@@ -34,24 +34,76 @@ class TelaMissao():
     # fazer aqui tratamento dos dados, caso a entrada seja diferente do esperado
     def pega_dados_missao(self):
         print('------ DADOS MISSÃO ------')
-        titulo = input('Título: ')
-        data = input('Data: ')
-        local = input('Local: ')
-        conflito = input('Conflito: ')
+        while True:
+            try:
+                titulo = input("Título: ").strip()
+                if titulo == "" or titulo.isdigit() is True:
+                    raise ValueError
+                break
+            except ValueError:
+                print("\033[1;31mATENÇÃO! VALOR INVÁLIDO. \033[0m")
+        while True:
+            try:
+                data = input("Data: ").strip()
+                if data == "":
+                    raise ValueError
+                break
+            except ValueError:
+                print("\033[1;31mATENÇÃO! VALOR INVÁLIDO. \033[0m")
+        while True:
+            try:
+                local = input("Local: ").strip()
+                if local == "" or local.isdigit() is True:
+                    raise ValueError
+                break
+            except ValueError:
+                print("\033[1;31mATENÇÃO! VALOR INVÁLIDO. \033[0m")
+        while True:
+            try:
+                conflito = input('Conflito: ').strip()
+                if conflito == "" or conflito.isdigit() is True:
+                    raise ValueError
+                break
+            except ValueError:
+                print("\033[1;31mATENÇÃO! VALOR INVÁLIDO. \033[0m")
         print('\n')
 
         return {'titulo': titulo, 'data': data, 'local': local, 'conflito': conflito}
 
     def pega_dados_tarefa(self):
         print('------ DADOS TAREFA ------')
-        id_tarefa = input('Id da tarefa: ')
-        descricao = input('Descrição da tarefa: ')
+        while True:
+            try:
+                id_tarefa = input('ID da tarefa: ').strip()
+                if id_tarefa == "" or id_tarefa.isalpha() is True:
+                    raise ValueError
+                break
+            except ValueError:
+                print("\033[1;31mATENÇÃO! VALOR INVÁLIDO. \033[0m")
+        while True:
+            try:
+                descricao = input('Descrição da tarefa: ').strip()
+                if descricao == "" or descricao.isalpha() is False:
+                    raise ValueError
+                break
+            except ValueError:
+                print("\033[1;31mATENÇÃO! VALOR INVÁLIDO. \033[0m")
         print('\n')
 
         return {'id_tarefa': id_tarefa, 'descricao': descricao}
 
     def selecionar_tarefa(self):
-        id_tarefa = input('Id da tarefa que deseja selecionar: ')
+        id_tarefas = []
+        for tarefa in self.__controlador_missao.tarefas:
+            id_tarefas.append(tarefa.id_tarefa)
+        while True:
+            try:
+                id_tarefa = input('ID da tarefa que deseja selecionar: ').strip()
+                if id_tarefa not in id_tarefas:
+                    raise ValueError
+                break
+            except ValueError:
+                print("\033[1;31mATENÇÃO! ESSA TAREFA NÃO EXISTE. \033[0m")
         print('\n')
         return id_tarefa
 
@@ -92,7 +144,17 @@ class TelaMissao():
         print('\n')
 
     def selecionar_missao(self):
-        titulo = input("Título da missão que deseja selecionar: ")
+        titulos = []
+        for missao in self.__controlador_missao.missoes:
+            titulos.append(missao.titulo)
+        while True:
+            try:
+                titulo = input('Título da missão que deseja selecionar: ').strip()
+                if titulo not in titulos:
+                    raise ValueError
+                break
+            except ValueError:
+                print("\033[1;31mATENÇÃO! ESSA MISSÃO NÃO EXISTE. \033[0m")
         print('\n')
         return titulo
 
@@ -132,5 +194,5 @@ class TelaMissao():
         print('\n')
         return pergunta
 
-    def mostrar_mensagem(self, msg):
-        print(msg)
+    def mostrar_mensagem(self, mensagem):
+        print(mensagem)

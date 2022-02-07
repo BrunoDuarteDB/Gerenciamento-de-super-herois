@@ -30,31 +30,31 @@ class TelaCliente():
         while True:
             try:
                 nome = input("Título: ").strip()
-                if nome == "":
+                if nome == "" or nome.isdigit() is True:
                     raise ValueError
                 break
             except ValueError:
-                print("\033[1;31mATENÇÃO! CAMPO NÃO PODE FICAR VAZIO. \033[0m")
+                print("\033[1;31mATENÇÃO! VALOR INVÁLIDO. \033[0m")
         while True:
             try:
                 pais_origem = input("País de Origem: ")
-                if pais_origem=="":
+                if pais_origem == "" or pais_origem.isdigit() is True:
                     raise ValueError
                 break
             except ValueError:
-                print("\033[1;31mATENÇÃO! CAMPO NÃO PODE FICAR VAZIO.  \033[0m")
+                print("\033[1;31mATENÇÃO! VALOR INVÁLIDO.  \033[0m")
         while True:
             try:
                 local_sede = input("Local da Sede: ")
-                if local_sede=="":
+                if local_sede == "" or local_sede.isdigit() is True:
                     raise ValueError
                 break
             except ValueError:
-                print("\033[1;31mATENÇÃO! CAMPO NÃO PODE FICAR VAZIO.  \033[0m")
+                print("\033[1;31mATENÇÃO! VALOR INVÁLIDO.  \033[0m")
         while True:
             try:
                 codigo = input("Código: ")
-                if not codigo.isnumeric():
+                if codigo.isnumeric() is False:
                     raise ValueError
                 break
             except ValueError:
@@ -86,14 +86,17 @@ class TelaCliente():
         # fazer aqui tratamento dos dados, caso a entrada seja diferente do esperado
 
     def seleciona_cliente(self):
+        codigos = []
+        for cliente in self.__controlador_cliente.clientes:
+            codigos.append(cliente.codigo)
         while True:
             try:
-                codigo = input("Codigo do cliente que deseja selecionar: ")
-                if not codigo.isnumeric():
+                codigo = input("Código do cliente que deseja selecionar: ")
+                if codigo.isnumeric() is False or codigo not in codigos:
                     raise ValueError
                 break
             except ValueError:
-                print("\033[1;31mCÓDIGO INVÁLIDO! DIGITE UM NÚMERO INTEIRO \033[0m")
+                print("\033[1;31mATENÇÃO! ESSE CÓDIGO DE CLIENTE NÃO EXISTE! \033[0m")
         print('\n')
         return codigo
 

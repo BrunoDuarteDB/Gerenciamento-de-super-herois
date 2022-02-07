@@ -25,17 +25,21 @@ class TelaPoder():
                 print("\033[1;31mOPÇÃO INVÁLIDA! \033[0m")
                 print('\n')
 
-    def pega_dados_poder(self):
+    def pega_dados_poder(self, nome=None):
+
         print("-------- DADOS PODER --------")
-        print("\033[1;32mPara poderes digite um valor de 0 a 1000. \033[0m")
-        while True:
-            try:
-                detentor = input("Detentor: ").strip()
-                if detentor == "":
-                    raise ValueError
-                break
-            except ValueError:
-                print("\033[1;31mATENÇÃO! NÃO DEIXE O CAMPO VAZIO \033[0m")
+        print("\033[1;32mPara poderes, digite um valor de 0 a 1000. \033[0m")
+        if nome is None:
+            while True:
+                try:
+                    detentor = input("Detentor: ").strip()
+                    if detentor == "":
+                        raise ValueError
+                    break
+                except ValueError:
+                    print("\033[1;31mATENÇÃO! NÃO DEIXE O CAMPO VAZIO \033[0m")
+        elif nome is not None:
+            detentor = nome
         while True:
             try:
                 velocidade = int(input("Velocidade: "))

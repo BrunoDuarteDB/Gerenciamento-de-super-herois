@@ -8,6 +8,10 @@ class ControladorCliente:
         self.__controlador_sistema = controlador_sistema
         self.__tela_cliente = TelaCliente(self)
 
+    @property
+    def clientes(self):
+        return self.__clientes
+
     def pega_cliente_por_codigo(self, codigo: int):
         for cliente in self.__clientes:
             if cliente.codigo == codigo:
@@ -46,7 +50,7 @@ class ControladorCliente:
             cliente.codigo = novos_dados_cliente["codigo"]
             self.lista_clientes()
         else:
-            self.__tela_cliente.mostra_mensagem("ATENCAO: Livro não existente")
+            self.__tela_cliente.mostra_mensagem("ATENCAO: cliente não existente")
 
 
 
@@ -74,7 +78,7 @@ class ControladorCliente:
             self.__clientes.remove(cliente)
             self.lista_clientes()
         else:
-            self.__tela_cliente.mostra_mensagem("ATENCAO: Cliente não existente")
+            self.__tela_cliente.mostra_mensagem("ATENÇÃO: Cliente não existente")
 
     def retornar(self):
         self.__controlador_sistema.abre_tela()

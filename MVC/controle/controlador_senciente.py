@@ -3,6 +3,7 @@ from MVC.entidade.senciente import Senciente
 from MVC.entidade.super_heroi import SuperHeroi
 from MVC.entidade.vilao import Vilao
 
+
 class ControladorSenciente:
 
     def __init__(self, controlador_sistema):
@@ -10,6 +11,14 @@ class ControladorSenciente:
         self.__viloes = []
         self.__tela_senciente = TelaSenciente(self)
         self.__controlador_sistema = controlador_sistema
+
+    @property
+    def super_herois(self):
+        return self.__super_herois
+
+    @property
+    def viloes(self):
+        return self.__viloes
 
     def pega_senciente_por_nome(self, nome: str):
         for senciente in self.__super_herois:
@@ -20,8 +29,8 @@ class ControladorSenciente:
                 return senciente
         return None
 
-    def pede_cadastro_poder(self):
-        poder = self.__controlador_sistema.controlador_poder.inclui_poder()
+    def pede_cadastro_poder(self, nome):
+        poder = self.__controlador_sistema.controlador_poder.inclui_poder(nome)
         return poder
 
     def incluir_senciente(self):
@@ -125,3 +134,4 @@ class ControladorSenciente:
         continua = True
         while continua:
             lista_opcoes[self.__tela_senciente.tela_opcoes()]()
+

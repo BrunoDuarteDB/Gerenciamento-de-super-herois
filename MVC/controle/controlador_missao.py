@@ -3,6 +3,7 @@ from MVC.entidade.missao import Missao
 from MVC.entidade.tarefa import Tarefa
 from random import randint
 
+
 class ControladorMissao:
 
     def __init__(self, controlador_sistema):
@@ -10,6 +11,14 @@ class ControladorMissao:
         self.__tarefas = []
         self.__tela_missao = TelaMissao(self)
         self.__controlador_sistema = controlador_sistema
+
+    @property
+    def tarefas(self):
+        return self.__tarefas
+
+    @property
+    def missoes(self):
+        return self.__missoes
 
     def pegar_missao_por_titulo(self, titulo: str):
         for missao in self.__missoes:
@@ -59,13 +68,13 @@ class ControladorMissao:
             })
 
     def excluir_missao(self):
-        self.listar_missao()
+        self.listar_missoes()
         titulo_missao = self.__tela_missao.selecionar_missao()
         missao = self.pegar_missao_por_titulo(titulo_missao)
 
         if missao is not None:
             self.__missoes.remove(missao)
-            self.listar_missao()
+            self.listar_missoes()
         else:
             self.__tela_missao.mostrar_mensagem("ATENÇÃO: Missão não existe, verifique se digitou corretamente.")
 
@@ -235,14 +244,16 @@ class ControladorMissao:
             })
 
     def pede_seleciona_cliente(self):
+        tamanho = len(self.__controlador_sistema.controlador_cliente.clientes)
         clientes = []
         cliente = self.__controlador_sistema.controlador_cliente.seleciona_cliente()
         clientes.append(cliente)
-        resposta = self.__controlador_sistema.controlador_cliente.deseja_mais()
-        while resposta == "S":
-            cliente = self.__controlador_sistema.controlador_cliente.seleciona_cliente()
-            clientes.append(cliente)
+        if tamanho > 1:
             resposta = self.__controlador_sistema.controlador_cliente.deseja_mais()
+            while resposta == "S":
+                cliente = self.__controlador_sistema.controlador_cliente.seleciona_cliente()
+                clientes.append(cliente)
+                resposta = self.__controlador_sistema.controlador_cliente.deseja_mais()
         return clientes
 
     def pede_seleciona_tarefa(self):
@@ -257,25 +268,29 @@ class ControladorMissao:
         return tarefas
 
     def pede_seleciona_super_heroi(self):
+        tamanho = len(self.__controlador_sistema.controlador_senciente.super_herois)
         super_herois = []
         super_heroi = self.__controlador_sistema.controlador_senciente.seleciona_super_heroi()
         super_herois.append(super_heroi)
-        resposta = self.__tela_missao.deseja_mais_super_heroi()
-        while resposta == 'S':
-            super_heroi = self.__controlador_sistema.controlador_senciente.seleciona_super_heroi()
-            super_herois.append(super_heroi)
+        if tamanho > 1:
             resposta = self.__tela_missao.deseja_mais_super_heroi()
+            while resposta == 'S':
+                super_heroi = self.__controlador_sistema.controlador_senciente.seleciona_super_heroi()
+                super_herois.append(super_heroi)
+                resposta = self.__tela_missao.deseja_mais_super_heroi()
         return super_herois
 
     def pede_seleciona_vilao(self):
+        tamanho = len(self.__controlador_sistema.controlador_senciente.viloes)
         viloes = []
         vilao = self.__controlador_sistema.controlador_senciente.seleciona_vilao()
         viloes.append(vilao)
-        resposta = self.__tela_missao.deseja_mais_vilao()
-        while resposta == 'S':
-            vilao = self.__controlador_sistema.controlador_senciente.seleciona_vilao()
-            viloes.append(vilao)
+        if tamanho > 1:
             resposta = self.__tela_missao.deseja_mais_vilao()
+            while resposta == 'S':
+                vilao = self.__controlador_sistema.controlador_senciente.seleciona_vilao()
+                viloes.append(vilao)
+                resposta = self.__tela_missao.deseja_mais_vilao()
         return viloes
 
     '''def incluir_cliente(self, cliente: Cliente):

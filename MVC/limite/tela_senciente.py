@@ -45,39 +45,46 @@ class TelaSenciente():
         while True:
             try:
                 nome = input('Nome: ')
-                if nome == "":
+                if nome == "" or nome.isdigit() is True:
                     raise ValueError
                 break
             except ValueError:
-                print("\033[1;31mATENÇÃO! NÃO DEIXE O CAMPO VAZIO \033[0m")
-        poder = self.__controlador_senciente.pede_cadastro_poder()
+                print("\033[1;31mATENÇÃO! VALOR INVÁLIDO. \033[0m")
+        poder = self.__controlador_senciente.pede_cadastro_poder(nome)
         while True:
             try:
                 fraqueza = input('Fraqueza ("kryptonita, por exemplo"): ')
-                if fraqueza == "":
+                if fraqueza.isdigit() is True or fraqueza == "":
                     raise ValueError
                 break
             except ValueError:
-                print("\033[1;31mATENÇÃO! NÃO DEIXE O CAMPO VAZIO \033[0m")
+                print("\033[1;31mATENÇÃO! VALOR INVÁLIDO \033[0m")
         while True:
             try:
                 empresa = input('Empresa: ')
-                if empresa == "":
+                if empresa.isdigit() is True or empresa == "":
                     raise ValueError
                 break
             except ValueError:
-                print("\033[1;31mATENÇÃO! NÃO DEIXE O CAMPO VAZIO \033[0m")
+                print("\033[1;31mATENÇÃO! VALOR INVÁLIDO \033[0m")
         while True:
             try:
                 local_moradia = input('Onde mora: ')
-                if local_moradia == "":
+                if local_moradia == "" or local_moradia.isdigit() is True:
                     raise ValueError
                 break
             except ValueError:
-                print("\033[1;31mATENÇÃO! NÃO DEIXE O CAMPO VAZIO \033[0m")
+                print("\033[1;31mATENÇÃO! VALOR INVÁLIDO \033[0m")
 
         if heroi_ou_vilao == 1:
-            alterego = input('Alterego: ')
+            while True:
+                try:
+                    alterego = input('Alterego: ')
+                    if alterego == "" or alterego.isdigit() is True:
+                        raise ValueError
+                    break
+                except ValueError:
+                    print("\033[1;31mATENÇÃO! VALOR INVÁLIDO \033[0m")
             print('\n')
             return {'heroi_ou_vilao': heroi_ou_vilao, "nome": nome, "poder": poder, "fraqueza": fraqueza,
                     "empresa": empresa,
@@ -86,7 +93,7 @@ class TelaSenciente():
         elif heroi_ou_vilao == 2:
             while True:
                 try:
-                    periculosidade = input('Periculosidade: ')
+                    periculosidade = int(input('Periculosidade: '))
                     if periculosidade == "" or periculosidade < 0 or periculosidade > 1000:
                         raise ValueError
                     break
@@ -139,17 +146,49 @@ class TelaSenciente():
             print('\n')
 
     def seleciona_senciente(self):
-        nome = input('Nome do senciente (Super-Herói ou Vilão) que deseja selecionar: ')
+        nomes_sencientes = []
+        for super_heroi in self.__controlador_senciente.super_herois:
+            nomes_sencientes.append(super_heroi.nome)
+        for vilao in self.__controlador_senciente.viloes:
+            nomes_sencientes.append(vilao.nome)
+        while True:
+            try:
+                nome = input('Nome do senciente (Super-Herói ou Vilão) que deseja selecionar: ')
+                if nome.isalpha() is False or nome not in nomes_sencientes:
+                    raise ValueError
+                break
+            except ValueError:
+                print("\033[1;31mATENÇÃO! ESSE NOME DE SENCIENTE NÃO EXISTE! \033[0m")
         print('\n')
         return nome
 
     def seleciona_super_heroi(self):
-        nome = input('Nome do Super-Herói que deseja selecionar: ')
+        nomes_super_herois = []
+        for super_heroi in self.__controlador_senciente.super_herois:
+            nomes_super_herois.append(super_heroi.nome)
+        while True:
+            try:
+                nome = input('Nome do Super-Herói que deseja selecionar: ')
+                if nome.isalpha() is False or nome not in nomes_super_herois:
+                    raise ValueError
+                break
+            except ValueError:
+                print("\033[1;31mATENÇÃO! ESSE NOME DE SUPER-HERÓI NÃO EXISTE! \033[0m")
         print('\n')
         return nome
 
     def seleciona_vilao(self):
-        nome = input('Nome do Vilão que deseja selecionar: ')
+        nomes_viloes = []
+        for vilao in self.__controlador_senciente.viloes:
+            nomes_viloes.append(vilao.nome)
+        while True:
+            try:
+                nome = input('Nome do Vilão que deseja selecionar: ')
+                if nome.isalpha() is False or nome not in nomes_viloes:
+                    raise ValueError
+                break
+            except ValueError:
+                print("\033[1;31mATENÇÃO! ESSE NOME DE VILÃO NÃO EXISTE! \033[0m")
         print('\n')
         return nome
 

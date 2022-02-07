@@ -1,6 +1,7 @@
 from MVC.entidade.poder import Poder
 from MVC.limite.tela_poder import TelaPoder
 
+
 class ControladorPoder:
     def __init__(self, controlador_sistema):
         self.__poderes = []
@@ -13,8 +14,12 @@ class ControladorPoder:
                 return poder
         return None
 
-    def inclui_poder(self):
-        dados_poder = self.__tela_poder.pega_dados_poder()
+    def inclui_poder(self, nome=None):
+        if nome is not None:
+            dados_poder = self.__tela_poder.pega_dados_poder(nome)
+        elif nome is None:
+            dados_poder = self.__tela_poder.pega_dados_poder()
+
         media_poder = (dados_poder["velocidade"] + dados_poder["forca"] + dados_poder["poder_magico"] +
                        dados_poder["resistencia"] + dados_poder["inteligencia"] + dados_poder["artes_marciais"] +
                        dados_poder["fator_cura"] + dados_poder["expertise"] + dados_poder["controle_natureza"]) / 9
@@ -30,7 +35,7 @@ class ControladorPoder:
         detentor_do_poder = self.__tela_poder.seleciona_poder()
         poder = self.pega_poder_por_detentor(detentor_do_poder)
 
-        if (poder is not None):
+        if poder is not None:
             novos_dados_poder = self.__tela_poder.pega_dados_poder()
             poder.velocidade = novos_dados_poder["velocidade"]
             poder.forca = novos_dados_poder["forca"]
@@ -50,15 +55,26 @@ class ControladorPoder:
         if (len(self.__poderes) == 0):
             self.__tela_poder.mostra_mensagem("\033[1;31mA LISTA DE PODERES ESTÁ VAZIA. \033[0m")
         for poder in self.__poderes:
-            self.__tela_poder.mostra_poder({"detentor": poder.detentor,"velocidade": poder.velocidade, "forca": poder.forca,
-                                            "poder_magico": poder.poder_magico, "resistencia": poder.resistencia,
-                                            "inteligencia": poder.inteligencia, "artes_marciais": poder.artes_marciais,
-                                            "fator_cura": poder.fator_cura, "expertise": poder.expertise,
-                                            "controle_natureza": poder.controle_natureza})
+            self.__tela_poder.mostra_poder({"detentor": poder.detentor,"velocidade": poder.velocidade,
+                                            "forca": poder.forca, "poder_magico": poder.poder_magico,
+                                            "resistencia": poder.resistencia, "inteligencia": poder.inteligencia,
+                                            "artes_marciais": poder.artes_marciais, "fator_cura": poder.fator_cura,
+                                            "expertise": poder.expertise, "controle_natureza": poder.controle_natureza})
 
     def exclui_poder(self):
         self.lista_poderes()
         detentor_do_poder = self.__tela_poder.seleciona_poder()
+
+        for i in self.__controlador_sistema.controlador_senciente.super_herois:
+            if i.nome == detentor_do_poder:
+                return self.__tela_poder.mostra_mensagem('\033[1;31mEste poder não pode ser excluído '
+                                                         'pois pertence a um Super-Herói!\033[0m')
+
+        for j in self.__controlador_sistema.controlador_senciente.viloes:
+            if j.nome == detentor_do_poder:
+                return self.__tela_poder.mostra_mensagem('\033[1;31mEste poder não pode ser excluído '
+                                                         'pois pertence a um Vilão!\033[0m')
+
         poder = self.pega_poder_por_detentor(detentor_do_poder)
 
         if (poder is not None):
