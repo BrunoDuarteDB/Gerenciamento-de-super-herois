@@ -7,29 +7,28 @@ class TelaMissao():
 
     # fazer aqui tratamento dos dados, caso a entrada seja diferente do esperado
     def tela_opcoes(self):
-        print('----- MISSÃO -----')
+        print('\033[1;95m----- MISSÃO -----\033[0m')
         print('Opções:')
         print('1 - Incluir missão')
         print('2 - Alterar missão')
         print('3 - Excluir missão')
         print('4 - Listar missões bem sucedidas')
         print('5 - Listar missões fracassadas')
+        print('6 - Listar todas as missões')
         print('0 - Retornar')
 
         while True:
 
             try:
-                opcoes_validas = [0, 1, 2, 3, 4, 5]
+                opcoes_validas = [0, 1, 2, 3, 4, 5, 6]
                 opcao = int(input("Escolha uma opção: "))
-                print('\n')
+                print()
                 if opcao not in opcoes_validas:
                     raise ValueError
                 return opcao
             except ValueError:
                 print('Opção inválida!')
-                print('\n')
-
-
+                print()
 
     # fazer aqui tratamento dos dados, caso a entrada seja diferente do esperado
     def pega_dados_missao(self):
@@ -66,7 +65,7 @@ class TelaMissao():
                 break
             except ValueError:
                 print("\033[1;31mATENÇÃO! VALOR INVÁLIDO. \033[0m")
-        print('\n')
+        print()
 
         return {'titulo': titulo, 'data': data, 'local': local, 'conflito': conflito}
 
@@ -88,7 +87,7 @@ class TelaMissao():
                 break
             except ValueError:
                 print("\033[1;31mATENÇÃO! VALOR INVÁLIDO. \033[0m")
-        print('\n')
+        print()
 
         return {'id_tarefa': id_tarefa, 'descricao': descricao}
 
@@ -104,11 +103,10 @@ class TelaMissao():
                 break
             except ValueError:
                 print("\033[1;31mATENÇÃO! ESSA TAREFA NÃO EXISTE. \033[0m")
-        print('\n')
+        print()
         return id_tarefa
 
     def mostrar_missao(self, dados_missao):
-        print('----- Informações da Missão -----')
         print("Título: ", dados_missao["titulo"])
         print("Data: ", dados_missao["data"])
         print("Local: ", dados_missao["local"])
@@ -118,7 +116,7 @@ class TelaMissao():
         print("Super-Heróis: ", dados_missao["super_herois"])
         print("Vilões: ", dados_missao["viloes"])
         print("Resultado: ", dados_missao["resultado"])
-        print('\n')
+        print()
 
     def mostrar_super_heroi(self, dados_super_heroi):
         print('NOME: ', dados_super_heroi['nome'])
@@ -127,7 +125,7 @@ class TelaMissao():
         print('EMPRESA: ', dados_super_heroi['empresa'])
         print('LOCAL ONDE MORA: ', dados_super_heroi['local_moradia'])
         print('ALTEREGO: ', dados_super_heroi['alterego'])
-        print('\n')
+        print()
 
     def mostrar_vilao(self, dados_vilao):
         print('NOME: ', dados_vilao['nome'])
@@ -136,12 +134,12 @@ class TelaMissao():
         print('EMPRESA: ', dados_vilao['empresa'])
         print('LOCAL ONDE MORA: ', dados_vilao['local_moradia'])
         print('PERICULOSIDADE: ', dados_vilao['periculosidade'])
-        print('\n')
+        print()
 
     def mostrar_tarefa(self, dados_tarefa):
         print('ID DA TAREFA: ', dados_tarefa['id_tarefa'])
         print('DESCRIÇÃO DA TAREFA: ', dados_tarefa['descricao'])
-        print('\n')
+        print()
 
     def selecionar_missao(self):
         titulos = []
@@ -155,7 +153,7 @@ class TelaMissao():
                 break
             except ValueError:
                 print("\033[1;31mATENÇÃO! ESSA MISSÃO NÃO EXISTE. \033[0m")
-        print('\n')
+        print()
         return titulo
 
     def deseja_mais_tarefa(self):
@@ -167,7 +165,7 @@ class TelaMissao():
                 break
             except ValueError:
                 print("\033[1;31mRESPOSTA INVÁLIDA. DIGITE S OU N \033[0m")
-        print('\n')
+        print()
         return pergunta
 
     def deseja_mais_super_heroi(self):
@@ -179,7 +177,7 @@ class TelaMissao():
                 break
             except ValueError:
                 print("\033[1;31mRESPOSTA INVÁLIDA. DIGITE S OU N \033[0m")
-        print('\n')
+        print()
         return pergunta
 
     def deseja_mais_vilao(self):
@@ -191,7 +189,7 @@ class TelaMissao():
                 break
             except ValueError:
                 print("\033[1;31mRESPOSTA INVÁLIDA. DIGITE S OU N \033[0m")
-        print('\n')
+        print()
         return pergunta
 
     def mostrar_mensagem(self, mensagem):

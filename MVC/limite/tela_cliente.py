@@ -4,7 +4,7 @@ class TelaCliente():
         self.__controlador_cliente = controlador_cliente
 
     def tela_opcoes(self):
-        print("-------- CLIENTES ----------")
+        print("\033[1;93m-------- CLIENTES ----------\033[0m")
         print("Escolha a opção: ")
         print("1 - Incluir Cliente")
         print("2 - Alterar Cliente")
@@ -16,13 +16,13 @@ class TelaCliente():
             try:
                 opcoes_validas = [0, 1, 2, 3, 4]
                 opcao = int(input("Escolha a opção: "))
-                print('\n')
+                print()
                 if opcao not in opcoes_validas:
                     raise ValueError
                 return opcao
             except ValueError:
                 print("\033[1;31mOPÇÃO INVÁLIDA! \033[0m")
-                print('\n')
+                print()
         # fazer aqui tratamento dos dados, caso a entrada seja diferente do esperado
 
     def pega_dados_cliente(self):
@@ -60,7 +60,7 @@ class TelaCliente():
             except ValueError:
                 print("\033[1;31mCÓDIGO INVÁLIDO! DIGITE UM NÚMERO INTEIRO \033[0m")
 
-        print('\n')
+        print()
 
         return {"nome": nome, "pais_origem": pais_origem, "local_sede": local_sede, "codigo": codigo}
 
@@ -72,7 +72,7 @@ class TelaCliente():
         print("PAÍS DE ORIGEM DO CLIENTE: ", dados_cliente["pais_origem"])
         print("LOCAL DA SEDE DO CLIENTE: ", dados_cliente["local_sede"])
         print("CÓDIGO DO CLIENTE: ", dados_cliente['codigo'])
-        print('\n')
+        print()
 
     def mostra_lista_clientes(self, clientes):
         print("------ LISTA DE CLIENTES ------")
@@ -81,7 +81,7 @@ class TelaCliente():
             print("PAÍS DE ORIGEM DO CLIENTE: ", cliente.pais_origem)
             print("LOCAL DA SEDE DO CLIENTE: ", cliente.local_sede)
             print("CÓDIGO DO CLIENTE: ", cliente.codigo)
-            print('\n')
+            print()
 
         # fazer aqui tratamento dos dados, caso a entrada seja diferente do esperado
 
@@ -97,7 +97,7 @@ class TelaCliente():
                 break
             except ValueError:
                 print("\033[1;31mATENÇÃO! ESSE CÓDIGO DE CLIENTE NÃO EXISTE! \033[0m")
-        print('\n')
+        print()
         return codigo
 
     def deseja_mais(self):
@@ -109,7 +109,7 @@ class TelaCliente():
                 break
             except ValueError:
                 print("\033[1;31mRESPOSTA INVÁLIDA. DIGITE S OU N \033[0m")
-        print('\n')
+        print()
         return pergunta
 
     def mostra_mensagem(self, msg):

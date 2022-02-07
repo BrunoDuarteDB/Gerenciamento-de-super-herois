@@ -68,6 +68,10 @@ class ControladorMissao:
             })
 
     def excluir_missao(self):
+        if self.__missoes == []:
+            self.__tela_missao.mostrar_mensagem("\033[1;31mATENÇÃO: Ainda não há missões cadastradas.\033[0m")
+            print()
+            self.abre_tela()
         self.listar_missoes()
         titulo_missao = self.__tela_missao.selecionar_missao()
         missao = self.pegar_missao_por_titulo(titulo_missao)
@@ -76,9 +80,11 @@ class ControladorMissao:
             self.__missoes.remove(missao)
             self.listar_missoes()
         else:
-            self.__tela_missao.mostrar_mensagem("ATENÇÃO: Missão não existe, verifique se digitou corretamente.")
+            self.__tela_missao.mostrar_mensagem("ATENÇÃO: essa missão não existe, verifique se digitou corretamente.")
 
     def listar_missoes(self):
+        self.__tela_missao.mostrar_mensagem('----- Lista de missões -----')
+        print()
         for m in self.__missoes:
             clientes = []
             tarefas = []
@@ -106,6 +112,11 @@ class ControladorMissao:
             })
 
     def alterar_missao(self):
+        if self.__missoes == []:
+            self.__tela_missao.mostrar_mensagem("\033[1;31mATENÇÃO: Ainda não há missões cadastradas.\033[0m")
+            print()
+            self.abre_tela()
+
         self.listar_missoes()
         titulo = self.__tela_missao.selecionar_missao()
         missao = self.pegar_missao_por_titulo(titulo)
@@ -128,21 +139,27 @@ class ControladorMissao:
     def gerar_resultado(self, super_herois, viloes):
         media_super_herois = 0
         media_viloes = 0
+        periculosidades = 0
         for super_heroi in super_herois:
             media_super_herois += super_heroi.poder.media_poder
         for vilao in viloes:
             media_viloes += vilao.poder.media_poder
+        for vilao in viloes:
+            periculosidades += vilao.periculosidade
 
         aleatorio_super_heroi = randint(1, 10)
         aleatorio_vilao = randint(1, 10)
 
         total_super_herois = media_super_herois * aleatorio_super_heroi
         total_viloes = media_viloes * aleatorio_vilao
+        total_viloes += periculosidades
 
         if total_super_herois > total_viloes:
             return 'sucesso'
         elif total_viloes > total_super_herois:
             return 'fracasso'
+        elif total_viloes == total_super_herois:
+            return 'empate'
 
     def incluir_tarefa(self): # deixei o verbo no infinitivo
         dados_tarefa = self.__tela_missao.pega_dados_tarefa()
@@ -178,6 +195,8 @@ class ControladorMissao:
         return None
 
     def listar_missao_fracasso(self):
+        self.__tela_missao.mostrar_mensagem('----- Lista de missões fracassadas -----')
+        print()
         fracassadas = []
         for m in self.__missoes:
             if m.resultado == 'fracasso':
@@ -211,6 +230,8 @@ class ControladorMissao:
             })
 
     def listar_missao_sucesso(self):
+        self.__tela_missao.mostrar_mensagem('----- Lista de missões bem-sucedidas -----')
+        print()
         bem_sucedidas = []
         for m in self.__missoes:
             if m.resultado == 'sucesso':
@@ -333,12 +354,13 @@ class ControladorMissao:
         self.__controlador_sistema.abre_tela()
 
     def abre_tela(self):
-        lista_opcoes= {
+        lista_opcoes = {
             1: self.incluir_missao,
             2: self.alterar_missao,
             3: self.excluir_missao,
             4: self.listar_missao_sucesso,
             5: self.listar_missao_fracasso,
+            6: self.listar_missoes,
             0: self.retornar
         }
         continua=True

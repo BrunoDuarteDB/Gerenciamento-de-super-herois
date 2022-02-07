@@ -31,6 +31,10 @@ class ControladorPoder:
         return poder
 
     def altera_poder(self):
+        if self.__poderes == []:
+            self.__tela_poder.mostra_mensagem("\033[1;31mATENÇÃO: Ainda não há poderes cadastrados.\033[0m")
+            print()
+            self.abre_tela()
         self.lista_poderes()
         detentor_do_poder = self.__tela_poder.seleciona_poder()
         poder = self.pega_poder_por_detentor(detentor_do_poder)
@@ -52,8 +56,10 @@ class ControladorPoder:
             self.__tela_poder.mostra_mensagem("\033[1;31mATENÇÃO! PODER INEXISTENTE \033[0m")
 
     def lista_poderes(self):
-        if (len(self.__poderes) == 0):
+        if len(self.__poderes) == 0:
             self.__tela_poder.mostra_mensagem("\033[1;31mA LISTA DE PODERES ESTÁ VAZIA. \033[0m")
+        elif len(self.__poderes) > 0:
+            self.__tela_poder.mostra_mensagem("----- Lista de Poderes -----")
         for poder in self.__poderes:
             self.__tela_poder.mostra_poder({"detentor": poder.detentor,"velocidade": poder.velocidade,
                                             "forca": poder.forca, "poder_magico": poder.poder_magico,
@@ -62,6 +68,10 @@ class ControladorPoder:
                                             "expertise": poder.expertise, "controle_natureza": poder.controle_natureza})
 
     def exclui_poder(self):
+        if self.__poderes == []:
+            self.__tela_poder.mostra_mensagem("\033[1;31mATENÇÃO: Ainda não há poderes cadastrados.\033[0m")
+            print()
+            self.abre_tela()
         self.lista_poderes()
         detentor_do_poder = self.__tela_poder.seleciona_poder()
 
@@ -77,7 +87,7 @@ class ControladorPoder:
 
         poder = self.pega_poder_por_detentor(detentor_do_poder)
 
-        if (poder is not None):
+        if poder is not None:
             self.__poderes.remove(poder)
             self.lista_poderes()
         else:

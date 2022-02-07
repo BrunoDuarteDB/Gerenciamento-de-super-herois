@@ -61,6 +61,10 @@ class ControladorSenciente:
             return vilao
 
     def alterar_senciente(self):
+        if self.__viloes == [] and self.__super_herois == []:
+            self.__tela_senciente.mostra_mensagem("\033[1;31mATENÇÃO: Ainda não há sencientes cadastrados.\033[0m")
+            print()
+            self.abre_tela()
         self.listar_senciente()
         nome_senciente = self.__tela_senciente.seleciona_senciente()
         senciente = self.pega_senciente_por_nome(nome_senciente)
@@ -103,6 +107,10 @@ class ControladorSenciente:
                                                         'periculosidade': senciente.periculosidade})
 
     def excluir_senciente(self):
+        if self.__viloes == [] and self.__super_herois == []:
+            self.__tela_senciente.mostra_mensagem("\033[1;31mATENÇÃO: Ainda não há sencientes cadastrados.\033[0m")
+            print()
+            self.abre_tela()
         self.listar_senciente()
         nome_senciente = self.__tela_senciente.seleciona_senciente()
         senciente = self.pega_senciente_por_nome(nome_senciente)

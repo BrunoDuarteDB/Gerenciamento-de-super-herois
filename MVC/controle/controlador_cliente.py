@@ -38,6 +38,10 @@ class ControladorCliente:
         self.__clientes.append(cliente)
 
     def alterar_cliente(self):
+        if self.__clientes == []:
+            self.__tela_cliente.mostra_mensagem("\033[1;31mATENÇÃO: Ainda não há clientes cadastrados.\033[0m")
+            print()
+            self.abre_tela()
         self.lista_clientes()
         codigo_cliente = self.__tela_cliente.seleciona_cliente()
         cliente = self.pega_cliente_por_codigo(codigo_cliente)
@@ -70,6 +74,10 @@ class ControladorCliente:
         return pergunta
 
     def excluir_cliente(self):
+        if self.__clientes == []:
+            self.__tela_cliente.mostra_mensagem("\033[1;31mATENÇÃO: Ainda não há clientes cadastrados.\033[0m")
+            print()
+            self.abre_tela()
         self.lista_clientes()
         codigo_cliente = self.__tela_cliente.seleciona_cliente()
         cliente = self.pega_cliente_por_codigo(codigo_cliente)

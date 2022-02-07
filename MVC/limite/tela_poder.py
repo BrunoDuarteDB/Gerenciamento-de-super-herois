@@ -4,7 +4,7 @@ class TelaPoder():
         self.__controlador_poder = controlador_poder
 
     def tela_opcoes(self):
-        print("-------- PODER --------")
+        print("\033[1;94m-------- PODER --------\033[0m")
         print("Escolha a opção")
         print("1 - Incluir poder")
         print("2 - Alterar poder")
@@ -17,13 +17,13 @@ class TelaPoder():
             try:
                 opcoes_validas = [0, 1, 2, 3, 4, 5]
                 opcao = int(input("Escolha a opção: "))
-                print('\n')
+                print()
                 if opcao not in opcoes_validas:
                     raise ValueError
                 return opcao
             except ValueError:
                 print("\033[1;31mOPÇÃO INVÁLIDA! \033[0m")
-                print('\n')
+                print()
 
     def pega_dados_poder(self, nome=None):
 
@@ -112,7 +112,7 @@ class TelaPoder():
                 break
             except ValueError:
                 print("\033[1;31mATENÇÃO! DIGITE UM NÚMERO VÁLIDO \033[0m")
-        print('\n')
+        print()
         return {"detentor": detentor, "velocidade": velocidade, "forca": forca, "poder_magico": poder_magico,
                 "resistencia": resistencia,
                 "inteligencia": inteligencia, "artes_marciais": artes_marciais, "fator_cura": fator_cura,
@@ -135,7 +135,7 @@ class TelaPoder():
 
     def seleciona_poder(self):
         detentor = input("Nome do detentor do poder que deseja selecionar: ")
-        print('\n')
+        print()
         return detentor
 
     def mostra_mensagem(self, msg):
