@@ -12,7 +12,7 @@ class ControladorSistema:
         self.__controlador_senciente = ControladorSenciente(self)
         self.__controlador_poder = ControladorPoder(self)
         self.__controlador_cliente = ControladorCliente(self)
-        self.__tela_sistema = TelaSistema()
+        self.__tela_sistema = TelaSistema(self)
 
     @property
     def controlador_missao(self):
