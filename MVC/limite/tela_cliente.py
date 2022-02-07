@@ -23,7 +23,6 @@ class TelaCliente():
             except ValueError:
                 print("\033[1;31mOPÇÃO INVÁLIDA! \033[0m")
                 print()
-        # fazer aqui tratamento dos dados, caso a entrada seja diferente do esperado
 
     def pega_dados_cliente(self):
         print("-------- DADOS CLIENTE ----------")
@@ -64,8 +63,6 @@ class TelaCliente():
 
         return {"nome": nome, "pais_origem": pais_origem, "local_sede": local_sede, "codigo": codigo}
 
-        # fazer aqui tratamento dos dados, caso a entrada seja diferente do esperado
-
     def mostra_cliente(self, dados_cliente):
         print("------ CLIENTE ------")
         print("NOME DO CLIENTE: ", dados_cliente["nome"])
@@ -82,8 +79,6 @@ class TelaCliente():
             print("LOCAL DA SEDE DO CLIENTE: ", cliente.local_sede)
             print("CÓDIGO DO CLIENTE: ", cliente.codigo)
             print()
-
-        # fazer aqui tratamento dos dados, caso a entrada seja diferente do esperado
 
     def seleciona_cliente(self):
         codigos = []

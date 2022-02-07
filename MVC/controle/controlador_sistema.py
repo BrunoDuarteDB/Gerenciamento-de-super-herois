@@ -4,6 +4,7 @@ from MVC.controle.controlador_senciente import ControladorSenciente
 from MVC.controle.controlador_poder import ControladorPoder
 from MVC.controle.controlador_cliente import ControladorCliente
 
+
 class ControladorSistema:
 
     def __init__(self):
@@ -35,10 +36,10 @@ class ControladorSistema:
     def cadastra_missao(self):
         checagem_super_heroi = self.__controlador_senciente.checar_lista_super_herois()
         checagem_cliente = self.__controlador_cliente.checar_lista_clientes()
-        #checagem_tarefa = self.__controlador_missao.checar_lista_tarefas()
-        if checagem_super_heroi == 0 or checagem_cliente == 0: # or checagem_tarefa == 0:
-            self.__tela_sistema.mostrar_mensagem('\033[1;31m Ops, você primeiro deve cadastrar pelo menos um Super-Herói, '
-                                                 'e um cliente! \033[0m')
+        if checagem_super_heroi == 0 or checagem_cliente == 0:
+            self.__tela_sistema.mostrar_mensagem(
+                '\033[1;31m Ops, você primeiro deve cadastrar pelo menos um Super-Herói, '
+                'e um cliente! \033[0m')
         else:
             self.__controlador_missao.abre_tela()
 

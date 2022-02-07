@@ -1,5 +1,4 @@
 from MVC.limite.tela_senciente import TelaSenciente
-from MVC.entidade.senciente import Senciente
 from MVC.entidade.super_heroi import SuperHeroi
 from MVC.entidade.vilao import Vilao
 
@@ -84,7 +83,6 @@ class ControladorSenciente:
         else:
             self.__tela_senciente.mostra_mensagem("Atenção: senciente não existente!")
 
-    # Sugestão: se a lista estiver vazia, mostrar a mensagem de lista vazia
     def listar_senciente(self):
         if self.__super_herois is not None:
             self.__tela_senciente.mostra_mensagem("----- Lista de Super-Heróis -----")
@@ -142,4 +140,3 @@ class ControladorSenciente:
         continua = True
         while continua:
             lista_opcoes[self.__tela_senciente.tela_opcoes()]()
-

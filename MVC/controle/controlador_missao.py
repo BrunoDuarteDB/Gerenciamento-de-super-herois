@@ -22,7 +22,7 @@ class ControladorMissao:
 
     def pegar_missao_por_titulo(self, titulo: str):
         for missao in self.__missoes:
-            if (missao.titulo== titulo):
+            if (missao.titulo == titulo):
                 return missao
         return None
 
@@ -39,7 +39,6 @@ class ControladorMissao:
         self.__missoes.append(missao)
         self.listar_missao(missao)
 
-        # Sugestão: se a lista estiver vazia, mostrar a mensagem de lista vazia
     def listar_missao(self, missao):
         clientes = []
         tarefas = []
@@ -65,7 +64,7 @@ class ControladorMissao:
             "super_herois": super_herois,
             "viloes": viloes,
             "resultado": missao.resultado
-            })
+        })
 
     def excluir_missao(self):
         if self.__missoes == []:
@@ -121,9 +120,8 @@ class ControladorMissao:
         titulo = self.__tela_missao.selecionar_missao()
         missao = self.pegar_missao_por_titulo(titulo)
 
-
         if missao is not None:
-            novos_dados_missao= self.__tela_missao.pega_dados_missao()
+            novos_dados_missao = self.__tela_missao.pega_dados_missao()
             missao.titulo = novos_dados_missao["titulo"]
             missao.data = novos_dados_missao["data"]
             missao.local = novos_dados_missao["local"]
@@ -161,13 +159,13 @@ class ControladorMissao:
         elif total_viloes == total_super_herois:
             return 'empate'
 
-    def incluir_tarefa(self): # deixei o verbo no infinitivo
+    def incluir_tarefa(self):
         dados_tarefa = self.__tela_missao.pega_dados_tarefa()
         tarefa = Tarefa(dados_tarefa['id_tarefa'], dados_tarefa['descricao'])
         self.__tarefas.append(tarefa)
         return tarefa
 
-    def alterar_tarefa(self): # deixei o verbo no infinitivo
+    def alterar_tarefa(self):
         self.listar_tarefas()
         id_tarefa = self.__tela_missao.selecionar_tarefa()
         tarefa = self.pega_tarefa_por_id(id_tarefa)
@@ -314,24 +312,6 @@ class ControladorMissao:
                 resposta = self.__tela_missao.deseja_mais_vilao()
         return viloes
 
-    '''def incluir_cliente(self, cliente: Cliente):
-        pass
-
-    def excluir_cliente(self, cliente: Cliente):
-        pass
-
-    def incluir_super_heroi(self, super_heroi: SuperHeroi):
-        pass
-
-    def excluir_super_heroi(self, super_heroi: SuperHeroi):
-        pass
-
-    def incluir_vilao(self, vilao: Vilao):
-        pass
-
-    def excluir_vilao(self, vilao: Vilao):
-        pass'''
-
     def listar_viloes(self):
         for vilao in missao.viloes:
             self.__tela_missao.mostrar_vilao({'nome': vilao.nome,
@@ -363,7 +343,6 @@ class ControladorMissao:
             6: self.listar_missoes,
             0: self.retornar
         }
-        continua=True
+        continua = True
         while continua:
             lista_opcoes[self.__tela_missao.tela_opcoes()]()
-

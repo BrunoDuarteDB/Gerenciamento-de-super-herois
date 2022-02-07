@@ -24,12 +24,6 @@ class ControladorCliente:
         cliente = self.pega_cliente_por_codigo(codigo)
         if cliente is not None:
             return cliente
-        ''' 1) mandar a tela printar todos os clientes (código e nome)
-            2) pede para a tela o código escolhido pelo cliente
-            3) usar o método "pega_cliente_por_codigo"
-                         if cliente is not None:
-                                return cliente
-            4) dar um return no cliente (ou lista de clientes) '''
 
     def incluir_cliente(self):
         dados_cliente = self.__tela_cliente.pega_dados_cliente()
@@ -56,14 +50,12 @@ class ControladorCliente:
         else:
             self.__tela_cliente.mostra_mensagem("ATENCAO: cliente não existente")
 
-
-
     def lista_clientes(self):
-        if len(self.__clientes)== 0:
+        if len(self.__clientes) == 0:
             return self.__tela_cliente.mostra_mensagem("\033[1;31mATENÇÃO: A lista de clientes está vazia\033[0m")
         for cliente in self.__clientes:
             self.__tela_cliente.mostra_cliente({"nome": cliente.nome, "pais_origem": cliente.pais_origem,
-                                                 "local_sede": cliente.local_sede, "codigo": cliente.codigo})
+                                                "local_sede": cliente.local_sede, "codigo": cliente.codigo})
 
     def checar_lista_clientes(self):
         if len(self.__clientes) == 0:
@@ -95,7 +87,6 @@ class ControladorCliente:
         lista_opcoes = {1: self.incluir_cliente, 2: self.alterar_cliente, 3: self.lista_clientes,
                         4: self.excluir_cliente,
                         0: self.retornar}
-
         continua = True
         while continua:
             lista_opcoes[self.__tela_cliente.tela_opcoes()]()

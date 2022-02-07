@@ -61,7 +61,7 @@ class ControladorPoder:
         elif len(self.__poderes) > 0:
             self.__tela_poder.mostra_mensagem("----- Lista de Poderes -----")
         for poder in self.__poderes:
-            self.__tela_poder.mostra_poder({"detentor": poder.detentor,"velocidade": poder.velocidade,
+            self.__tela_poder.mostra_poder({"detentor": poder.detentor, "velocidade": poder.velocidade,
                                             "forca": poder.forca, "poder_magico": poder.poder_magico,
                                             "resistencia": poder.resistencia, "inteligencia": poder.inteligencia,
                                             "artes_marciais": poder.artes_marciais, "fator_cura": poder.fator_cura,
@@ -98,10 +98,12 @@ class ControladorPoder:
         poder = self.pega_poder_por_detentor(detentor_do_poder)
         if poder is not None:
             media = (poder.velocidade + poder.forca + poder.poder_magico + poder.resistencia + poder.inteligencia +
-                 poder.artes_marciais + poder.fator_cura + poder.expertise + poder.controle_natureza) / 9
-            return self.__tela_poder.mostra_mensagem(f"\033[1;33mA média de poder do detentor escolhido é: {media}\033[0m ")
+                     poder.artes_marciais + poder.fator_cura + poder.expertise + poder.controle_natureza) / 9
+            return self.__tela_poder.mostra_mensagem(
+                f"\033[1;33mA média de poder do detentor escolhido é: {media}\033[0m ")
         else:
-            return self.__tela_poder.mostra_mensagem("\033[1;31mDETENTOR DO PODER INVÁLIDO. VERIFIQUE SE DIGITOU CORRETAMENTE \033[0m")
+            return self.__tela_poder.mostra_mensagem(
+                "\033[1;31mDETENTOR DO PODER INVÁLIDO. VERIFIQUE SE DIGITOU CORRETAMENTE \033[0m")
 
     def retornar(self):
         self.__controlador_sistema.abre_tela()

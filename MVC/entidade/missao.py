@@ -1,8 +1,7 @@
-
-
 class Missao:
     def __init__(self, titulo: str, data: str, local: str, conflito: str, clientes: list, tarefas: list,
-                 super_herois: list, viloes: list, resultado=None):  # aqui já não deveria gerar o resultado? MUDAR NO DIAGRAMA
+                 super_herois: list, viloes: list,
+                 resultado=None):
         self.__titulo = titulo
         self.__data = data
         self.__local = local
@@ -10,7 +9,7 @@ class Missao:
         self.__clientes = clientes
         self.__tarefas = tarefas
         self.__super_herois = super_herois
-        self.__viloes = viloes # MUDAR NO DIAGRAMA
+        self.__viloes = viloes
         self.__resultado = resultado
 
     @property
@@ -84,4 +83,3 @@ class Missao:
     @resultado.setter
     def resultado(self, resultado: str):
         self.__resultado = resultado
-

@@ -1,13 +1,8 @@
-from MVC.entidade.super_heroi import SuperHeroi
-from MVC.entidade.vilao import Vilao
-
-
 class TelaSenciente():
 
     def __init__(self, controlador_senciente):
         self.__controlador_senciente = controlador_senciente
 
-    # fazer aqui tratamento dos dados, caso a entrada seja diferente do esperado
     def tela_opcoes(self):
         print('\033[1;96m---------- SENCIENTE ----------\033[0m')
         print('Opções:')
@@ -30,7 +25,6 @@ class TelaSenciente():
                 print('Opção inválida!')
                 print()
 
-    # fazer aqui tratamento dos dados, caso a entrada seja diferente do esperado
     def pega_dados_senciente(self):
         print('----- DADOS SENCIENTE -----')
         while True:
@@ -104,7 +98,6 @@ class TelaSenciente():
                     "empresa": empresa,
                     "local_moradia": local_moradia, "periculosidade": periculosidade}
 
-    # fazer aqui tratamento dos dados, caso a entrada seja diferente do esperado
     def mostra_senciente(self, dados_senciente):
         if dados_senciente['codigo'] == 1:
             print('Nome do Super-Herói: ', dados_senciente['nome'])

@@ -1,5 +1,3 @@
-
-
 class Tarefa:
     def __init__(self, id_tarefa: str, descricao: str):
         self.__descricao = descricao

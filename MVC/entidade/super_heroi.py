@@ -1,5 +1,6 @@
-from entidade.senciente import Senciente
-from entidade.poder import Poder
+from MVC.entidade.senciente import Senciente
+from MVC.entidade.poder import Poder
+
 
 class SuperHeroi(Senciente):
     def __init__(self, nome: str, poder: Poder, fraqueza: str, empresa: str, local_moradia: str, alterego: str):
@@ -13,4 +14,3 @@ class SuperHeroi(Senciente):
     @alterego.setter
     def alterego(self, alterego):
         self.__alterego = alterego
-

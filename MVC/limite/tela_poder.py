@@ -43,7 +43,7 @@ class TelaPoder():
         while True:
             try:
                 velocidade = int(input("Velocidade: "))
-                if velocidade == "" or velocidade< 0 or velocidade>1000:
+                if velocidade == "" or velocidade < 0 or velocidade > 1000:
                     raise ValueError
                 break
             except ValueError:
@@ -51,7 +51,7 @@ class TelaPoder():
         while True:
             try:
                 forca = int(input("Força: "))
-                if forca == "" or forca< 0 or forca>1000:
+                if forca == "" or forca < 0 or forca > 1000:
                     raise ValueError
                 break
             except ValueError:
@@ -59,7 +59,7 @@ class TelaPoder():
         while True:
             try:
                 poder_magico = int(input("Poder Mágico: "))
-                if poder_magico == "" or poder_magico< 0 or poder_magico>1000:
+                if poder_magico == "" or poder_magico < 0 or poder_magico > 1000:
                     raise ValueError
                 break
             except ValueError:
@@ -67,7 +67,7 @@ class TelaPoder():
         while True:
             try:
                 resistencia = int(input("Resistência: "))
-                if resistencia == "" or resistencia< 0 or resistencia>1000:
+                if resistencia == "" or resistencia < 0 or resistencia > 1000:
                     raise ValueError
                 break
             except ValueError:
@@ -75,7 +75,7 @@ class TelaPoder():
         while True:
             try:
                 inteligencia = int(input("Inteligência: "))
-                if inteligencia == "" or inteligencia< 0 or inteligencia>1000:
+                if inteligencia == "" or inteligencia < 0 or inteligencia > 1000:
                     raise ValueError
                 break
             except ValueError:
@@ -83,7 +83,7 @@ class TelaPoder():
         while True:
             try:
                 artes_marciais = int(input("Artes Marciais: "))
-                if artes_marciais == "" or artes_marciais< 0 or artes_marciais>1000:
+                if artes_marciais == "" or artes_marciais < 0 or artes_marciais > 1000:
                     raise ValueError
                 break
             except ValueError:
@@ -91,7 +91,7 @@ class TelaPoder():
         while True:
             try:
                 fator_cura = int(input("Fator Cura: "))
-                if fator_cura == "" or fator_cura< 0 or fator_cura>1000:
+                if fator_cura == "" or fator_cura < 0 or fator_cura > 1000:
                     raise ValueError
                 break
             except ValueError:
@@ -99,7 +99,7 @@ class TelaPoder():
         while True:
             try:
                 expertise = int(input("Expertise: "))
-                if expertise == "" or expertise< 0 or expertise>1000:
+                if expertise == "" or expertise < 0 or expertise > 1000:
                     raise ValueError
                 break
             except ValueError:
@@ -107,7 +107,7 @@ class TelaPoder():
         while True:
             try:
                 controle_natureza = int(input("Controle da Natureza: "))
-                if controle_natureza == "" or controle_natureza< 0 or controle_natureza>1000:
+                if controle_natureza == "" or controle_natureza < 0 or controle_natureza > 1000:
                     raise ValueError
                 break
             except ValueError:
@@ -120,7 +120,7 @@ class TelaPoder():
                 "controle_natureza": controle_natureza}
 
     def mostra_poder(self, dados_poder):
-        print(f"\033[1;32mPoder de {dados_poder['detentor'] } \033[0m")
+        print(f"\033[1;32mPoder de {dados_poder['detentor']} \033[0m")
         print("DETENTOR: ", dados_poder["detentor"])
         print("VELOCIDADE: ", dados_poder["velocidade"])
         print("FORÇA: ", dados_poder["forca"])

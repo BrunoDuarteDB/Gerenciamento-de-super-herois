@@ -1,11 +1,8 @@
-
-
 class TelaMissao():
 
     def __init__(self, controlador_missao):
         self.__controlador_missao = controlador_missao
 
-    # fazer aqui tratamento dos dados, caso a entrada seja diferente do esperado
     def tela_opcoes(self):
         print('\033[1;95m----- MISSÃO -----\033[0m')
         print('Opções:')
@@ -30,7 +27,6 @@ class TelaMissao():
                 print('Opção inválida!')
                 print()
 
-    # fazer aqui tratamento dos dados, caso a entrada seja diferente do esperado
     def pega_dados_missao(self):
         print('------ DADOS MISSÃO ------')
         while True:

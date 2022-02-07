@@ -2,8 +2,6 @@ class Poder:
     def __init__(self, velocidade: int, forca: int, poder_magico: int, resistencia: int, inteligencia: int,
                  artes_marciais: int,
                  fator_cura: int, expertise: int, controle_natureza: int, detentor, media_poder: int):
-        '''from MVC.entidade.vilao import Vilao
-        if isinstance(detentor, Vilao):'''
         self.__detentor = detentor
         self.__velocidade = velocidade
         self.__forca = forca
@@ -15,8 +13,6 @@ class Poder:
         self.__expertise = expertise
         self.__controle_natureza = controle_natureza
         self.__media_poder = media_poder
-
-    # Criar getter e setter para detentor? Sim *ERA ISSO *
 
     @property
     def detentor(self):
@@ -64,7 +60,7 @@ class Poder:
 
     @detentor.setter
     def detentor(self, detentor):
-         self.__detentor= detentor
+        self.__detentor = detentor
 
     @velocidade.setter
     def velocidade(self, velocidade: int):
@@ -105,4 +101,3 @@ class Poder:
     @media_poder.setter
     def media_poder(self, media_poder: int):
         self.__media_poder = media_poder
-

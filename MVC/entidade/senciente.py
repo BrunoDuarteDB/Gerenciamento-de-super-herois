@@ -1,6 +1,7 @@
 from abc import ABC, abstractmethod
 from MVC.entidade.poder import Poder
 
+
 class Senciente(ABC):
     @abstractmethod
     def __init__(self, nome: str, poder: Poder, fraqueza: str, empresa: str, local_moradia: str):
@@ -49,4 +50,3 @@ class Senciente(ABC):
     @local_moradia.setter
     def local_moradia(self, local_moradia):
         self.__local_moradia = local_moradia
-
