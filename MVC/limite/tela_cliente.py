@@ -1,5 +1,3 @@
-
-
 class TelaCliente():
 
     def __init__(self, controlador_cliente):
@@ -16,8 +14,8 @@ class TelaCliente():
 
         while True:
             try:
-                opcoes_validas=[0,1,2,3,4]
-                opcao= int(input("Escolha a opção: "))
+                opcoes_validas = [0, 1, 2, 3, 4]
+                opcao = int(input("Escolha a opção: "))
                 print('\n')
                 if opcao not in opcoes_validas:
                     raise ValueError
@@ -29,10 +27,39 @@ class TelaCliente():
 
     def pega_dados_cliente(self):
         print("-------- DADOS CLIENTE ----------")
-        nome = input("Título: ")
-        pais_origem = input("País de Origem: ")
-        local_sede = input("Local da Sede: ")
-        codigo= input("Código: ")
+        while True:
+            try:
+                nome = input("Título: ").strip()
+                if nome == "":
+                    raise ValueError
+                break
+            except ValueError:
+                print("\033[1;31mATENÇÃO! CAMPO NÃO PODE FICAR VAZIO. \033[0m")
+        while True:
+            try:
+                pais_origem = input("País de Origem: ")
+                if pais_origem=="":
+                    raise ValueError
+                break
+            except ValueError:
+                print("\033[1;31mATENÇÃO! CAMPO NÃO PODE FICAR VAZIO.  \033[0m")
+        while True:
+            try:
+                local_sede = input("Local da Sede: ")
+                if local_sede=="":
+                    raise ValueError
+                break
+            except ValueError:
+                print("\033[1;31mATENÇÃO! CAMPO NÃO PODE FICAR VAZIO.  \033[0m")
+        while True:
+            try:
+                codigo = input("Código: ")
+                if not codigo.isnumeric():
+                    raise ValueError
+                break
+            except ValueError:
+                print("\033[1;31mCÓDIGO INVÁLIDO! DIGITE UM NÚMERO INTEIRO \033[0m")
+
         print('\n')
 
         return {"nome": nome, "pais_origem": pais_origem, "local_sede": local_sede, "codigo": codigo}
@@ -56,16 +83,29 @@ class TelaCliente():
             print("CÓDIGO DO CLIENTE: ", cliente.codigo)
             print('\n')
 
-
         # fazer aqui tratamento dos dados, caso a entrada seja diferente do esperado
 
     def seleciona_cliente(self):
-        codigo = input("Codigo do cliente que deseja selecionar: ")
+        while True:
+            try:
+                codigo = input("Codigo do cliente que deseja selecionar: ")
+                if not codigo.isnumeric():
+                    raise ValueError
+                break
+            except ValueError:
+                print("\033[1;31mCÓDIGO INVÁLIDO! DIGITE UM NÚMERO INTEIRO \033[0m")
         print('\n')
         return codigo
 
     def deseja_mais(self):
-        pergunta = input('Deseja adicionar mais um cliente? (S/N): ')
+        while True:
+            try:
+                pergunta = input('Deseja adicionar mais um cliente? (S/N): ')
+                if pergunta not in {"S", "s", "N", "n"}:
+                    raise ValueError
+                break
+            except ValueError:
+                print("\033[1;31mRESPOSTA INVÁLIDA. DIGITE S OU N \033[0m")
         print('\n')
         return pergunta
 

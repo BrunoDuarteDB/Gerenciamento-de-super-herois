@@ -1,22 +1,26 @@
-
 class Poder:
-    def __init__(self, velocidade: int, forca: int, poder_magico: int, resistencia: int, inteligencia: int, artes_marciais: int,
-                 fator_cura: int, expertise:int, controle_natureza: int, detentor, media_poder: int):
+    def __init__(self, velocidade: int, forca: int, poder_magico: int, resistencia: int, inteligencia: int,
+                 artes_marciais: int,
+                 fator_cura: int, expertise: int, controle_natureza: int, detentor, media_poder: int):
         '''from MVC.entidade.vilao import Vilao
         if isinstance(detentor, Vilao):'''
         self.__detentor = detentor
-        self.__velocidade= velocidade
-        self.__forca=forca
-        self.__poder_magico=poder_magico
-        self.__resistencia=resistencia
-        self.__inteligencia=inteligencia
-        self.__artes_marciais=artes_marciais
-        self.__fator_cura=fator_cura
-        self.__expertise=expertise
-        self.__controle_natureza=controle_natureza
+        self.__velocidade = velocidade
+        self.__forca = forca
+        self.__poder_magico = poder_magico
+        self.__resistencia = resistencia
+        self.__inteligencia = inteligencia
+        self.__artes_marciais = artes_marciais
+        self.__fator_cura = fator_cura
+        self.__expertise = expertise
+        self.__controle_natureza = controle_natureza
         self.__media_poder = media_poder
 
-    #Criar getter e setter para detentor? Sim
+    # Criar getter e setter para detentor? Sim *ERA ISSO *
+
+    @property
+    def detentor(self):
+        return self.__detentor
 
     @property
     def velocidade(self):
@@ -58,6 +62,10 @@ class Poder:
     def media_poder(self):
         return self.__media_poder
 
+    @detentor.setter
+    def detentor(self, detentor):
+         self.__detentor= detentor
+
     @velocidade.setter
     def velocidade(self, velocidade: int):
         self.__velocidade = velocidade
@@ -97,3 +105,4 @@ class Poder:
     @media_poder.setter
     def media_poder(self, media_poder: int):
         self.__media_poder = media_poder
+

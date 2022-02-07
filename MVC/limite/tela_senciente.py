@@ -1,6 +1,7 @@
 from MVC.entidade.super_heroi import SuperHeroi
 from MVC.entidade.vilao import Vilao
 
+
 class TelaSenciente():
 
     def __init__(self, controlador_senciente):
@@ -32,23 +33,68 @@ class TelaSenciente():
     # fazer aqui tratamento dos dados, caso a entrada seja diferente do esperado
     def pega_dados_senciente(self):
         print('----- DADOS SENCIENTE -----')
-        heroi_ou_vilao = int(input('Herói ou vilão? Digite 1 para Herói ou 2 para Vilão: '))
-        nome = input('Nome: ')
+        while True:
+            try:
+                heroi_ou_vilao = int(input('Herói ou vilão? Digite 1 para Herói ou 2 para Vilão: ').strip())
+                numeros_possiveis = [1, 2]
+                if heroi_ou_vilao not in numeros_possiveis:
+                    raise ValueError
+                break
+            except ValueError:
+                print("\033[1;31mOPÇÃO INVÁLIDA! DIGITE 1 OU 2 \033[0m")
+        while True:
+            try:
+                nome = input('Nome: ')
+                if nome == "":
+                    raise ValueError
+                break
+            except ValueError:
+                print("\033[1;31mATENÇÃO! NÃO DEIXE O CAMPO VAZIO \033[0m")
         poder = self.__controlador_senciente.pede_cadastro_poder()
-        fraqueza = input('Fraqueza ("kryptonita, por exemplo"): ')
-        empresa = input('Empresa: ')
-        local_moradia = input('Onde mora: ')
+        while True:
+            try:
+                fraqueza = input('Fraqueza ("kryptonita, por exemplo"): ')
+                if fraqueza == "":
+                    raise ValueError
+                break
+            except ValueError:
+                print("\033[1;31mATENÇÃO! NÃO DEIXE O CAMPO VAZIO \033[0m")
+        while True:
+            try:
+                empresa = input('Empresa: ')
+                if empresa == "":
+                    raise ValueError
+                break
+            except ValueError:
+                print("\033[1;31mATENÇÃO! NÃO DEIXE O CAMPO VAZIO \033[0m")
+        while True:
+            try:
+                local_moradia = input('Onde mora: ')
+                if local_moradia == "":
+                    raise ValueError
+                break
+            except ValueError:
+                print("\033[1;31mATENÇÃO! NÃO DEIXE O CAMPO VAZIO \033[0m")
 
         if heroi_ou_vilao == 1:
             alterego = input('Alterego: ')
             print('\n')
-            return {'heroi_ou_vilao': heroi_ou_vilao, "nome": nome, "poder": poder, "fraqueza": fraqueza, "empresa": empresa,
+            return {'heroi_ou_vilao': heroi_ou_vilao, "nome": nome, "poder": poder, "fraqueza": fraqueza,
+                    "empresa": empresa,
                     "local_moradia": local_moradia, "alterego": alterego}
 
         elif heroi_ou_vilao == 2:
-            periculosidade = input('Periculosidade: ')
+            while True:
+                try:
+                    periculosidade = input('Periculosidade: ')
+                    if periculosidade == "" or periculosidade < 0 or periculosidade > 1000:
+                        raise ValueError
+                    break
+                except ValueError:
+                    print("\033[1;31mATENÇÃO! DIGITE UM NÚMERO VÁLIDO \033[0m")
             print('\n')
-            return {'heroi_ou_vilao': heroi_ou_vilao, "nome": nome, "poder": poder, "fraqueza": fraqueza, "empresa": empresa,
+            return {'heroi_ou_vilao': heroi_ou_vilao, "nome": nome, "poder": poder, "fraqueza": fraqueza,
+                    "empresa": empresa,
                     "local_moradia": local_moradia, "periculosidade": periculosidade}
 
     # fazer aqui tratamento dos dados, caso a entrada seja diferente do esperado
@@ -58,7 +104,10 @@ class TelaSenciente():
             print('Fraqueza do Super-Herói: ', dados_senciente['fraqueza'])
             print('Empresa do Super-Herói: ', dados_senciente['empresa'])
             print('Local onde mora: ', dados_senciente['local_moradia'])
-            print('Alterego do Super-Herói: ', dados_senciente['alterego'])
+            if dados_senciente['alterego'] == "":
+                print('Este Super-Herói não possui Alterego')
+            else:
+                print('Alterego do Super-Herói: ', dados_senciente['alterego'])
             print('\n')
         elif dados_senciente['codigo'] == 2:
             print('Nome do Vilão: ', dados_senciente['nome'])

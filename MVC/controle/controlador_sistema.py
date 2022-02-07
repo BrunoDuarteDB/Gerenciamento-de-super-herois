@@ -38,7 +38,7 @@ class ControladorSistema:
         #checagem_tarefa = self.__controlador_missao.checar_lista_tarefas()
         if checagem_super_heroi == 0 or checagem_cliente == 0: # or checagem_tarefa == 0:
             self.__tela_sistema.mostrar_mensagem('\033[1;31m Ops, você primeiro deve cadastrar pelo menos um Super-Herói, '
-                                                 'uma tarefa e um cliente! \033[0m')
+                                                 'e um cliente! \033[0m')
         else:
             self.__controlador_missao.abre_tela()
 

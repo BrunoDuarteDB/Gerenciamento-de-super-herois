@@ -44,13 +44,13 @@ class ControladorPoder:
             poder.detentor = novos_dados_poder["detentor"]
             self.lista_poderes()
         else:
-            self.__tela_poder.mostra_mensagem("ATENÇÃO: Poder não existente.")
+            self.__tela_poder.mostra_mensagem("\033[1;31mATENÇÃO! PODER INEXISTENTE \033[0m")
 
     def lista_poderes(self):
         if (len(self.__poderes) == 0):
-            self.__tela_poder.mostra_mensagem("A lista de poderes está vazia.")
+            self.__tela_poder.mostra_mensagem("\033[1;31mA LISTA DE PODERES ESTÁ VAZIA. \033[0m")
         for poder in self.__poderes:
-            self.__tela_poder.mostra_poder({"velocidade": poder.velocidade, "forca": poder.forca,
+            self.__tela_poder.mostra_poder({"detentor": poder.detentor,"velocidade": poder.velocidade, "forca": poder.forca,
                                             "poder_magico": poder.poder_magico, "resistencia": poder.resistencia,
                                             "inteligencia": poder.inteligencia, "artes_marciais": poder.artes_marciais,
                                             "fator_cura": poder.fator_cura, "expertise": poder.expertise,
@@ -70,9 +70,12 @@ class ControladorPoder:
     def mostra_media_poder(self):
         detentor_do_poder = self.__tela_poder.seleciona_poder()
         poder = self.pega_poder_por_detentor(detentor_do_poder)
-        media = (poder.velocidade + poder.forca + poder.poder_magico + poder.resistencia + poder.inteligencia +
+        if poder is not None:
+            media = (poder.velocidade + poder.forca + poder.poder_magico + poder.resistencia + poder.inteligencia +
                  poder.artes_marciais + poder.fator_cura + poder.expertise + poder.controle_natureza) / 9
-        return self.__tela_poder.mostra_mensagem(f"A média de poder do detentor escolhido é: {media} ")
+            return self.__tela_poder.mostra_mensagem(f"\033[1;33mA média de poder do detentor escolhido é: {media}\033[0m ")
+        else:
+            return self.__tela_poder.mostra_mensagem("\033[1;31mDETENTOR DO PODER INVÁLIDO. VERIFIQUE SE DIGITOU CORRETAMENTE \033[0m")
 
     def retornar(self):
         self.__controlador_sistema.abre_tela()

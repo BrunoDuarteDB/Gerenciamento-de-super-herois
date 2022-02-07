@@ -69,10 +69,38 @@ class ControladorMissao:
         else:
             self.__tela_missao.mostrar_mensagem("ATENÇÃO: Missão não existe, verifique se digitou corretamente.")
 
+    def listar_missoes(self):
+        for m in self.__missoes:
+            clientes = []
+            tarefas = []
+            super_herois = []
+            viloes = []
+            for b in m.clientes:
+                clientes.append(b.nome)
+            for c in m.tarefas:
+                tarefas.append(c.descricao)
+            for d in m.super_herois:
+                super_herois.append(d.nome)
+            for e in m.viloes:
+                viloes.append(e.nome)
+
+            self.__tela_missao.mostrar_missao({
+                "titulo": m.titulo,
+                "data": m.data,
+                "local": m.local,
+                "conflito": m.conflito,
+                "clientes": clientes,
+                "tarefas": tarefas,
+                "super_herois": super_herois,
+                "viloes": viloes,
+                "resultado": m.resultado
+            })
+
     def alterar_missao(self):
-        self.listar_missao()
+        self.listar_missoes()
         titulo = self.__tela_missao.selecionar_missao()
         missao = self.pegar_missao_por_titulo(titulo)
+
 
         if missao is not None:
             novos_dados_missao= self.__tela_missao.pega_dados_missao()

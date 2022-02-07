@@ -97,17 +97,38 @@ class TelaMissao():
         return titulo
 
     def deseja_mais_tarefa(self):
-        pergunta = input('Deseja adicionar mais uma tarefa? (S/N): ')
+        while True:
+            try:
+                pergunta = input('Deseja adicionar mais uma tarefa? (S/N): ')
+                if pergunta not in {"S", "s", "N", "n"}:
+                    raise ValueError
+                break
+            except ValueError:
+                print("\033[1;31mRESPOSTA INVÁLIDA. DIGITE S OU N \033[0m")
         print('\n')
         return pergunta
 
     def deseja_mais_super_heroi(self):
-        pergunta = input('Deseja adicionar mais um Super-Herói? (S/N): ')
+        while True:
+            try:
+                pergunta = input('Deseja adicionar mais um super-herói? (S/N): ')
+                if pergunta not in {"S", "s", "N", "n"}:
+                    raise ValueError
+                break
+            except ValueError:
+                print("\033[1;31mRESPOSTA INVÁLIDA. DIGITE S OU N \033[0m")
         print('\n')
         return pergunta
 
     def deseja_mais_vilao(self):
-        pergunta = input('Deseja adicionar mais um Vilão? (S/N): ')
+        while True:
+            try:
+                pergunta = input('Deseja adicionar mais um vilão? (S/N): ')
+                if pergunta not in {"S", "s", "N", "n"}:
+                    raise ValueError
+                break
+            except ValueError:
+                print("\033[1;31mRESPOSTA INVÁLIDA. DIGITE S OU N \033[0m")
         print('\n')
         return pergunta
 
