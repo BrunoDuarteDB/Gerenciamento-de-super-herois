@@ -312,7 +312,7 @@ class ControladorMissao:
                 resposta = self.__tela_missao.deseja_mais_vilao()
         return viloes
 
-    def listar_viloes(self):
+    def listar_viloes(self, missao):
         for vilao in missao.viloes:
             self.__tela_missao.mostrar_vilao({'nome': vilao.nome,
                                               'poder': vilao.poder,
@@ -321,7 +321,7 @@ class ControladorMissao:
                                               'local_moradia': vilao.local_moradia,
                                               'periculosidade': vilao.periculosidade})
 
-    def listar_super_herois(self):
+    def listar_super_herois(self, missao):
         for super_heroi in missao.super_herois:
             self.__tela_missao.mostrar_super_heroi({'nome': super_heroi.nome,
                                                     'poder': super_heroi.poder,
