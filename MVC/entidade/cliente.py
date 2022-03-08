@@ -1,9 +1,13 @@
 class Cliente:
     def __init__(self, nome: str, pais_origem: str, local_sede: str, codigo: int):
-        self.__nome = nome
-        self.__pais_origem = pais_origem
-        self.__local_sede = local_sede
-        self.__codigo = codigo
+        if isinstance(nome, str):
+            self.__nome = nome
+        if isinstance(pais_origem, str):
+            self.__pais_origem = pais_origem
+        if isinstance(local_sede, str):
+            self.__local_sede = local_sede
+        if isinstance(codigo, int):
+            self.__codigo = codigo
 
     @property
     def nome(self):
@@ -19,11 +23,13 @@ class Cliente:
 
     @nome.setter
     def nome(self, nome: str):
-        self.__nome = nome
+        if isinstance(nome, str):
+            self.__nome = nome
 
     @pais_origem.setter
     def pais_origem(self, pais_origem: str):
-        self.__pais_origem = pais_origem
+        if isinstance(pais_origem, str):
+            self.__pais_origem = pais_origem
 
     @local_sede.setter
     def local_sede(self, local_sede: str):
@@ -35,4 +41,5 @@ class Cliente:
 
     @codigo.setter
     def codigo(self, codigo: int):
-        self.__codigo = codigo
+        if isinstance(codigo, int):
+            self.__codigo = codigo

@@ -2,14 +2,23 @@ class Missao:
     def __init__(self, titulo: str, data: str, local: str, conflito: str, clientes: list, tarefas: list,
                  super_herois: list, viloes: list,
                  resultado=None):
-        self.__titulo = titulo
-        self.__data = data
-        self.__local = local
-        self.__conflito = conflito
-        self.__clientes = clientes
-        self.__tarefas = tarefas
-        self.__super_herois = super_herois
-        self.__viloes = viloes
+        # testar tipos!!!
+        if isinstance(titulo, str):
+            self.__titulo = titulo
+        if isinstance(data, str):
+            self.__data = data
+        if isinstance(local, str):
+            self.__local = local
+        if isinstance(conflito, str):
+            self.__conflito = conflito
+        if isinstance(clientes, list):
+            self.__clientes = clientes
+        if isinstance(tarefas, list):
+            self.__tarefas = tarefas
+        if isinstance(super_herois, list):
+            self.__super_herois = super_herois
+        if isinstance(viloes, list):
+            self.__viloes = viloes
         self.__resultado = resultado
 
     @property
@@ -50,35 +59,43 @@ class Missao:
 
     @titulo.setter
     def titulo(self, titulo: str):
-        self.__titulo = titulo
+        if isinstance(titulo, str):
+            self.__titulo = titulo
 
     @data.setter
     def data(self, data: str):
-        self.__data = data
+        if isinstance(data, str):
+            self.__data = data
 
     @local.setter
     def local(self, local: str):
-        self.__local = local
+        if isinstance(local, str):
+            self.__local = local
 
     @conflito.setter
     def conflito(self, conflito: str):
-        self.__conflito = conflito
+        if isinstance(conflito, str):
+            self.__conflito = conflito
 
     @clientes.setter
     def clientes(self, clientes: list):
-        self.__clientes = clientes
+        if isinstance(clientes, list):
+            self.__clientes = clientes
 
     @tarefas.setter
     def tarefas(self, tarefas: list):
-        self.__tarefas = tarefas
+        if isinstance(tarefas, list):
+            self.__tarefas = tarefas
 
     @super_herois.setter
     def super_herois(self, super_herois):
-        self.__super_herois = super_herois
+        if isinstance(super_herois, list):
+            self.__super_herois = super_herois
 
     @viloes.setter
     def viloes(self, viloes):
-        self.__viloes = viloes
+        if isinstance(viloes, list):
+            self.__viloes = viloes
 
     @resultado.setter
     def resultado(self, resultado: str):

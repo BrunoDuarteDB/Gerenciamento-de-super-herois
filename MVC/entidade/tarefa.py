@@ -1,15 +1,18 @@
 class Tarefa:
-    def __init__(self, id_tarefa: str, descricao: str):
-        self.__descricao = descricao
-        self.__id_tarefa = id_tarefa
+    def __init__(self, id_tarefa: int, descricao: str):
+        if isinstance(descricao, str):
+            self.__descricao = descricao
+        if isinstance(id_tarefa, int):
+            self.__id_tarefa = id_tarefa
 
     @property
     def id_tarefa(self):
         return self.__id_tarefa
 
     @id_tarefa.setter
-    def id_tarefa(self, id_tarefa: str):
-        self.__id_tarefa = id_tarefa
+    def id_tarefa(self, id_tarefa: int):
+        if isinstance(id_tarefa, int):
+            self.__id_tarefa = id_tarefa
 
     @property
     def descricao(self):
@@ -17,4 +20,5 @@ class Tarefa:
 
     @descricao.setter
     def descricao(self, descricao: str):
-        self.__descricao = descricao
+        if isinstance(descricao, str):
+            self.__descricao = descricao

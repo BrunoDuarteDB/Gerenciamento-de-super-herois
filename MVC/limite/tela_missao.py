@@ -70,7 +70,7 @@ class TelaMissao():
         while True:
             try:
                 id_tarefa = input('ID da tarefa: ').strip()
-                if id_tarefa == "" or id_tarefa.isalpha() is True:
+                if id_tarefa == "" or id_tarefa.isdigit() is False:
                     raise ValueError
                 break
             except ValueError:
@@ -78,7 +78,7 @@ class TelaMissao():
         while True:
             try:
                 descricao = input('Descrição da tarefa: ').strip()
-                if descricao == "" or descricao.isalpha() is False:
+                if descricao == "" or descricao.isdigit() is True:
                     raise ValueError
                 break
             except ValueError:

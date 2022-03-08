@@ -116,6 +116,7 @@ class ControladorSenciente:
         if senciente is not None:
             if isinstance(senciente, SuperHeroi):
                 self.__super_herois.remove(senciente)
+                # del(senciente) deleta o objeto da memória de vez
             elif isinstance(senciente, Vilao):
                 self.__viloes.remove(senciente)
             self.listar_senciente()

@@ -1,7 +1,8 @@
 class Poder:
     def __init__(self, velocidade: int, forca: int, poder_magico: int, resistencia: int, inteligencia: int,
                  artes_marciais: int,
-                 fator_cura: int, expertise: int, controle_natureza: int, detentor, media_poder: int):
+                 fator_cura: int, expertise: int, controle_natureza: int, detentor: str, media_poder: int):
+        #  alterar detentor para Senciente
         self.__detentor = detentor
         self.__velocidade = velocidade
         self.__forca = forca

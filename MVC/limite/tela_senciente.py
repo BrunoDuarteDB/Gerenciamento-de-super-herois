@@ -147,7 +147,7 @@ class TelaSenciente():
         while True:
             try:
                 nome = input('Nome do senciente (Super-Herói ou Vilão) que deseja selecionar: ')
-                if nome.isalpha() is False or nome not in nomes_sencientes:
+                if nome.isdigit() is True or nome not in nomes_sencientes:
                     raise ValueError
                 break
             except ValueError:
@@ -162,7 +162,7 @@ class TelaSenciente():
         while True:
             try:
                 nome = input('Nome do Super-Herói que deseja selecionar: ')
-                if nome.isalpha() is False or nome not in nomes_super_herois:
+                if nome.isdigit() is True or nome not in nomes_super_herois:
                     raise ValueError
                 break
             except ValueError:
@@ -177,7 +177,7 @@ class TelaSenciente():
         while True:
             try:
                 nome = input('Nome do Vilão que deseja selecionar: ')
-                if nome.isalpha() is False or nome not in nomes_viloes:
+                if nome.isdigit() is True or nome not in nomes_viloes:
                     raise ValueError
                 break
             except ValueError:
