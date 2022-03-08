@@ -1,7 +1,7 @@
 from MVC.limite.tela_senciente import TelaSenciente
 from MVC.entidade.super_heroi import SuperHeroi
 from MVC.entidade.vilao import Vilao
-from MVC.limite.tela_dados_senciente import TelaDadosSenciente
+from MVC.limite.tela_senciente_gui import TelaDadosSenciente
 
 
 class ControladorSenciente:

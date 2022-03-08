@@ -1,5 +1,5 @@
 from MVC.limite.tela_sistema import TelaSistema
-from MVC.limite.tela_dados_sistema import TelaDadosSistema
+from MVC.limite.tela_sistema_gui import TelaDadosSistema
 from MVC.controle.controlador_missao import ControladorMissao
 from MVC.controle.controlador_senciente import ControladorSenciente
 from MVC.controle.controlador_poder import ControladorPoder
