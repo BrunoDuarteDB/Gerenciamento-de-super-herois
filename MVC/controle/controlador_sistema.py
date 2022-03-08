@@ -1,4 +1,5 @@
 from MVC.limite.tela_sistema import TelaSistema
+from MVC.limite.tela_dados_sistema import TelaDadosSistema
 from MVC.controle.controlador_missao import ControladorMissao
 from MVC.controle.controlador_senciente import ControladorSenciente
 from MVC.controle.controlador_poder import ControladorPoder
@@ -12,7 +13,8 @@ class ControladorSistema:
         self.__controlador_senciente = ControladorSenciente(self)
         self.__controlador_poder = ControladorPoder(self)
         self.__controlador_cliente = ControladorCliente(self)
-        self.__tela_sistema = TelaSistema(self)
+        self.__tela_sistema = TelaDadosSistema(self)
+        # self.__tela_sistema = TelaSistema(self)
 
     @property
     def controlador_missao(self):
@@ -56,10 +58,11 @@ class ControladorSistema:
         exit(0)
 
     def abre_tela(self):
-        lista_opcoes = {1: self.cadastra_missao, 2: self.cadastra_senciente, 3: self.cadastra_poder,
-                        4: self.cadastra_cliente, 0: self.encerra_sistema}
+        lista_opcoes = {'Missão': self.cadastra_missao, 'Senciente (Super-Herói ou Vilão)': self.cadastra_senciente,
+                        'Poder': self.cadastra_poder, 'Cliente': self.cadastra_cliente,
+                        'Finalizar Sistema': self.encerra_sistema}
 
         while True:
-            opcao_escolhida = self.__tela_sistema.tela_opcoes()
+            opcao_escolhida = self.__tela_sistema.open()
             funcao_escolhida = lista_opcoes[opcao_escolhida]
             funcao_escolhida()

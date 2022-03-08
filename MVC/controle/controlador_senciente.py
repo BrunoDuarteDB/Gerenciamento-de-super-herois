@@ -1,6 +1,7 @@
 from MVC.limite.tela_senciente import TelaSenciente
 from MVC.entidade.super_heroi import SuperHeroi
 from MVC.entidade.vilao import Vilao
+from MVC.limite.tela_dados_senciente import TelaDadosSenciente
 
 
 class ControladorSenciente:
@@ -8,7 +9,8 @@ class ControladorSenciente:
     def __init__(self, controlador_sistema):
         self.__super_herois = []
         self.__viloes = []
-        self.__tela_senciente = TelaSenciente(self)
+        # self.__tela_senciente = TelaSenciente(self)
+        self.__tela_senciente = TelaDadosSenciente(self) #  tem que ajustar
         self.__controlador_sistema = controlador_sistema
 
     @property
