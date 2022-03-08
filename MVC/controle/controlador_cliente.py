@@ -1,4 +1,6 @@
 from MVC.limite.tela_cliente import TelaCliente
+from MVC.limite.tela_cliente_gui import TelaClienteGUI
+from MVC.limite.tela_dados_cliente import TelaDadosCliente
 from MVC.entidade.cliente import Cliente
 
 
@@ -6,7 +8,9 @@ class ControladorCliente:
     def __init__(self, controlador_sistema):
         self.__clientes = []
         self.__controlador_sistema = controlador_sistema
-        self.__tela_cliente = TelaCliente(self)
+        # self.__tela_cliente = TelaCliente(self)
+        self.__tela_cliente = TelaClienteGUI(self)
+        self.__tela_dados_cliente = TelaDadosCliente(self)
 
     @property
     def clientes(self):
@@ -26,9 +30,9 @@ class ControladorCliente:
             return cliente
 
     def incluir_cliente(self):
-        dados_cliente = self.__tela_cliente.pega_dados_cliente()
-        cliente = Cliente(dados_cliente["nome"], dados_cliente["pais_origem"], dados_cliente["local_sede"],
-                          dados_cliente["codigo"])
+        dados_cliente = self.__tela_dados_cliente.open()
+        cliente = Cliente(dados_cliente[1]["nome"], dados_cliente[1]["pais_origem"], dados_cliente[1]["local_sede"],
+                          dados_cliente[1]["codigo"])
         self.__clientes.append(cliente)
 
     def alterar_cliente(self):
@@ -67,7 +71,7 @@ class ControladorCliente:
 
     def excluir_cliente(self):
         if self.__clientes == []:
-            self.__tela_cliente.mostra_mensagem("\033[1;31mATENÇÃO: Ainda não há clientes cadastrados.\033[0m")
+            self.__tela_cliente.show_message('Atenção!', 'Ainda não há clientes cadastrados.')
             print()
             self.abre_tela()
         self.lista_clientes()
@@ -84,9 +88,9 @@ class ControladorCliente:
         self.__controlador_sistema.abre_tela()
 
     def abre_tela(self):
-        lista_opcoes = {1: self.incluir_cliente, 2: self.alterar_cliente, 3: self.lista_clientes,
-                        4: self.excluir_cliente,
-                        0: self.retornar}
+        lista_opcoes = {'Novo Cliente': self.incluir_cliente, 'Alterar': self.alterar_cliente, # 3: self.lista_clientes,
+                        'Excluir': self.excluir_cliente, 'Retornar': self.retornar}
+
         continua = True
         while continua:
-            lista_opcoes[self.__tela_cliente.tela_opcoes()]()
+            lista_opcoes[self.__tela_cliente.open()]()

@@ -24,7 +24,7 @@ class TelaDadosSenciente():
 
     def open(self):
         button, values = self.__window.Read()
-        return button, values
+        return button
 
     def close(self):
         self.__window.Close()

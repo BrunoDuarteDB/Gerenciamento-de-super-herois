@@ -1,7 +1,7 @@
 import PySimpleGUI as sg
 
 
-class TelaDadosSistema():
+class TelaSistemaGUI():
 
     def __init__(self, controlador_sistema):
         self.__controlador_sistema = controlador_sistema

@@ -1,5 +1,5 @@
 from MVC.limite.tela_sistema import TelaSistema
-from MVC.limite.tela_sistema_gui import TelaDadosSistema
+from MVC.limite.tela_sistema_gui import TelaSistemaGUI
 from MVC.controle.controlador_missao import ControladorMissao
 from MVC.controle.controlador_senciente import ControladorSenciente
 from MVC.controle.controlador_poder import ControladorPoder
@@ -13,7 +13,7 @@ class ControladorSistema:
         self.__controlador_senciente = ControladorSenciente(self)
         self.__controlador_poder = ControladorPoder(self)
         self.__controlador_cliente = ControladorCliente(self)
-        self.__tela_sistema = TelaDadosSistema(self)
+        self.__tela_sistema = TelaSistemaGUI(self)
         # self.__tela_sistema = TelaSistema(self)
 
     @property
