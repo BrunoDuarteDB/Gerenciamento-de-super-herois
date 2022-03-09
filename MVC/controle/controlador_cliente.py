@@ -30,13 +30,22 @@ class ControladorCliente:
             return cliente
 
     def incluir_cliente(self):
-        dados_cliente = self.__tela_dados_cliente.open()
-        cliente = Cliente(dados_cliente[1]["nome"], dados_cliente[1]["pais_origem"], dados_cliente[1]["local_sede"],
-                          dados_cliente[1]["codigo"])
+        botao, dados_cliente = self.__tela_dados_cliente.open()
+        self.__tela_dados_cliente.close()
+        cliente = Cliente(dados_cliente["nome"], dados_cliente["pais_origem"], dados_cliente["local_sede"],
+                          int(dados_cliente["codigo"]))
         self.__clientes.append(cliente)
+
+    def monta_dict_clientes(self):
+        clientes = {}
+        for cliente in self.__clientes:
+            clientes[cliente.codigo]={"nome": cliente.nome, "pais_origem": cliente.pais_origem,
+                                                "local_sede": cliente.local_sede, "codigo": cliente.codigo}
+        return clientes
 
     def alterar_cliente(self):
         if self.__clientes == []:
+
             self.__tela_cliente.mostra_mensagem("\033[1;31mATENÇÃO: Ainda não há clientes cadastrados.\033[0m")
             print()
             self.abre_tela()
@@ -93,4 +102,4 @@ class ControladorCliente:
 
         continua = True
         while continua:
-            lista_opcoes[self.__tela_cliente.open()]()
+            lista_opcoes[self.__tela_cliente.open(self.monta_dict_clientes())]()

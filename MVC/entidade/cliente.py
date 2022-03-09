@@ -1,5 +1,6 @@
 class Cliente:
     def __init__(self, nome: str, pais_origem: str, local_sede: str, codigo: int):
+        self.__codigo = None
         if isinstance(nome, str):
             self.__nome = nome
         if isinstance(pais_origem, str):
