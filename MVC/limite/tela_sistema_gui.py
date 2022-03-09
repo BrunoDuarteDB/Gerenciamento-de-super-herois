@@ -21,7 +21,6 @@ class TelaSistemaGUI():
 
     def open(self):
         button, values = self.__window.Read()
-        # self.close()
         return button
 
     def close(self):

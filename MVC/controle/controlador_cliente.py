@@ -9,7 +9,7 @@ class ControladorCliente:
         self.__clientes = []
         self.__controlador_sistema = controlador_sistema
         # self.__tela_cliente = TelaCliente(self)
-        self.__tela_cliente = TelaClienteGUI(self)
+        self.__tela_cliente_gui = TelaClienteGUI(self)
         self.__tela_dados_cliente = TelaDadosCliente(self)
 
     @property
@@ -45,9 +45,13 @@ class ControladorCliente:
 
     def alterar_cliente(self):
         if self.__clientes == []:
+            self.__tela_cliente_gui.show_message("Atenção!", "Ainda não há clientes cadastrados.")
 
-            self.__tela_cliente.mostra_mensagem("\033[1;31mATENÇÃO: Ainda não há clientes cadastrados.\033[0m")
-            print()
+        button, values = self.__tela_cliente_gui.open()
+        print(button, values)
+
+        '''if self.__clientes == []:
+            self.__tela_cliente.show_message("Atenção!", "Ainda não há clientes cadastrados.")
             self.abre_tela()
         self.lista_clientes()
         codigo_cliente = self.__tela_cliente.seleciona_cliente()
@@ -61,14 +65,14 @@ class ControladorCliente:
             cliente.codigo = novos_dados_cliente["codigo"]
             self.lista_clientes()
         else:
-            self.__tela_cliente.mostra_mensagem("ATENCAO: cliente não existente")
+            self.__tela_cliente.mostra_mensagem("ATENCAO: cliente não existente")'''
 
-    def lista_clientes(self):
+    '''def lista_clientes(self):
         if len(self.__clientes) == 0:
             return self.__tela_cliente.mostra_mensagem("\033[1;31mATENÇÃO: A lista de clientes está vazia\033[0m")
         for cliente in self.__clientes:
             self.__tela_cliente.mostra_cliente({"nome": cliente.nome, "pais_origem": cliente.pais_origem,
-                                                "local_sede": cliente.local_sede, "codigo": cliente.codigo})
+                                                "local_sede": cliente.local_sede, "codigo": cliente.codigo})'''
 
     def checar_lista_clientes(self):
         if len(self.__clientes) == 0:
@@ -102,4 +106,4 @@ class ControladorCliente:
 
         continua = True
         while continua:
-            lista_opcoes[self.__tela_cliente.open(self.monta_dict_clientes())]()
+            lista_opcoes[self.__tela_cliente_gui.open(self.monta_dict_clientes())]()

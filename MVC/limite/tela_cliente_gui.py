@@ -22,9 +22,7 @@ class TelaClienteGUI():
     def open(self, dados_clientes=[]):
         self.init_components(dados_clientes)
         button, values = self.__window.Read()
-        # self.close()
-        print(button)
-        return button
+        return button, values
 
     def close(self):
         self.__window.Close()
