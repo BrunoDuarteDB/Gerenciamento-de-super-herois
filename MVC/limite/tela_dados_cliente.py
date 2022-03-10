@@ -18,7 +18,7 @@ class TelaDadosCliente():
         ]
         self.__window = sg.Window('Dados do Cliente').Layout(layout)
 
-    def open(self, dados_cliente={"codigo":"","nome":"","pais_origem":"","local_sede":""}):
+    def open(self, dados_cliente):
         self.init_components(dados_cliente)
         button, values = self.__window.Read()
         return button, values

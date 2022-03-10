@@ -29,26 +29,45 @@ class ControladorCliente:
         if cliente is not None:
             return cliente
 
-    def incluir_cliente(self):
-        botao, dados_cliente = self.__tela_dados_cliente.open()
+    def incluir_cliente(self, values=None):
+        botao, dados_cliente = self.__tela_dados_cliente.open(dados_cliente={"codigo":"","nome":"","pais_origem":"",
+                                                                             "local_sede":""})
         self.__tela_dados_cliente.close()
         cliente = Cliente(dados_cliente["nome"], dados_cliente["pais_origem"], dados_cliente["local_sede"],
                           int(dados_cliente["codigo"]))
         self.__clientes.append(cliente)
+        self.__tela_dados_cliente.close()
+        self.__tela_cliente_gui.close()
 
     def monta_dict_clientes(self):
-        clientes = {}
+        clientes = []
+        for cliente in self.__clientes:
+            clientes.append({"nome": cliente.nome, "pais_origem": cliente.pais_origem,
+                                                "local_sede": cliente.local_sede, "codigo": cliente.codigo})
+            return clientes
+
+        '''clientes = {}
         for cliente in self.__clientes:
             clientes[cliente.codigo]={"nome": cliente.nome, "pais_origem": cliente.pais_origem,
                                                 "local_sede": cliente.local_sede, "codigo": cliente.codigo}
-        return clientes
+        return clientes'''
 
-    def alterar_cliente(self):
+    def alterar_cliente(self, dados_cliente):
         if self.__clientes == []:
             self.__tela_cliente_gui.show_message("Atenção!", "Ainda não há clientes cadastrados.")
 
-        button, values = self.__tela_cliente_gui.open()
-        print(button, values)
+        codigo_cliente_alterado = dados_cliente['sb_itens']['codigo']
+        button, values = self.__tela_dados_cliente.open(dados_cliente['sb_itens'])
+
+        for cliente in self.__clientes:
+            if cliente.codigo == codigo_cliente_alterado:
+                cliente.nome = values["nome"]
+                cliente.pais_origem = values["pais_origem"]
+                cliente.local_sede = values["local_sede"]
+                cliente.codigo = values["codigo"]
+
+        self.__tela_dados_cliente.close()
+        self.__tela_cliente_gui.close()
 
         '''if self.__clientes == []:
             self.__tela_cliente.show_message("Atenção!", "Ainda não há clientes cadastrados.")
@@ -82,8 +101,17 @@ class ControladorCliente:
         pergunta = self.__tela_cliente.deseja_mais()
         return pergunta
 
-    def excluir_cliente(self):
+    def excluir_cliente(self, dados_cliente):
         if self.__clientes == []:
+            self.__tela_cliente_gui.show_message("Atenção!", "Ainda não há clientes cadastrados.")
+
+        codigo_cliente_excluido = dados_cliente['sb_itens']['codigo']
+
+        for cliente in self.__clientes:
+            if cliente.codigo == codigo_cliente_excluido:
+                del(cliente)
+
+        '''if self.__clientes == []:
             self.__tela_cliente.show_message('Atenção!', 'Ainda não há clientes cadastrados.')
             print()
             self.abre_tela()
@@ -95,7 +123,7 @@ class ControladorCliente:
             self.__clientes.remove(cliente)
             self.lista_clientes()
         else:
-            self.__tela_cliente.mostra_mensagem("ATENÇÃO: Cliente não existente")
+            self.__tela_cliente.mostra_mensagem("ATENÇÃO: Cliente não existente")'''
 
     def retornar(self):
         self.__controlador_sistema.abre_tela()
@@ -106,4 +134,7 @@ class ControladorCliente:
 
         continua = True
         while continua:
-            lista_opcoes[self.__tela_cliente_gui.open(self.monta_dict_clientes())]()
+            dict_clientes = self.monta_dict_clientes()
+            button, values = self.__tela_cliente_gui.open(dict_clientes)
+            lista_opcoes[button](values)
+            # lista_opcoes[self.__tela_cliente_gui.open(self.monta_dict_clientes())]()
