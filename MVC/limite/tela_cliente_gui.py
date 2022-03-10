@@ -12,7 +12,7 @@ class TelaClienteGUI():
 
         layout = [
             [sg.Text('Clientes:')],
-            [sg.Combo(values=dados_clientes, size=(30, 3), key='sb_itens')],
+            [sg.Spin(values=dados_clientes, size=(30, 3), key='sb_itens')],
             [sg.Submit(button_text='Novo Cliente'), sg.Submit(button_text='Alterar'), sg.Submit(button_text='Excluir'),
              # sg.Submit(button_text='Retornar'),
              sg.Submit(button_text='Incluir em Missão')]
