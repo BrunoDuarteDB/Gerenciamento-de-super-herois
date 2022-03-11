@@ -1,7 +1,9 @@
 from MVC.limite.tela_senciente import TelaSenciente
 from MVC.entidade.super_heroi import SuperHeroi
 from MVC.entidade.vilao import Vilao
-from MVC.limite.tela_senciente_gui import TelaDadosSenciente
+from MVC.limite.tela_senciente_gui import TelaSencienteGUI
+from MVC.limite.tela_dados_super_heroi import TelaDadosSuperHeroi
+from MVC.limite.tela_dados_vilao import TelaDadosVilao
 
 
 class ControladorSenciente:
@@ -10,7 +12,9 @@ class ControladorSenciente:
         self.__super_herois = []
         self.__viloes = []
         # self.__tela_senciente = TelaSenciente(self)
-        self.__tela_senciente = TelaDadosSenciente(self) #  tem que ajustar
+        self.__tela_senciente_gui = TelaSencienteGUI(self)  #  tem que ajustar
+        self.__tela_dados_super_heroi = TelaDadosSuperHeroi(self)
+        self.__tela_dados_vilao = TelaDadosVilao(self)
         self.__controlador_sistema = controlador_sistema
 
     @property
@@ -34,7 +38,7 @@ class ControladorSenciente:
         poder = self.__controlador_sistema.controlador_poder.inclui_poder(nome)
         return poder
 
-    def incluir_senciente(self):
+    '''def incluir_senciente(self):
         dados_senciente = self.__tela_senciente.pega_dados_senciente()
         if dados_senciente['heroi_ou_vilao'] == 1:
             senciente = SuperHeroi(dados_senciente['nome'], dados_senciente['poder'], dados_senciente['fraqueza'],
@@ -45,7 +49,39 @@ class ControladorSenciente:
             senciente = Vilao(dados_senciente['nome'], dados_senciente['poder'], dados_senciente['fraqueza'],
                               dados_senciente['empresa'], dados_senciente['local_moradia'],
                               dados_senciente['periculosidade'])
-            self.__viloes.append(senciente)
+            self.__viloes.append(senciente)'''
+
+    def incluir_super_heroi(self, values):
+        button, values = self.__tela_dados_super_heroi.open()
+        poder = self.__controlador_sistema.controlador_poder.inclui_poder(values['nome'])
+        senciente = SuperHeroi(values['nome'], poder, values['fraqueza'],
+                                values['empresa'], values['local_moradia'],
+                                values['alterego'])
+        self.__super_herois.append(senciente)
+
+    def incluir_vilao(self, values):
+        button, values = self.__tela_dados_vilao.open()
+        poder = self.__controlador_sistema.controlador_poder.inclui_poder(values['nome'])
+        senciente = Vilao(values['nome'], poder, values['fraqueza'],
+                               values['empresa'], values['local_moradia'],
+                               values['periculosidade'])
+        self.__viloes.append(senciente)
+
+    def monta_dict_super_herois(self):
+        super_herois = []
+        for super_heroi in self.__super_herois:
+            super_herois.append({"nome": super_heroi.nome, "fraqueza": super_heroi.fraqueza,
+                                 "empresa": super_heroi.empresa, "local_moradia": super_heroi.local_moradia,
+                                 "alterego": super_heroi.alterego})
+            return super_herois
+
+    def monta_dict_viloes(self):
+        viloes = []
+        for vilao in self.__viloes:
+            viloes.append({"nome": vilao.nome, "fraqueza": vilao.fraqueza,
+                                 "empresa": vilao.empresa, "local_moradia": vilao.local_moradia,
+                                 "periculosidade": vilao.periculosidade})
+            return viloes
 
     def seleciona_super_heroi(self):
         self.__tela_senciente.mostra_lista_super_herois(self.__super_herois)
@@ -137,9 +173,18 @@ class ControladorSenciente:
         return poder
 
     def abre_tela(self):
-        lista_opcoes = {1: self.incluir_senciente, 2: self.alterar_senciente, 3: self.listar_senciente,
-                        4: self.excluir_senciente, 0: self.retornar}
+        lista_opcoes = {"Novo Super-Herói": self.incluir_super_heroi, "Novo Vilão": self.incluir_vilao,
+                        "Alterar": self.alterar_senciente, # 3: self.listar_senciente,
+                        "Excluir": self.excluir_senciente, # 0: self.retornar
+                        }
 
         continua = True
         while continua:
-            lista_opcoes[self.__tela_senciente.tela_opcoes()]()
+            dict_super_herois = self.monta_dict_super_herois()
+            dict_viloes = self.monta_dict_viloes()
+            button, values = self.__tela_senciente_gui.open([dict_super_herois, dict_viloes])
+            print(button)
+            print(values)
+            lista_opcoes[button](values)
+
+            # lista_opcoes[self.__tela_senciente_gui.open()]()

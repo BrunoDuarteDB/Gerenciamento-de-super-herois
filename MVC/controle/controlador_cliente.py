@@ -36,6 +36,7 @@ class ControladorCliente:
         cliente = Cliente(dados_cliente["nome"], dados_cliente["pais_origem"], dados_cliente["local_sede"],
                           int(dados_cliente["codigo"]))
         self.__clientes.append(cliente)
+        print(self.__clientes)
         self.__tela_dados_cliente.close()
         self.__tela_cliente_gui.close()
 
@@ -43,7 +44,7 @@ class ControladorCliente:
         clientes = []
         for cliente in self.__clientes:
             clientes.append({"nome": cliente.nome, "pais_origem": cliente.pais_origem,
-                                                "local_sede": cliente.local_sede, "codigo": cliente.codigo})
+                             "local_sede": cliente.local_sede, "codigo": cliente.codigo})
             return clientes
 
         '''clientes = {}
@@ -109,7 +110,10 @@ class ControladorCliente:
 
         for cliente in self.__clientes:
             if cliente.codigo == codigo_cliente_excluido:
-                del(cliente)
+                self.__clientes.remove(cliente)
+                del cliente
+
+        print(self.__clientes)
 
         '''if self.__clientes == []:
             self.__tela_cliente.show_message('Atenção!', 'Ainda não há clientes cadastrados.')

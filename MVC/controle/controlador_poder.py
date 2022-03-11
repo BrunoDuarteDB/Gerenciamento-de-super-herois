@@ -1,20 +1,43 @@
 from MVC.entidade.poder import Poder
 from MVC.limite.tela_poder import TelaPoder
+from MVC.limite.tela_poder_gui import TelaPoderGUI
+from MVC.limite.tela_dados_poder import TelaDadosPoder
 
 
 class ControladorPoder:
     def __init__(self, controlador_sistema):
         self.__poderes = []
-        self.__tela_poder = TelaPoder(self)
+        self.__tela_poder_gui = TelaPoderGUI(self)
+        self.__tela_dados_poder = TelaDadosPoder(self)
         self.__controlador_sistema = controlador_sistema
 
     def pega_poder_por_detentor(self, detentor: str):
         for poder in self.__poderes:
-            if (poder.detentor == detentor):
+            if poder.detentor == detentor:
                 return poder
         return None
 
     def inclui_poder(self, nome=None):
+        if nome is not None:
+            button, values = self.__tela_dados_poder.open(nome)
+        elif nome is None:
+            button, values = self.__tela_dados_poder.open(None)
+
+        media_poder = (int(values["velocidade"]) + int(values["forca"]) + int(values["poder_magico"]) +
+                       int(values["resistencia"]) + int(values["inteligencia"]) + int(values["artes_marciais"]) +
+                       int(values["fator_cura"]) + int(values["expertise"]) + int(values["controle_natureza"])) / 9
+
+        poder = Poder(values["velocidade"], values["forca"], values["poder_magico"],
+                      values["resistencia"], values["inteligencia"], values["artes_marciais"],
+                      values["fator_cura"], values["expertise"], values["controle_natureza"],
+                      values["detentor"], media_poder)
+
+        self.__poderes.append(poder)
+        self.__tela_dados_poder.close()
+        self.__tela_poder_gui.close()
+        return poder
+
+        '''
         if nome is not None:
             dados_poder = self.__tela_poder.pega_dados_poder(nome)
         elif nome is None:
@@ -28,7 +51,17 @@ class ControladorPoder:
                       dados_poder["fator_cura"], dados_poder["expertise"], dados_poder["controle_natureza"],
                       dados_poder["detentor"], media_poder)
         self.__poderes.append(poder)
-        return poder
+        return poder'''
+
+    def monta_dict_poderes(self):
+        poderes = []
+        for poder in self.__poderes:
+            poderes.append({"detentor": poder.detentor, "velocidade": poder.velocidade, "força": poder.forca,
+                            "poder_magico": poder.poder_magico, "resistencia": poder.resistencia,
+                            "inteligencia": poder.inteligencia, "artes_marciais": poder.artes_marciais,
+                            "fator_cura": poder.fator_cura, "expertise": poder.expertise,
+                            "controle_natureza": poder.controle_natureza, "media_poder": poder.media_poder})
+            return poderes
 
     def altera_poder(self):
         if self.__poderes == []:
@@ -110,13 +143,17 @@ class ControladorPoder:
 
     def abre_tela(self):
         lista_opcoes = {
-            1: self.inclui_poder,
-            2: self.altera_poder,
-            3: self.lista_poderes,
-            4: self.exclui_poder,
-            5: self.mostra_media_poder,
-            0: self.retornar
+            "Incluir": self.inclui_poder,
+            "Alterar": self.altera_poder,
+            # 3: self.lista_poderes,
+            "Excluir": self.exclui_poder,
+            # 5: self.mostra_media_poder,
+            "Retornar": self.retornar
         }
         continua = True
         while continua:
-            lista_opcoes[self.__tela_poder.tela_opcoes()]()
+            dict_poderes = self.monta_dict_poderes()
+            button, values = self.__tela_poder_gui.open(dict_poderes)
+            lista_opcoes[button](values)
+
+            # lista_opcoes[self.__tela_poder_gui.open()]()
