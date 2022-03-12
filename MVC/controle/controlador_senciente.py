@@ -249,8 +249,9 @@ class ControladorSenciente:
         else:
             self.__tela_senciente.mostra_mensagem("Atenção: senciente não existente!")"""
 
-    def retornar(self):
+    def retornar(self, values):
         self.__controlador_sistema.abre_tela()
+        self.__tela_senciente_gui.close()
 
     def checar_lista_super_herois(self):
         if len(self.__super_herois) == 0:
@@ -263,7 +264,7 @@ class ControladorSenciente:
     def abre_tela(self):
         lista_opcoes = {"Novo Super-Herói": self.incluir_super_heroi, "Novo Vilão": self.incluir_vilao,
                         "Alterar": self.alterar_senciente,  # 3: self.listar_senciente,
-                        "Excluir": self.excluir_senciente,  # 0: self.retornar
+                        "Excluir": self.excluir_senciente,  "Retornar": self.retornar
                         }
 
         continua = True

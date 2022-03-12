@@ -1,4 +1,5 @@
 from MVC.limite.tela_missao import TelaMissao
+from MVC.limite.tela_missao_gui import TelaMissaoGUI
 from MVC.entidade.missao import Missao
 from MVC.entidade.tarefa import Tarefa
 from random import randint
@@ -9,7 +10,8 @@ class ControladorMissao:
     def __init__(self, controlador_sistema):
         self.__missoes = []
         self.__tarefas = []
-        self.__tela_missao = TelaMissao(self)
+        # self.__tela_missao = TelaMissao(self)
+        self.__tela_missao_gui = TelaMissaoGUI(self)
         self.__controlador_sistema = controlador_sistema
 
     @property
@@ -38,6 +40,18 @@ class ControladorMissao:
         missao.resultado = resultado
         self.__missoes.append(missao)
         self.listar_missao(missao)
+
+    def monta_dict_missoes_sucesso(self):
+        sucesso = []
+        for missao in self.__missoes:
+            sucesso.append(missao.titulo)
+        return sucesso
+
+    def monta_dict_missoes_fracasso(self):
+        fracasso = []
+        for missao in self.__missoes:
+            fracasso.append(missao.titulo)
+        return fracasso
 
     def listar_missao(self, missao):
         clientes = []
@@ -335,14 +349,20 @@ class ControladorMissao:
 
     def abre_tela(self):
         lista_opcoes = {
-            1: self.incluir_missao,
-            2: self.alterar_missao,
-            3: self.excluir_missao,
-            4: self.listar_missao_sucesso,
-            5: self.listar_missao_fracasso,
-            6: self.listar_missoes,
-            0: self.retornar
+            "Incluir": self.incluir_missao,
+            "Alterar": self.alterar_missao,
+            "Excluir": self.excluir_missao,
+            # 4: self.listar_missao_sucesso,
+            # 5: self.listar_missao_fracasso,
+            # 6: self.listar_missoes,
+            "Retornar": self.retornar
         }
+        
         continua = True
         while continua:
-            lista_opcoes[self.__tela_missao.tela_opcoes()]()
+            dict_sucesso = self.monta_dict_missoes_sucesso()
+            dict_fracasso = self.monta_dict_missoes_fracasso()
+            button, values = self.__tela_missao_gui.open([dict_sucesso, dict_fracasso])
+            lista_opcoes[button](values)
+
+            # lista_opcoes[self.__tela_missao.tela_opcoes()]()
