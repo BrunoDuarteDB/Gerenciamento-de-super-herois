@@ -13,7 +13,7 @@ class ControladorSistema:
         self.__controlador_senciente = ControladorSenciente(self)
         self.__controlador_poder = ControladorPoder(self)
         self.__controlador_cliente = ControladorCliente(self)
-        self.__tela_sistema = TelaSistemaGUI(self)
+        self.__tela_sistema_gui = TelaSistemaGUI(self)
         # self.__tela_sistema = TelaSistema(self)
 
     @property
@@ -47,12 +47,17 @@ class ControladorSistema:
 
     def cadastra_senciente(self):
         self.__controlador_senciente.abre_tela()
+        self.__tela_sistema_gui.close()
+
 
     def cadastra_poder(self):
         self.__controlador_poder.abre_tela()
+        self.__tela_sistema_gui.close()
 
     def cadastra_cliente(self):
         self.__controlador_cliente.abre_tela()
+        self.__tela_sistema_gui.close()
+
 
     def encerra_sistema(self):
         exit(0)
@@ -63,6 +68,6 @@ class ControladorSistema:
                         'Finalizar Sistema': self.encerra_sistema}
 
         while True:
-            opcao_escolhida = self.__tela_sistema.open()
+            opcao_escolhida = self.__tela_sistema_gui.open()
             funcao_escolhida = lista_opcoes[opcao_escolhida]
             funcao_escolhida()

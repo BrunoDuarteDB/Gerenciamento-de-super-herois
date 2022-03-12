@@ -144,8 +144,9 @@ class ControladorCliente:
         else:
             self.__tela_cliente.mostra_mensagem("ATENÇÃO: Cliente não existente")'''
 
-    def retornar(self):
+    def retornar(self, values):
         self.__controlador_sistema.abre_tela()
+        self.__tela_cliente_gui.close()
 
     def abre_tela(self):
         lista_opcoes = {'Novo Cliente': self.incluir_cliente, 'Alterar': self.alterar_cliente, # 3: self.lista_clientes,

@@ -9,13 +9,11 @@ class TelaClienteGUI():
         self.init_components()
 
     def init_components(self, dados_clientes=[]):
-
         layout = [
             [sg.Text('Clientes:')],
             [sg.Listbox(values=tuple(dados_clientes), size=(30, 3), key='lb_itens')],
             [sg.Submit(button_text='Novo Cliente'), sg.Submit(button_text='Alterar'), sg.Submit(button_text='Excluir'),
-             # sg.Submit(button_text='Retornar'),
-             sg.Submit(button_text='Incluir em Missão')]
+             sg.Submit(button_text='Retornar'), sg.Submit(button_text='Incluir em Missão')]
         ]
 
         self.__window = sg.Window('TelaCliente', default_element_size=(40, 1)).Layout(layout)

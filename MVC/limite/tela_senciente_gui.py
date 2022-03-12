@@ -24,9 +24,13 @@ class TelaSencienteGUI():
         self.__window = sg.Window('TelaSenciente', default_element_size=(40, 1)).Layout(layout)
 
     def open(self, dicts):
+        if dicts[0] == None and dicts[1] == None:
+            dict_super_herois = []
+            dict_viloes = []
         dict_super_herois = dicts[0]
         dict_viloes = dicts[1]
-        button, values = self.__window.Read(dict_super_herois, dict_viloes)
+        self.init_components(dict_super_herois, dict_viloes)
+        button, values = self.__window.Read()
         return button, values
 
     def close(self):

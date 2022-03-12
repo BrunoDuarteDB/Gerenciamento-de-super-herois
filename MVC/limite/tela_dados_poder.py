@@ -31,7 +31,9 @@ class TelaDadosPoder():
             self.init_components(dados_poder)
         elif isinstance(dados_poder, str):
             nome = dados_poder
-            dados_poder = {'detentor': nome}
+            dados_poder = {'detentor': nome, "inteligencia": "", "velocidade": "", "artes_marciais": "",
+                                          "forca": "", "fator_cura": "", "poder_magico": "", "expertise": "",
+                                          "resistencia": "", "controle_natureza": ""}
             self.init_components(dados_poder)
         button, values = self.__window.Read()
         return button, values
