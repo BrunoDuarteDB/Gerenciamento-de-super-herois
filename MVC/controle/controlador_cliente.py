@@ -30,22 +30,31 @@ class ControladorCliente:
             return cliente
 
     def incluir_cliente(self, values=None):
-        botao, dados_cliente = self.__tela_dados_cliente.open(dados_cliente={"codigo":"","nome":"","pais_origem":"",
-                                                                             "local_sede":""})
-        self.__tela_dados_cliente.close()
-        cliente = Cliente(dados_cliente["nome"], dados_cliente["pais_origem"], dados_cliente["local_sede"],
-                          int(dados_cliente["codigo"]))
-        self.__clientes.append(cliente)
-        print(self.__clientes)
-        self.__tela_dados_cliente.close()
-        self.__tela_cliente_gui.close()
+        while True:
+            botao, dados_cliente = self.__tela_dados_cliente.open(dados_cliente={"codigo":"","nome":"","pais_origem":"",
+                                                                                 "local_sede":""})
+            self.__tela_dados_cliente.close()
+
+            try:
+                int(dados_cliente["codigo"])
+                cliente = Cliente(dados_cliente["nome"], dados_cliente["pais_origem"], dados_cliente["local_sede"],
+                                  int(dados_cliente["codigo"]))
+                self.__clientes.append(cliente)
+                self.__tela_cliente_gui.close()
+                break
+            except ValueError:
+                self.__tela_cliente_gui.show_message('Atenção', 'Código inválido, tente novamente!')
+                continue
+
+
 
     def monta_dict_clientes(self):
         clientes = []
         for cliente in self.__clientes:
-            clientes.append({"nome": cliente.nome, "pais_origem": cliente.pais_origem,
-                             "local_sede": cliente.local_sede, "codigo": cliente.codigo})
-            return clientes
+            '''clientes.append({"nome": cliente.nome, "pais_origem": cliente.pais_origem,
+                             "local_sede": cliente.local_sede, "codigo": cliente.codigo})'''
+            clientes.append(cliente.nome)
+        return clientes
 
         '''clientes = {}
         for cliente in self.__clientes:
@@ -57,11 +66,17 @@ class ControladorCliente:
         if self.__clientes == []:
             self.__tela_cliente_gui.show_message("Atenção!", "Ainda não há clientes cadastrados.")
 
-        codigo_cliente_alterado = dados_cliente['sb_itens']['codigo']
-        button, values = self.__tela_dados_cliente.open(dados_cliente['sb_itens'])
+        nome_cliente_alterado = dados_cliente['sb_itens'][0]
 
         for cliente in self.__clientes:
-            if cliente.codigo == codigo_cliente_alterado:
+            if cliente.nome == nome_cliente_alterado:
+                dados_cliente = {"codigo": cliente.codigo, "nome": cliente.nome, "pais_origem": cliente.pais_origem,
+                                 "local_sede": cliente.local_sede}
+
+        button, values = self.__tela_dados_cliente.open(dados_cliente)
+
+        for cliente in self.__clientes:
+            if cliente.nome == nome_cliente_alterado:
                 cliente.nome = values["nome"]
                 cliente.pais_origem = values["pais_origem"]
                 cliente.local_sede = values["local_sede"]
@@ -106,14 +121,14 @@ class ControladorCliente:
         if self.__clientes == []:
             self.__tela_cliente_gui.show_message("Atenção!", "Ainda não há clientes cadastrados.")
 
-        codigo_cliente_excluido = dados_cliente['sb_itens']['codigo']
+        codigo_cliente_excluido = dados_cliente['sb_itens'][0]
 
         for cliente in self.__clientes:
-            if cliente.codigo == codigo_cliente_excluido:
+            if cliente.nome == codigo_cliente_excluido:
                 self.__clientes.remove(cliente)
                 del cliente
 
-        print(self.__clientes)
+        self.__tela_cliente_gui.close()
 
         '''if self.__clientes == []:
             self.__tela_cliente.show_message('Atenção!', 'Ainda não há clientes cadastrados.')
