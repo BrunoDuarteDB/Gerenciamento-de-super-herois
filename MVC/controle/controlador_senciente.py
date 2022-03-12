@@ -52,15 +52,20 @@ class ControladorSenciente:
             self.__viloes.append(senciente)'''
 
     def incluir_super_heroi(self, values):
-        button, values = self.__tela_dados_super_heroi.open()
-        poder = self.__controlador_sistema.controlador_poder.inclui_poder(values['nome'])
+        button, values = self.__tela_dados_super_heroi.open(dados_super_heroi={"nome":"","fraqueza":"",
+                                                                               "local_moradia":"","alterego":""})
+        self.__controlador_sistema.controlador_poder.abre_tela()
+        dados_poder= self.__controlador_sistema.controlador_poder.inclui_poder_em_senciente
+        poder= dados_poder
+        #poder = self.__controlador_sistema.controlador_poder.inclui_poder(values['nome'])
         senciente = SuperHeroi(values['nome'], poder, values['fraqueza'],
                                 values['empresa'], values['local_moradia'],
                                 values['alterego'])
         self.__super_herois.append(senciente)
 
     def incluir_vilao(self, values):
-        button, values = self.__tela_dados_vilao.open()
+        button, values = self.__tela_dados_vilao.open(dados_vilao={"nome":"","fraqueza":"",
+                                                                   "local_moradia":"","periculosidade":""})
         poder = self.__controlador_sistema.controlador_poder.inclui_poder(values['nome'])
         senciente = Vilao(values['nome'], poder, values['fraqueza'],
                                values['empresa'], values['local_moradia'],

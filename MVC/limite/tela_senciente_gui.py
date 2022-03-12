@@ -12,10 +12,10 @@ class TelaSencienteGUI():
         layout = [
             [sg.Text('Sencientes cadastrados:')],
             [sg.Text('Super-Heróis:')],
-            [sg.Listbox(values=(dict_super_herois), size=(30, 3), key='lb_itens')],
+            [sg.Listbox(values=tuple(dict_super_herois), size=(30, 3), key='lb_itens')],
             [sg.Text('')],
             [sg.Text('Vilões:')],
-            [sg.Listbox(values=(dict_viloes), size=(30, 3), key='lb_itens')],
+            [sg.Listbox(values=tuple(dict_viloes), size=(30, 3), key='lb_itens')],
             [sg.Button('Incluir em Missão'), sg.Button('Novo Super-Herói'), sg.Button('Novo Vilão'),
              sg.Button('Alterar'), sg.Button('Excluir'),
              sg.Button('Retornar')]

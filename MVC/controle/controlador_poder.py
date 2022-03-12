@@ -17,12 +17,17 @@ class ControladorPoder:
                 return poder
         return None
 
-    def inclui_poder(self, nome=None):
-        if nome is not None:
-            button, values = self.__tela_dados_poder.open(nome)
-        elif nome is None:
-            button, values = self.__tela_dados_poder.open(None)
+    def inclui_poder(self, nome):
 
+        if isinstance(nome, str):
+            button, values = self.__tela_dados_poder.open(nome)
+        elif isinstance(nome, dict):
+            button, values = self.__tela_dados_poder.open(dados_poder={"detentor": "", "inteligencia": "", "velocidade": "", "artes_marciais": "",
+                                          "forca": "", "fator_cura": "", "poder_magico": "", "expertise": "",
+                                          "resistencia": "", "controle_natureza": ""})
+        self.__tela_dados_poder.close()
+
+        print('Botão:',button,'Valores:', values)
         media_poder = (int(values["velocidade"]) + int(values["forca"]) + int(values["poder_magico"]) +
                        int(values["resistencia"]) + int(values["inteligencia"]) + int(values["artes_marciais"]) +
                        int(values["fator_cura"]) + int(values["expertise"]) + int(values["controle_natureza"])) / 9
@@ -56,15 +61,46 @@ class ControladorPoder:
     def monta_dict_poderes(self):
         poderes = []
         for poder in self.__poderes:
-            poderes.append({"detentor": poder.detentor, "velocidade": poder.velocidade, "força": poder.forca,
-                            "poder_magico": poder.poder_magico, "resistencia": poder.resistencia,
-                            "inteligencia": poder.inteligencia, "artes_marciais": poder.artes_marciais,
-                            "fator_cura": poder.fator_cura, "expertise": poder.expertise,
-                            "controle_natureza": poder.controle_natureza, "media_poder": poder.media_poder})
-            return poderes
+            poderes.append(poder.detentor)
+        return poderes
 
-    def altera_poder(self):
+    def altera_poder(self, dados_poder):
+
         if self.__poderes == []:
+            self.__tela_poder_gui.show_message("Atenção!", "Ainda não há clientes cadastrados.")
+
+        detentor_poder_alterado = dados_poder['lb_itens'][0]
+
+        for poder in self.__poderes:
+            if poder.detentor == detentor_poder_alterado:
+                 dados_poder= {"detentor": poder.detentor, "inteligencia": poder.inteligencia, "velocidade": poder.velocidade,
+                               "artes_marciais": poder.artes_marciais, "forca": poder.forca,
+                               "fator_cura": poder.fator_cura, "poder_magico": poder.poder_magico,
+                               "expertise": poder.expertise, "resistencia": poder.resistencia,
+                               "controle_natureza": poder.controle_natureza}
+
+
+        button, values = self.__tela_dados_poder.open(dados_poder)
+
+        for poder in self.__poderes:
+            if poder.detentor == detentor_poder_alterado:
+                poder.detentor = values["detentor"]
+                poder.inteligencia = values["inteligencia"]
+                poder.velocidade = values["velocidade"]
+                poder.artes_marciais = values["artes_marciais"]
+                poder.forca = values["forca"]
+                poder.fator_cura = values["fator_cura"]
+                poder.poder_magico = values["poder_magico"]
+                poder.expertise = values["expertise"]
+                poder.resistencia = values["resistencia"]
+                poder.controle_natureza = values["controle_natureza"]
+
+
+        self.__tela_dados_poder.close()
+        self.__tela_poder_gui.close()
+
+
+        '''if self.__poderes == []:
             self.__tela_poder.mostra_mensagem("\033[1;31mATENÇÃO: Ainda não há poderes cadastrados.\033[0m")
             print()
             self.abre_tela()
@@ -86,7 +122,7 @@ class ControladorPoder:
             poder.detentor = novos_dados_poder["detentor"]
             self.lista_poderes()
         else:
-            self.__tela_poder.mostra_mensagem("\033[1;31mATENÇÃO! PODER INEXISTENTE \033[0m")
+            self.__tela_poder.mostra_mensagem("\033[1;31mATENÇÃO! PODER INEXISTENTE \033[0m")'''
 
     def lista_poderes(self):
         if len(self.__poderes) == 0:
@@ -100,8 +136,37 @@ class ControladorPoder:
                                             "artes_marciais": poder.artes_marciais, "fator_cura": poder.fator_cura,
                                             "expertise": poder.expertise, "controle_natureza": poder.controle_natureza})
 
-    def exclui_poder(self):
+    def exclui_poder(self, dados_poder):
         if self.__poderes == []:
+            self.__tela_poder_gui.show_message("Atenção!", "Ainda não há poderes cadastrados.")
+
+        detentor_poder_excluido = dados_poder['lb_itens'][0]
+
+        for poder in self.__poderes:
+            if poder.detentor == detentor_poder_excluido:
+                self.__poderes.remove(poder)
+                del poder
+
+        self.__tela_poder_gui.close()
+
+
+    def inclui_poder_em_senciente(self, dados_poder):
+        if self.__poderes == []:
+            self.__tela_poder_gui.show_message("Atenção!", "Ainda não há poderes cadastrados.")
+        detentor_poder_incluido = dados_poder['lb_itens'][0]
+        for poder in self.__poderes:
+            if poder.detentor == detentor_poder_incluido:
+                dados_poder= {"detentor": poder.detentor, "inteligencia": poder.inteligencia, "velocidade": poder.velocidade,
+                               "artes_marciais": poder.artes_marciais, "forca": poder.forca,
+                               "fator_cura": poder.fator_cura, "poder_magico": poder.poder_magico,
+                               "expertise": poder.expertise, "resistencia": poder.resistencia,
+                               "controle_natureza": poder.controle_natureza}
+                return dados_poder
+
+
+        self.__tela_dados_poder.close()
+        self.__tela_poder_gui.close()
+        '''if self.__poderes == []:
             self.__tela_poder.mostra_mensagem("\033[1;31mATENÇÃO: Ainda não há poderes cadastrados.\033[0m")
             print()
             self.abre_tela()
@@ -124,7 +189,7 @@ class ControladorPoder:
             self.__poderes.remove(poder)
             self.lista_poderes()
         else:
-            self.__tela_poder.mostra_mensagem("ATENÇÃO: Poder não existente.")
+            self.__tela_poder.mostra_mensagem("ATENÇÃO: Poder não existente.")'''
 
     def mostra_media_poder(self):
         detentor_do_poder = self.__tela_poder.seleciona_poder()
@@ -148,7 +213,8 @@ class ControladorPoder:
             # 3: self.lista_poderes,
             "Excluir": self.exclui_poder,
             # 5: self.mostra_media_poder,
-            "Retornar": self.retornar
+            "Retornar": self.retornar,
+            "Incluir em Senciente": self.inclui_poder_em_senciente
         }
         continua = True
         while continua:

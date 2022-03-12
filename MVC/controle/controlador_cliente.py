@@ -66,7 +66,7 @@ class ControladorCliente:
         if self.__clientes == []:
             self.__tela_cliente_gui.show_message("Atenção!", "Ainda não há clientes cadastrados.")
 
-        nome_cliente_alterado = dados_cliente['sb_itens'][0]
+        nome_cliente_alterado = dados_cliente['lb_itens'][0]
 
         for cliente in self.__clientes:
             if cliente.nome == nome_cliente_alterado:
@@ -121,7 +121,7 @@ class ControladorCliente:
         if self.__clientes == []:
             self.__tela_cliente_gui.show_message("Atenção!", "Ainda não há clientes cadastrados.")
 
-        codigo_cliente_excluido = dados_cliente['sb_itens'][0]
+        codigo_cliente_excluido = dados_cliente['lb_itens'][0]
 
         for cliente in self.__clientes:
             if cliente.nome == codigo_cliente_excluido:
