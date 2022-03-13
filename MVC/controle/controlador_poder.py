@@ -2,21 +2,23 @@ from MVC.entidade.poder import Poder
 from MVC.limite.tela_poder import TelaPoder
 from MVC.limite.tela_poder_gui import TelaPoderGUI
 from MVC.limite.tela_dados_poder import TelaDadosPoder
+from MVC.persistencia.poder_dao import PoderDAO
 
 
 class ControladorPoder:
     def __init__(self, controlador_sistema):
-        self.__poderes = []
         self.__tela_poder_gui = TelaPoderGUI(self)
         self.__tela_dados_poder = TelaDadosPoder(self)
         self.__controlador_sistema = controlador_sistema
+        self.__poder_dao = PoderDAO()
+        # self.__poderes = []
 
     @property
     def poderes(self):
-        return self.__poderes
+        return self.__poder_dao.get_all()
 
     def pega_poder_por_detentor(self, detentor: str):
-        for poder in self.__poderes:
+        for poder in self.__poder_dao.get_all():
             if poder.detentor == detentor:
                 return poder
         return None
@@ -57,7 +59,7 @@ class ControladorPoder:
                               values["resistencia"], values["inteligencia"], values["artes_marciais"],
                               values["fator_cura"], values["expertise"], values["controle_natureza"],
                               values["detentor"], media_poder)
-                self.__poderes.append(poder)
+                self.__poder_dao.persist(poder)
                 self.__tela_dados_poder.close()
                 self.__tela_poder_gui.close()
                 return poder
@@ -82,19 +84,22 @@ class ControladorPoder:
         return poder'''
 
     def monta_dict_poderes(self):
+        print(self.__poder_dao.get_all())
         poderes = []
-        for poder in self.__poderes:
+        for poder in self.__poder_dao.get_all():
             poderes.append(poder.detentor)
+        print(poderes)
         return poderes
 
     def altera_poder(self, dados_poder):
 
-        if self.__poderes == []:
+        if self.__poder_dao.get_all() == []: #Mudar!!!!!!!!!!!!!!!!!!!!!!!!
             self.__tela_poder_gui.show_message("Atenção!", "Ainda não há clientes cadastrados.")
 
         detentor_poder_alterado = dados_poder['lb_itens'][0]
 
-        for poder in self.__poderes:
+        lista_poderes= self.__poder_dao.get_all()
+        for poder in lista_poderes:
             if poder.detentor == detentor_poder_alterado:
                 dados_poder = {"detentor": poder.detentor, "inteligencia": poder.inteligencia,
                                "velocidade": poder.velocidade,
@@ -121,7 +126,9 @@ class ControladorPoder:
                               'controle_natureza': ''} or \
                         (values['detentor'].isdigit()) == True:
                     raise ValueError
-                for poder in self.__poderes:
+                lista_poderes = self.__poder_dao.get_all()
+                poder_alterado = ''
+                for poder in lista_poderes:
                     if poder.detentor == detentor_poder_alterado:
                         poder.detentor = values["detentor"]
                         poder.inteligencia = values["inteligencia"]
@@ -133,6 +140,8 @@ class ControladorPoder:
                         poder.expertise = values["expertise"]
                         poder.resistencia = values["resistencia"]
                         poder.controle_natureza = values["controle_natureza"]
+                        poder_alterado = poder
+                self.__poder_dao.persist(poder_alterado)
                 break
             except ValueError:
                 self.__tela_poder_gui.show_message('Atenção', 'Valores inválidos, tente novamente!')
@@ -166,11 +175,11 @@ class ControladorPoder:
             self.__tela_poder.mostra_mensagem("\033[1;31mATENÇÃO! PODER INEXISTENTE \033[0m")'''
 
     def lista_poderes(self):
-        if len(self.__poderes) == 0:
+        if len(self.__poder_dao.get_all()) == 0:
             self.__tela_poder.mostra_mensagem("\033[1;31mA LISTA DE PODERES ESTÁ VAZIA. \033[0m")
-        elif len(self.__poderes) > 0:
+        elif len(self.__poder_dao.get_all()) > 0:
             self.__tela_poder.mostra_mensagem("----- Lista de Poderes -----")
-        for poder in self.__poderes:
+        for poder in self.__poder_dao.get_all():
             self.__tela_poder.mostra_poder({"detentor": poder.detentor, "velocidade": poder.velocidade,
                                             "forca": poder.forca, "poder_magico": poder.poder_magico,
                                             "resistencia": poder.resistencia, "inteligencia": poder.inteligencia,
@@ -178,23 +187,23 @@ class ControladorPoder:
                                             "expertise": poder.expertise, "controle_natureza": poder.controle_natureza})
 
     def exclui_poder(self, dados_poder):
-        if self.__poderes == []:
+
+        if self.__poder_dao.get_all() == []:
             self.__tela_poder_gui.show_message("Atenção!", "Ainda não há poderes cadastrados.")
-
         detentor_poder_excluido = dados_poder['lb_itens'][0]
-
-        for poder in self.__poderes:
+        poder_excluido = ''
+        for poder in self.__poder_dao.get_all():
             if poder.detentor == detentor_poder_excluido:
-                self.__poderes.remove(poder)
-                del poder
-
+                poder_excluido = poder
+        self.__poder_dao.remove(poder_excluido)
+        del poder_excluido
         self.__tela_poder_gui.close()
 
     def inclui_poder_em_senciente(self, dados_poder):
-        if self.__poderes == []:
+        if self.__poder_dao.get_all() == []:
             self.__tela_poder_gui.show_message("Atenção!", "Ainda não há poderes cadastrados.")
         detentor_poder_incluido = dados_poder['lb_itens'][0]
-        for poder in self.__poderes:
+        for poder in self.__poder_dao.get_all():
             if poder.detentor == detentor_poder_incluido:
                 dados_poder = {"detentor": poder.detentor, "inteligencia": poder.inteligencia,
                                "velocidade": poder.velocidade,

@@ -24,6 +24,7 @@ class DAO(ABC):
         self.__dump()
 
     def remove(self, key):
+        print('CACHE: ', self.__cache)
         self.__cache.pop(key)
         self.__dump()
 
