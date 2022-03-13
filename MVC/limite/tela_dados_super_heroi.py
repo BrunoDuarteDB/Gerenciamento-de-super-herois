@@ -16,7 +16,7 @@ class TelaDadosSuperHeroi():
             [sg.Text('Empresa:'), sg.InputText(dados_super_heroi['empresa'], key='empresa')],
             [sg.Text('Local de Moradia:'), sg.InputText(dados_super_heroi['local_moradia'], key='local_moradia')],
             [sg.Text('Alter Ego:'), sg.InputText(dados_super_heroi['alterego'], key='alterego')],
-            [sg.Submit(button_text="Salvar"), sg.Cancel(button_text="Cancelar", )]
+            [sg.Submit(button_text="Salvar")]
         ]
         self.__window = sg.Window('Dados do Super-Herói').Layout(layout)
 

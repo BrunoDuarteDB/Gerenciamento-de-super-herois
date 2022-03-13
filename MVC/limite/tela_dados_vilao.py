@@ -16,7 +16,7 @@ class TelaDadosVilao():
             [sg.Text('Empresa:'), sg.InputText(dados_vilao['empresa'], key='empresa')],
             [sg.Text('Local de Moradia:'), sg.InputText(dados_vilao['local_moradia'], key='local_moradia')],
             [sg.Text('Periculosidade:'), sg.InputText(dados_vilao['periculosidade'], key='periculosidade')],
-            [sg.Submit(button_text="Salvar"), sg.Cancel(button_text="Cancelar", )]
+            [sg.Submit(button_text="Salvar")]
         ]
         self.__window = sg.Window('Dados dos Poderes').Layout(layout)
 

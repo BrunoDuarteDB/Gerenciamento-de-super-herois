@@ -2,6 +2,7 @@ from MVC.limite.tela_cliente import TelaCliente
 from MVC.limite.tela_cliente_gui import TelaClienteGUI
 from MVC.limite.tela_dados_cliente import TelaDadosCliente
 from MVC.entidade.cliente import Cliente
+from MVC.exceptions.botaoErradoException import BotaoErradoException
 
 
 class ControladorCliente:
@@ -27,7 +28,19 @@ class ControladorCliente:
         dict_clientes = self.monta_dict_clientes()
         button = 'Incluir mais Clientes'
         while button == 'Incluir mais Clientes':
-            button, values = self.__tela_cliente_gui.open(dict_clientes)
+
+            while True:
+                button, values = self.__tela_cliente_gui.open(dict_clientes)
+
+                try:
+                    if button != 'Incluir mais Clientes' and button != 'Incluir em Missão':
+                        raise BotaoErradoException
+                    break
+                except BotaoErradoException:
+                    self.__tela_cliente_gui.show_message('Ops','Você deve clicar em "Incluir mais Clientes" ou "Incluir'
+                                                               'em Missão"!')
+                    continue
+
             self.__tela_cliente_gui.close()
             if values['lb_itens'] != []:
                 clientes.append(values['lb_itens'])
@@ -94,7 +107,7 @@ class ControladorCliente:
                 int(values["codigo"])
                 if values == {"codigo": "", "nome": "", "pais_origem": "", "local_sede": ""} or \
                         (values["nome"]).isdigit() == True or (values["pais_origem"]).isdigit() == True \
-                        or (values["local_sede"]).isdigit() == True:
+                        or (dados_cliente["local_sede"]).isdigit() == True:
                     raise ValueError
                 for cliente in self.__clientes:
                     if cliente.nome == nome_cliente_alterado:

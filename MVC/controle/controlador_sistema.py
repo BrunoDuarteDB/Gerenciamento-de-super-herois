@@ -41,12 +41,13 @@ class ControladorSistema:
         checagem_cliente = self.__controlador_cliente.checar_lista_clientes()
         try:
             if checagem_super_heroi == 0 and checagem_cliente == 0:
-                raise MissaoSemIntegrantesException()
+                raise MissaoSemIntegrantesException
             self.__controlador_missao.abre_tela()
-        except:
-            self.__tela_sistema_gui.show_message("Ops!",
-                                                 "Você primeiro deve cadastrar pelo menos um Super-Herói e um cliente!")
 
+        except MissaoSemIntegrantesException:
+            self.__tela_sistema_gui.show_message("Ops!",
+                                                 "Você primeiro deve cadastrar pelo menos um Super-Herói e um "
+                                                 "cliente!")
 
         '''if checagem_super_heroi != 0 and checagem_cliente != 0:
             self.__controlador_missao.abre_tela()

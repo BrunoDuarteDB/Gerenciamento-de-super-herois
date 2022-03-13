@@ -22,7 +22,7 @@ class TelaDadosPoder():
             [sg.Text('Expertise:'), sg.InputText(dados_poder['expertise'], key='expertise')],
             [sg.Text('Resistência:'), sg.InputText(dados_poder['resistencia'], key='resistencia')],
             [sg.Text('Controle da Natureza:'), sg.InputText(dados_poder['controle_natureza'], key='controle_natureza')],
-            [sg.Submit(button_text="Salvar"), sg.Cancel(button_text="Cancelar", )]
+            [sg.Submit(button_text="Salvar")]
         ]
         self.__window = sg.Window('Dados dos Poderes').Layout(layout)
 

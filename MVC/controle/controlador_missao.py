@@ -4,6 +4,7 @@ from MVC.limite.tela_dados_missao import TelaDadosMissao
 from MVC.limite.tela_dados_tarefa import TelaDadosTarefa
 from MVC.entidade.missao import Missao
 from MVC.entidade.tarefa import Tarefa
+from MVC.exceptions.listaVaziaException import ListaVaziaException
 from random import randint
 
 
@@ -33,11 +34,31 @@ class ControladorMissao:
         return None
 
     def incluir_missao(self, values):
-        button, values = self.__tela_dados_missao.open(dados_missao={"titulo":"","data":"","local":"","conflito":""})
-        self.__tela_dados_missao.close()
-        tarefas = self.incluir_tarefa() # tem que permitir mais de uma
+        while True:
+            button, values = self.__tela_dados_missao.open(dados_missao={"titulo":"","data":"","local":"","conflito":""})
+            self.__tela_dados_missao.close()
 
-        sencientes = self.pede_seleciona_senciente()
+            try:
+                if values == {"titulo":"","data":"","local":"","conflito":""} or (values["titulo"]).isdigit() == True \
+                        or (values["local"]).isdigit() == True or (values["conflito"]).isdigit() == True:
+                    raise ValueError
+                break
+            except ValueError:
+                self.__tela_missao_gui.show_message('Atenção', 'Valor(es) inválido(s), tente novamente!')
+                continue
+
+        tarefas = self.incluir_tarefa()
+
+        while True:
+            sencientes = self.pede_seleciona_senciente() # BOTAOERRADOEXCEPTION AQUI TAMBÉM AAAAAAAAAAAAAAAAAAA
+            try:
+                if sencientes == []:
+                    raise ListaVaziaException
+                break
+            except ListaVaziaException:
+                self.__tela_missao_gui.show_message('Ops',"Você esqueceu de selecionar algum senciente!")
+                continue
+
         lista_super_herois = []
         lista_viloes = []
         for i in range(len(sencientes)):
@@ -48,7 +69,16 @@ class ControladorMissao:
                 if vilao.nome == sencientes[i][0]:
                     lista_viloes.append(vilao)
 
-        clientes = self.pede_seleciona_cliente()
+        while True:
+            clientes = self.pede_seleciona_cliente()
+            try:
+                if clientes == []:
+                    raise ListaVaziaException
+                break
+            except ListaVaziaException:
+                self.__tela_missao_gui.show_message('Ops',"Você esqueceu de selecionar algum cliente!")
+                continue
+
         lista_clientes = []
         for i in range(len(clientes)):
             for cliente in self.__controlador_sistema.controlador_cliente.clientes:
@@ -225,11 +255,20 @@ class ControladorMissao:
         tarefas = []
         button = 'Salvar e incluir +1 tarefa'
         while button == 'Salvar e incluir +1 tarefa':
-            button, values = self.__tela_dados_tarefa.open()
-            self.__tela_dados_tarefa.close()
-            tarefa = Tarefa(values['id'], values['descricao'])
-            tarefas.append(tarefa)
-            self.__tarefas.append(tarefa)
+            while True:
+                button, values = self.__tela_dados_tarefa.open()
+                self.__tela_dados_tarefa.close()
+
+                try:
+                    if (values['id']).isalpha() == True or (values['descricao']).isdigit() == True:
+                        raise ValueError
+                    tarefa = Tarefa(values['id'], values['descricao'])
+                    tarefas.append(tarefa)
+                    self.__tarefas.append(tarefa)
+                    break
+                except ValueError:
+                    self.__tela_missao_gui.show_message('Atenção', 'Valor(es) inválido(s), tente novamente!')
+                    continue
         return tarefas
 
         '''dados_tarefa = self.__tela_missao.pega_dados_tarefa()
@@ -418,6 +457,7 @@ class ControladorMissao:
                                                     'alterego': super_heroi.alterego})
 
     def mostrar_detalhes(self, values):
+        print('Values do "mostrar_detalhes:', values)
         clientes = []
         tarefas = []
         super_herois = []
