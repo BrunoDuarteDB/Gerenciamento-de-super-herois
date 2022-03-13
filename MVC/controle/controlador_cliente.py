@@ -43,10 +43,16 @@ class ControladorCliente:
         while True:
             botao, dados_cliente = self.__tela_dados_cliente.open(dados_cliente={"codigo":"","nome":"","pais_origem":"",
                                                                                  "local_sede":""})
+
+            print(botao, dados_cliente)
             self.__tela_dados_cliente.close()
 
             try:
                 int(dados_cliente["codigo"])
+                if dados_cliente == {"codigo":"","nome":"","pais_origem":"","local_sede":""} or \
+                        (dados_cliente["nome"]).isdigit() == True or (dados_cliente["pais_origem"]).isdigit() == True \
+                        or (dados_cliente["local_sede"]).isdigit() == True:
+                    raise ValueError
                 cliente = Cliente(dados_cliente["nome"], dados_cliente["pais_origem"], dados_cliente["local_sede"],
                                   int(dados_cliente["codigo"]))
                 self.__clientes.append(cliente)
@@ -81,14 +87,25 @@ class ControladorCliente:
                 dados_cliente = {"codigo": cliente.codigo, "nome": cliente.nome, "pais_origem": cliente.pais_origem,
                                  "local_sede": cliente.local_sede}
 
-        button, values = self.__tela_dados_cliente.open(dados_cliente)
-
-        for cliente in self.__clientes:
-            if cliente.nome == nome_cliente_alterado:
-                cliente.nome = values["nome"]
-                cliente.pais_origem = values["pais_origem"]
-                cliente.local_sede = values["local_sede"]
-                cliente.codigo = values["codigo"]
+        while True:
+            try:
+                button, values = self.__tela_dados_cliente.open(dados_cliente)
+                self.__tela_dados_cliente.close()
+                int(values["codigo"])
+                if values == {"codigo": "", "nome": "", "pais_origem": "", "local_sede": ""} or \
+                        (values["nome"]).isdigit() == True or (values["pais_origem"]).isdigit() == True \
+                        or (values["local_sede"]).isdigit() == True:
+                    raise ValueError
+                for cliente in self.__clientes:
+                    if cliente.nome == nome_cliente_alterado:
+                        cliente.nome = values["nome"]
+                        cliente.pais_origem = values["pais_origem"]
+                        cliente.local_sede = values["local_sede"]
+                        cliente.codigo = values["codigo"]
+                break
+            except ValueError:
+                self.__tela_cliente_gui.show_message('Atenção', 'Código inválido, tente novamente!')
+                continue
 
         self.__tela_dados_cliente.close()
         self.__tela_cliente_gui.close()
