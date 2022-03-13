@@ -65,6 +65,7 @@ class ControladorPoder:
         return poderes
 
     def altera_poder(self, dados_poder):
+        print(dados_poder)
 
         if self.__poderes == []:
             self.__tela_poder_gui.show_message("Atenção!", "Ainda não há clientes cadastrados.")
@@ -201,7 +202,8 @@ class ControladorPoder:
             return self.__tela_poder.mostra_mensagem(
                 "\033[1;31mDETENTOR DO PODER INVÁLIDO. VERIFIQUE SE DIGITOU CORRETAMENTE \033[0m")
 
-    def retornar(self):
+    def retornar(self, values):
+        self.__tela_poder_gui.close()
         self.__controlador_sistema.abre_tela()
 
     def abre_tela(self):

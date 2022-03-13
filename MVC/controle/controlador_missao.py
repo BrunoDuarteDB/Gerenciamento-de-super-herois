@@ -1,5 +1,7 @@
 from MVC.limite.tela_missao import TelaMissao
 from MVC.limite.tela_missao_gui import TelaMissaoGUI
+from MVC.limite.tela_dados_missao import TelaDadosMissao
+from MVC.limite.tela_dados_tarefa import TelaDadosTarefa
 from MVC.entidade.missao import Missao
 from MVC.entidade.tarefa import Tarefa
 from random import randint
@@ -12,6 +14,8 @@ class ControladorMissao:
         self.__tarefas = []
         # self.__tela_missao = TelaMissao(self)
         self.__tela_missao_gui = TelaMissaoGUI(self)
+        self.__tela_dados_tarefa = TelaDadosTarefa(self)
+        self.__tela_dados_missao = TelaDadosMissao(self)
         self.__controlador_sistema = controlador_sistema
 
     @property
@@ -28,8 +32,38 @@ class ControladorMissao:
                 return missao
         return None
 
-    def incluir_missao(self):
-        dados_missao = self.__tela_missao.pega_dados_missao()
+    def incluir_missao(self, values):
+        button, values = self.__tela_dados_missao.open(dados_missao={"titulo":"","data":"","local":"","conflito":""})
+        self.__tela_dados_missao.close()
+        tarefas = self.incluir_tarefa() # tem que permitir mais de uma
+
+        sencientes = self.pede_seleciona_senciente()
+        lista_super_herois = []
+        lista_viloes = []
+        for i in range(len(sencientes)):
+            for super_heroi in self.__controlador_sistema.controlador_senciente.super_herois:
+                if super_heroi.nome == sencientes[i][0]:
+                    lista_super_herois.append(super_heroi)
+            for vilao in self.__controlador_sistema.controlador_senciente.viloes:
+                if vilao.nome == sencientes[i][0]:
+                    lista_viloes.append(vilao)
+
+        clientes = self.pede_seleciona_cliente()
+        lista_clientes = []
+        for i in range(len(clientes)):
+            for cliente in self.__controlador_sistema.controlador_cliente.clientes:
+                if cliente.nome == clientes[i][0]:
+                    lista_clientes.append(cliente)
+
+        missao = Missao(values['titulo'], values['data'], values['local'],
+                        values['conflito'], lista_clientes, tarefas, lista_super_herois, lista_viloes)
+        resultado = self.gerar_resultado(lista_super_herois, lista_viloes)
+        missao.resultado = resultado
+        self.__missoes.append(missao)
+        self.__tela_dados_missao.close()
+        self.__tela_missao_gui.close()
+
+        '''dados_missao = self.__tela_missao.pega_dados_missao()
         clientes = self.pede_seleciona_cliente()
         tarefas = self.pede_seleciona_tarefa()
         super_herois = self.pede_seleciona_super_heroi()
@@ -39,18 +73,20 @@ class ControladorMissao:
         resultado = self.gerar_resultado(super_herois, viloes)
         missao.resultado = resultado
         self.__missoes.append(missao)
-        self.listar_missao(missao)
+        self.listar_missao(missao)'''
 
     def monta_dict_missoes_sucesso(self):
         sucesso = []
         for missao in self.__missoes:
-            sucesso.append(missao.titulo)
+            if missao.resultado == 'sucesso':
+                sucesso.append(missao.titulo)
         return sucesso
 
     def monta_dict_missoes_fracasso(self):
         fracasso = []
         for missao in self.__missoes:
-            fracasso.append(missao.titulo)
+            if missao.resultado == 'fracasso':
+                fracasso.append(missao.titulo)
         return fracasso
 
     def listar_missao(self, missao):
@@ -80,8 +116,20 @@ class ControladorMissao:
             "resultado": missao.resultado
         })
 
-    def excluir_missao(self):
+    def excluir_missao(self, dados_missao):
         if self.__missoes == []:
+            self.__tela_missao_gui.show_message("Atenção!", "Ainda não há missão cadastradas.")
+
+        titulo_missao_excluida = dados_missao['lb_itens'][0]
+
+        for missao in self.__missoes:
+            if missao.titulo == titulo_missao_excluida:
+                self.__missoes.remove(missao)
+                del missao
+
+        self.__tela_missao_gui.close()
+
+        '''if self.__missoes == []:
             self.__tela_missao.mostrar_mensagem("\033[1;31mATENÇÃO: Ainda não há missões cadastradas.\033[0m")
             print()
             self.abre_tela()
@@ -93,7 +141,7 @@ class ControladorMissao:
             self.__missoes.remove(missao)
             self.listar_missoes()
         else:
-            self.__tela_missao.mostrar_mensagem("ATENÇÃO: essa missão não existe, verifique se digitou corretamente.")
+            self.__tela_missao.mostrar_mensagem("ATENÇÃO: essa missão não existe, verifique se digitou corretamente.")'''
 
     def listar_missoes(self):
         self.__tela_missao.mostrar_mensagem('----- Lista de missões -----')
@@ -174,10 +222,20 @@ class ControladorMissao:
             return 'empate'
 
     def incluir_tarefa(self):
-        dados_tarefa = self.__tela_missao.pega_dados_tarefa()
+        tarefas = []
+        button = 'Salvar e incluir +1 tarefa'
+        while button == 'Salvar e incluir +1 tarefa':
+            button, values = self.__tela_dados_tarefa.open()
+            self.__tela_dados_tarefa.close()
+            tarefa = Tarefa(values['id'], values['descricao'])
+            tarefas.append(tarefa)
+            self.__tarefas.append(tarefa)
+        return tarefas
+
+        '''dados_tarefa = self.__tela_missao.pega_dados_tarefa()
         tarefa = Tarefa(dados_tarefa['id_tarefa'], dados_tarefa['descricao'])
         self.__tarefas.append(tarefa)
-        return tarefa
+        return tarefa'''
 
     def alterar_tarefa(self):
         self.listar_tarefas()
@@ -277,7 +335,14 @@ class ControladorMissao:
             })
 
     def pede_seleciona_cliente(self):
-        tamanho = len(self.__controlador_sistema.controlador_cliente.clientes)
+        self.__tela_missao_gui.show_message('Atenção!', 'Selecione um cliente que você queira que '
+                                                        'esteja na missão e, depois, clique em "Incluir em Missão"! Se'
+                                                        'desejar incluir mais vezes, clique em "Incluir mais '
+                                                        'Clientes"!')
+        clientes = self.__controlador_sistema.controlador_cliente.seleciona_cliente()
+        return clientes
+
+        '''tamanho = len(self.__controlador_sistema.controlador_cliente.clientes)
         clientes = []
         cliente = self.__controlador_sistema.controlador_cliente.seleciona_cliente()
         clientes.append(cliente)
@@ -287,7 +352,7 @@ class ControladorMissao:
                 cliente = self.__controlador_sistema.controlador_cliente.seleciona_cliente()
                 clientes.append(cliente)
                 resposta = self.__controlador_sistema.controlador_cliente.deseja_mais()
-        return clientes
+        return clientes'''
 
     def pede_seleciona_tarefa(self):
         tarefas = []
@@ -299,6 +364,14 @@ class ControladorMissao:
             tarefas.append(tarefa)
             resposta = self.__tela_missao.deseja_mais_tarefa()
         return tarefas
+
+    def pede_seleciona_senciente(self):
+        self.__tela_missao_gui.show_message('Atenção!', 'Selecione um super-herói e um vilão que você queira que '
+                                                        'esteja na missão e, depois, clique em "Incluir sencientes"! Se'
+                                                        ' desejar incluir mais vezes, clique em "Incluir mais '
+                                                        'Sencientes"!')
+        sencientes = self.__controlador_sistema.controlador_senciente.seleciona_senciente()
+        return sencientes
 
     def pede_seleciona_super_heroi(self):
         tamanho = len(self.__controlador_sistema.controlador_senciente.super_herois)
@@ -344,7 +417,36 @@ class ControladorMissao:
                                                     'local_moradia': super_heroi.local_moradia,
                                                     'alterego': super_heroi.alterego})
 
+    def mostrar_detalhes(self, values):
+        clientes = []
+        tarefas = []
+        super_herois = []
+        viloes = []
+        titulo_desejado = values['lb_itens'][0]
+        for missao in self.__missoes:
+            if missao.titulo == titulo_desejado:
+                data = missao.data
+                local = missao.local
+                conflito = missao.conflito
+
+                for cliente in missao.clientes:
+                    clientes.append(cliente.nome)
+
+                for tarefa in missao.tarefas:
+                    tarefas.append(tarefa.descricao)
+
+                for super_heroi in missao.super_herois:
+                    super_herois.append(super_heroi.nome)
+
+                for vilao in missao.viloes:
+                    viloes.append(vilao.nome)
+
+                resultado = missao.resultado
+
+        self.__tela_missao_gui.show_message("Detalhes da Missão:", f'Título: {titulo_desejado}, Data: {data}  Local: {local}, Conflito: {conflito}, Clientes: {clientes}, Tarefas: {tarefas}, Super-Herói(s): {super_herois}, Vilão(ões): {viloes}, Resultado: {resultado}')
+
     def retornar(self):
+        self.__tela_missao_gui.close()
         self.__controlador_sistema.abre_tela()
 
     def abre_tela(self):
@@ -355,13 +457,15 @@ class ControladorMissao:
             # 4: self.listar_missao_sucesso,
             # 5: self.listar_missao_fracasso,
             # 6: self.listar_missoes,
+            "Mostrar Detalhes": self.mostrar_detalhes,
             "Retornar": self.retornar
         }
-        
+
         continua = True
         while continua:
             dict_sucesso = self.monta_dict_missoes_sucesso()
             dict_fracasso = self.monta_dict_missoes_fracasso()
+            print('Dict sucesso:', dict_sucesso, "Dict fracasso:", dict_fracasso)
             button, values = self.__tela_missao_gui.open([dict_sucesso, dict_fracasso])
             lista_opcoes[button](values)
 

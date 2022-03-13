@@ -15,7 +15,8 @@ class TelaMissaoGUI():
             [sg.Text('')],
             [sg.Text('Missões Fracassadas:')],
             [sg.Listbox(values=tuple(dict_missoes_fracasso), size=(30, 3), key='lb_itens')],
-            [sg.Button('Incluir'), sg.Button('Alterar'), sg.Button('Excluir'), sg.Button('Retornar')]
+            [sg.Button('Incluir'), sg.Button('Alterar'), sg.Button('Excluir'), sg.Button('Mostrar Detalhes'),
+             sg.Button('Retornar')]
         ]
 
         self.__window = sg.Window('TelaMissao', default_element_size=(40, 1)).Layout(layout)

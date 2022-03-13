@@ -1,5 +1,6 @@
 import PySimpleGUI as sg
 
+
 class TelaDadosMissao():
     def __init__(self, controlador_missao):
         self.__controlador_cliente = controlador_missao

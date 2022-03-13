@@ -39,17 +39,20 @@ class ControladorSistema:
     def cadastra_missao(self):
         checagem_super_heroi = self.__controlador_senciente.checar_lista_super_herois()
         checagem_cliente = self.__controlador_cliente.checar_lista_clientes()
-        '''try:
-            if checagem_super_heroi != 0 and checagem_cliente != 0:
-                self.__controlador_missao.abre_tela()
+        try:
+            if checagem_super_heroi == 0 and checagem_cliente == 0:
+                raise MissaoSemIntegrantesException()
+            self.__controlador_missao.abre_tela()
+        except:
+            self.__tela_sistema_gui.show_message("Ops!",
+                                                 "Você primeiro deve cadastrar pelo menos um Super-Herói e um cliente!")
 
-        except MissaoSemIntegrantesException:
-            print(MissaoSemIntegrantesException)'''
-        if checagem_super_heroi != 0 and checagem_cliente != 0:
+
+        '''if checagem_super_heroi != 0 and checagem_cliente != 0:
             self.__controlador_missao.abre_tela()
         else:
             self.__tela_sistema_gui.show_message("Ops!",
-                "Você primeiro deve cadastrar pelo menos um Super-Herói e um cliente!")
+                "Você primeiro deve cadastrar pelo menos um Super-Herói e um cliente!")'''
 
     def cadastra_senciente(self):
         self.__controlador_senciente.abre_tela()

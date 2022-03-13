@@ -1,7 +1,6 @@
 class Missao:
     def __init__(self, titulo: str, data: str, local: str, conflito: str, clientes: list, tarefas: list,
-                 super_herois: list, viloes: list,
-                 resultado=None):
+                 super_herois: list, viloes: list, resultado=None):
         # testar tipos!!!
         if isinstance(titulo, str):
             self.__titulo = titulo

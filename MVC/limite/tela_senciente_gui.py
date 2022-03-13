@@ -16,8 +16,8 @@ class TelaSencienteGUI():
             [sg.Text('')],
             [sg.Text('Vilões:')],
             [sg.Listbox(values=tuple(dict_viloes), size=(30, 3), key='lb_itens')],
-            [sg.Button('Incluir em Missão'), sg.Button('Novo Super-Herói'), sg.Button('Novo Vilão'),
-             sg.Button('Alterar'), sg.Button('Excluir'),
+            [sg.Button('Incluir em Missão'), sg.Button('Incluir mais Sencientes'), sg.Button('Novo Super-Herói'),
+             sg.Button('Novo Vilão'), sg.Button('Alterar'), sg.Button('Excluir'),
              sg.Button('Retornar')]
         ]
 

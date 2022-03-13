@@ -23,11 +23,21 @@ class ControladorCliente:
         return None
 
     def seleciona_cliente(self):
-        self.__tela_cliente.mostra_lista_clientes(self.__clientes)
+        clientes = []
+        dict_clientes = self.monta_dict_clientes()
+        button = 'Incluir mais Clientes'
+        while button == 'Incluir mais Clientes':
+            button, values = self.__tela_cliente_gui.open(dict_clientes)
+            self.__tela_cliente_gui.close()
+            if values['lb_itens'] != []:
+                clientes.append(values['lb_itens'])
+        return clientes
+
+        '''self.__tela_cliente.mostra_lista_clientes(self.__clientes)
         codigo = self.__tela_cliente.seleciona_cliente()
         cliente = self.pega_cliente_por_codigo(codigo)
         if cliente is not None:
-            return cliente
+            return cliente'''
 
     def incluir_cliente(self, values=None):
         while True:
@@ -45,8 +55,6 @@ class ControladorCliente:
             except ValueError:
                 self.__tela_cliente_gui.show_message('Atenção', 'Código inválido, tente novamente!')
                 continue
-
-
 
     def monta_dict_clientes(self):
         clientes = []
@@ -145,8 +153,8 @@ class ControladorCliente:
             self.__tela_cliente.mostra_mensagem("ATENÇÃO: Cliente não existente")'''
 
     def retornar(self, values):
-        self.__controlador_sistema.abre_tela()
         self.__tela_cliente_gui.close()
+        self.__controlador_sistema.abre_tela()
 
     def abre_tela(self):
         lista_opcoes = {'Novo Cliente': self.incluir_cliente, 'Alterar': self.alterar_cliente, # 3: self.lista_clientes,

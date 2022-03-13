@@ -68,6 +68,8 @@ class ControladorSenciente:
                           values['empresa'], values['local_moradia'],
                           int(values['periculosidade']))  # Fazer tratamento
         self.__viloes.append(senciente)
+        self.__tela_dados_vilao.close()
+        self.__tela_senciente_gui.close()
 
     """def incluir_super_heroi(self, values):
         button, values = self.__tela_dados_super_heroi.open(dados_super_heroi={"nome":"","fraqueza":"",
@@ -104,6 +106,20 @@ class ControladorSenciente:
         for vilao in self.__viloes:
             viloes.append(vilao.nome)
         return viloes
+
+    def seleciona_senciente(self):
+        sencientes = []
+        dict_super_herois = self.monta_dict_super_herois()
+        dict_viloes = self.monta_dict_viloes()
+        button = 'Incluir mais Sencientes'
+        while button == 'Incluir mais Sencientes':
+            button, values = self.__tela_senciente_gui.open([dict_super_herois, dict_viloes])
+            self.__tela_senciente_gui.close()
+            if values['lb_itens'] != []:
+                sencientes.append(values['lb_itens'])
+            if values['lb_itens0'] != []:
+                sencientes.append(values['lb_itens0'])
+        return sencientes
 
     def seleciona_super_heroi(self):
         self.__tela_senciente.mostra_lista_super_herois(self.__super_herois)
@@ -228,7 +244,6 @@ class ControladorSenciente:
                     self.__viloes.remove(vilao)
                     del vilao
 
-
         self.__tela_senciente_gui.close()
 
         """if self.__viloes == [] and self.__super_herois == []:
@@ -250,8 +265,8 @@ class ControladorSenciente:
             self.__tela_senciente.mostra_mensagem("Atenção: senciente não existente!")"""
 
     def retornar(self, values):
-        self.__controlador_sistema.abre_tela()
         self.__tela_senciente_gui.close()
+        self.__controlador_sistema.abre_tela()
 
     def checar_lista_super_herois(self):
         if len(self.__super_herois) == 0:
