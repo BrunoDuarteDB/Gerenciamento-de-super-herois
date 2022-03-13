@@ -11,6 +11,10 @@ class ControladorPoder:
         self.__tela_dados_poder = TelaDadosPoder(self)
         self.__controlador_sistema = controlador_sistema
 
+    @property
+    def poderes(self):
+        return self.__poderes
+
     def pega_poder_por_detentor(self, detentor: str):
         for poder in self.__poderes:
             if poder.detentor == detentor:
@@ -18,29 +22,48 @@ class ControladorPoder:
         return None
 
     def inclui_poder(self, nome):
+        while True:
+            if isinstance(nome, str):
+                button, values = self.__tela_dados_poder.open(nome)
+            elif isinstance(nome, dict):
+                button, values = self.__tela_dados_poder.open(
+                    dados_poder={"detentor": "", "inteligencia": "", "velocidade": "", "artes_marciais": "",
+                                 "forca": "", "fator_cura": "", "poder_magico": "", "expertise": "",
+                                 "resistencia": "", "controle_natureza": ""})
+            self.__tela_dados_poder.close()
 
-        if isinstance(nome, str):
-            button, values = self.__tela_dados_poder.open(nome)
-        elif isinstance(nome, dict):
-            button, values = self.__tela_dados_poder.open(
-                dados_poder={"detentor": "", "inteligencia": "", "velocidade": "", "artes_marciais": "",
-                             "forca": "", "fator_cura": "", "poder_magico": "", "expertise": "",
-                             "resistencia": "", "controle_natureza": ""})
-        self.__tela_dados_poder.close()
+            try:
+                int(values["velocidade"])
+                int(values["forca"])
+                int(values["poder_magico"])
+                int(values["resistencia"])
+                int(values["inteligencia"])
+                int(values["artes_marciais"])
+                int(values["fator_cura"])
+                int(values["expertise"])
+                int(values["controle_natureza"])
+                if values == {'detentor': '', 'inteligencia': '', 'velocidade': '', 'artes_marciais': '', 'forca': '',
+                              'fator_cura': '', 'poder_magico': '', 'expertise': '', 'resistencia': '',
+                              'controle_natureza': ''} or \
+                        (values['detentor'].isdigit()) == True:
+                    raise ValueError
+                media_poder = (int(values["velocidade"]) + int(values["forca"]) + int(values["poder_magico"]) +
+                               int(values["resistencia"]) + int(values["inteligencia"]) + int(
+                            values["artes_marciais"]) +
+                               int(values["fator_cura"]) + int(values["expertise"]) + int(
+                            values["controle_natureza"])) / 9
 
-        media_poder = (int(values["velocidade"]) + int(values["forca"]) + int(values["poder_magico"]) +
-                       int(values["resistencia"]) + int(values["inteligencia"]) + int(values["artes_marciais"]) +
-                       int(values["fator_cura"]) + int(values["expertise"]) + int(values["controle_natureza"])) / 9
-
-        poder = Poder(values["velocidade"], values["forca"], values["poder_magico"],
-                      values["resistencia"], values["inteligencia"], values["artes_marciais"],
-                      values["fator_cura"], values["expertise"], values["controle_natureza"],
-                      values["detentor"], media_poder)
-
-        self.__poderes.append(poder)
-        self.__tela_dados_poder.close()
-        self.__tela_poder_gui.close()
-        return poder
+                poder = Poder(values["velocidade"], values["forca"], values["poder_magico"],
+                              values["resistencia"], values["inteligencia"], values["artes_marciais"],
+                              values["fator_cura"], values["expertise"], values["controle_natureza"],
+                              values["detentor"], media_poder)
+                self.__poderes.append(poder)
+                self.__tela_dados_poder.close()
+                self.__tela_poder_gui.close()
+                return poder
+            except ValueError:
+                self.__tela_poder_gui.show_message('Atenção', 'Valores inválidos, tente novamente!')
+                continue
 
         '''
         if nome is not None:
@@ -65,7 +88,6 @@ class ControladorPoder:
         return poderes
 
     def altera_poder(self, dados_poder):
-        print(dados_poder)
 
         if self.__poderes == []:
             self.__tela_poder_gui.show_message("Atenção!", "Ainda não há clientes cadastrados.")
@@ -81,20 +103,40 @@ class ControladorPoder:
                                "expertise": poder.expertise, "resistencia": poder.resistencia,
                                "controle_natureza": poder.controle_natureza}
 
-        button, values = self.__tela_dados_poder.open(dados_poder)
-
-        for poder in self.__poderes:
-            if poder.detentor == detentor_poder_alterado:
-                poder.detentor = values["detentor"]
-                poder.inteligencia = values["inteligencia"]
-                poder.velocidade = values["velocidade"]
-                poder.artes_marciais = values["artes_marciais"]
-                poder.forca = values["forca"]
-                poder.fator_cura = values["fator_cura"]
-                poder.poder_magico = values["poder_magico"]
-                poder.expertise = values["expertise"]
-                poder.resistencia = values["resistencia"]
-                poder.controle_natureza = values["controle_natureza"]
+        while True:
+            try:
+                button, values = self.__tela_dados_poder.open(dados_poder)
+                self.__tela_dados_poder.close()
+                values["velocidade"] = int(values["velocidade"])
+                values["forca"] = int(values["forca"])
+                values["poder_magico"] = int(values["poder_magico"])
+                values["resistencia"] = int(values["resistencia"])
+                values["inteligencia"] = int(values["inteligencia"])
+                values["artes_marciais"] = int(values["artes_marciais"])
+                values["fator_cura"] = int(values["fator_cura"])
+                values["expertise"] = int(values["expertise"])
+                values["controle_natureza"] = int(values["controle_natureza"])
+                if values == {'detentor': '', 'inteligencia': '', 'velocidade': '', 'artes_marciais': '', 'forca': '',
+                              'fator_cura': '', 'poder_magico': '', 'expertise': '', 'resistencia': '',
+                              'controle_natureza': ''} or \
+                        (values['detentor'].isdigit()) == True:
+                    raise ValueError
+                for poder in self.__poderes:
+                    if poder.detentor == detentor_poder_alterado:
+                        poder.detentor = values["detentor"]
+                        poder.inteligencia = values["inteligencia"]
+                        poder.velocidade = values["velocidade"]
+                        poder.artes_marciais = values["artes_marciais"]
+                        poder.forca = values["forca"]
+                        poder.fator_cura = values["fator_cura"]
+                        poder.poder_magico = values["poder_magico"]
+                        poder.expertise = values["expertise"]
+                        poder.resistencia = values["resistencia"]
+                        poder.controle_natureza = values["controle_natureza"]
+                break
+            except ValueError:
+                self.__tela_poder_gui.show_message('Atenção', 'Valores inválidos, tente novamente!')
+                continue
 
         self.__tela_dados_poder.close()
         self.__tela_poder_gui.close()
@@ -161,9 +203,6 @@ class ControladorPoder:
                                "expertise": poder.expertise, "resistencia": poder.resistencia,
                                "controle_natureza": poder.controle_natureza}
         self.__tela_poder_gui.close()
-
-
-
 
         '''if self.__poderes == []:
             self.__tela_poder.mostra_mensagem("\033[1;31mATENÇÃO: Ainda não há poderes cadastrados.\033[0m")
