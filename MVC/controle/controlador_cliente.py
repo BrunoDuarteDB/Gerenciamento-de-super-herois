@@ -3,22 +3,24 @@ from MVC.limite.tela_cliente_gui import TelaClienteGUI
 from MVC.limite.tela_dados_cliente import TelaDadosCliente
 from MVC.entidade.cliente import Cliente
 from MVC.exceptions.botaoErradoException import BotaoErradoException
+from MVC.persistencia.cliente_dao import ClienteDAO
 
 
 class ControladorCliente:
     def __init__(self, controlador_sistema):
-        self.__clientes = []
         self.__controlador_sistema = controlador_sistema
         # self.__tela_cliente = TelaCliente(self)
         self.__tela_cliente_gui = TelaClienteGUI(self)
         self.__tela_dados_cliente = TelaDadosCliente(self)
+        self.__cliente_dao = ClienteDAO()
+        #self.__clientes = []
 
     @property
     def clientes(self):
-        return self.__clientes
+        return self.__cliente_dao.get_all()
 
     def pega_cliente_por_codigo(self, codigo: int):
-        for cliente in self.__clientes:
+        for cliente in self.__cliente_dao.get_all():
             if cliente.codigo == codigo:
                 return cliente
         return None
@@ -68,7 +70,7 @@ class ControladorCliente:
                     raise ValueError
                 cliente = Cliente(dados_cliente["nome"], dados_cliente["pais_origem"], dados_cliente["local_sede"],
                                   int(dados_cliente["codigo"]))
-                self.__clientes.append(cliente)
+                self.__cliente_dao.persist(cliente)
                 self.__tela_cliente_gui.close()
                 break
             except ValueError:
@@ -77,7 +79,7 @@ class ControladorCliente:
 
     def monta_dict_clientes(self):
         clientes = []
-        for cliente in self.__clientes:
+        for cliente in self.__cliente_dao.get_all():
             '''clientes.append({"nome": cliente.nome, "pais_origem": cliente.pais_origem,
                              "local_sede": cliente.local_sede, "codigo": cliente.codigo})'''
             clientes.append(cliente.nome)
@@ -90,12 +92,12 @@ class ControladorCliente:
         return clientes'''
 
     def alterar_cliente(self, dados_cliente):
-        if self.__clientes == []:
+        if self.__cliente_dao.get_all() == []:
             self.__tela_cliente_gui.show_message("Atenção!", "Ainda não há clientes cadastrados.")
 
         nome_cliente_alterado = dados_cliente['lb_itens'][0]
 
-        for cliente in self.__clientes:
+        for cliente in self.__cliente_dao.get_all():
             if cliente.nome == nome_cliente_alterado:
                 dados_cliente = {"codigo": cliente.codigo, "nome": cliente.nome, "pais_origem": cliente.pais_origem,
                                  "local_sede": cliente.local_sede}
@@ -109,12 +111,14 @@ class ControladorCliente:
                         (values["nome"]).isdigit() == True or (values["pais_origem"]).isdigit() == True \
                         or (dados_cliente["local_sede"]).isdigit() == True:
                     raise ValueError
-                for cliente in self.__clientes:
+                for cliente in self.__cliente_dao.get_all():
                     if cliente.nome == nome_cliente_alterado:
                         cliente.nome = values["nome"]
                         cliente.pais_origem = values["pais_origem"]
                         cliente.local_sede = values["local_sede"]
                         cliente.codigo = values["codigo"]
+
+                        self.__cliente_dao.persist(cliente) #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
                 break
             except ValueError:
                 self.__tela_cliente_gui.show_message('Atenção', 'Código inválido, tente novamente!')
@@ -148,7 +152,7 @@ class ControladorCliente:
                                                 "local_sede": cliente.local_sede, "codigo": cliente.codigo})'''
 
     def checar_lista_clientes(self):
-        if len(self.__clientes) == 0:
+        if len(self.__cliente_dao.get_all()) == 0:
             return 0
 
     def deseja_mais(self):
@@ -156,16 +160,18 @@ class ControladorCliente:
         return pergunta
 
     def excluir_cliente(self, dados_cliente):
-        if self.__clientes == []:
+        if self.__cliente_dao.get_all() == []:
             self.__tela_cliente_gui.show_message("Atenção!", "Ainda não há clientes cadastrados.")
 
-        codigo_cliente_excluido = dados_cliente['lb_itens'][0]
+        nome_cliente_excluido = dados_cliente['lb_itens'][0]
 
-        for cliente in self.__clientes:
-            if cliente.nome == codigo_cliente_excluido:
-                self.__clientes.remove(cliente)
-                del cliente
-
+        lista_clientes = self.__cliente_dao.get_all()
+        cliente_excluido = ''
+        for cliente in lista_clientes:
+            if cliente.nome == nome_cliente_excluido:
+                cliente_excluido = cliente
+        self.__cliente_dao.remove(cliente_excluido)
+        del cliente_excluido
         self.__tela_cliente_gui.close()
 
         '''if self.__clientes == []:
