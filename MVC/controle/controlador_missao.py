@@ -483,9 +483,10 @@ class ControladorMissao:
 
                 resultado = missao.resultado
 
+        self.__tela_missao_gui.close()
         self.__tela_missao_gui.show_message("Detalhes da Missão:", f'Título: {titulo_desejado}, Data: {data}  Local: {local}, Conflito: {conflito}, Clientes: {clientes}, Tarefas: {tarefas}, Super-Herói(s): {super_herois}, Vilão(ões): {viloes}, Resultado: {resultado}')
 
-    def retornar(self):
+    def retornar(self, values):
         self.__tela_missao_gui.close()
         self.__controlador_sistema.abre_tela()
 
