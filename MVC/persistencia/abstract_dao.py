@@ -24,11 +24,10 @@ class DAO(ABC):
         self.__dump()
 
     def remove(self, key):
-        print('Cache:', self.__cache)
         self.__cache.pop(key)
         self.__dump()
 
     def get_all(self):
-        print('Get all:', self.__cache)
+        print('Cache:', self.__cache)
         print('Cache.values: ', self.__cache.values())
         return self.__cache.values()

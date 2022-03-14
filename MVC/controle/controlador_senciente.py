@@ -5,6 +5,7 @@ from MVC.limite.tela_dados_super_heroi import TelaDadosSuperHeroi
 from MVC.limite.tela_dados_vilao import TelaDadosVilao
 from MVC.persistencia.super_heroi_dao import SuperHeroiDAO
 from MVC.persistencia.vilao_dao import VilaoDAO
+from MVC.exceptions.botaoErradoException import BotaoErradoException
 
 
 class ControladorSenciente:
@@ -90,7 +91,21 @@ class ControladorSenciente:
         dict_viloes = self.monta_dict_viloes()
         button = 'Incluir mais Sencientes'
         while button == 'Incluir mais Sencientes':
-            button, values = self.__tela_senciente_gui.open([dict_super_herois, dict_viloes])
+
+            while True:
+                button, values = self.__tela_senciente_gui.open([dict_super_herois, dict_viloes])
+
+                try:
+                    if button != 'Incluir mais Sencientes' and button != 'Incluir em Missão':
+                        raise BotaoErradoException
+                    break
+                except BotaoErradoException:
+                    self.__tela_senciente_gui.show_message('Ops',
+                                                         'Você deve clicar em "Incluir mais Sencientes" ou "Incluir'
+                                                         'em Missão"!')
+                    self.__tela_senciente_gui.close()
+                    continue
+
             self.__tela_senciente_gui.close()
             if values['lb_itens'] != []:
                 sencientes.append(values['lb_itens'])
@@ -129,7 +144,7 @@ class ControladorSenciente:
                                 self.__super_heroi_dao.persist(super_heroi)
                         break
                     except ValueError:
-                        self.__tela_senciente_gui.show_message('Atenção', 'Valores inválidos, tente novamente!')
+                        self.__tela_senciente_gui.show_message('Atenção', 'Valor(es) inválido(s), tente novamente!')
                         continue
 
                 self.__tela_dados_super_heroi.close()
@@ -210,6 +225,27 @@ class ControladorSenciente:
 
         self.__tela_senciente_gui.close()
 
+    def mostrar_detalhes(self, values):
+        nome_desejado = values['lb_itens'][0]
+
+        for super_heroi in self.__super_heroi_dao.get_all():
+            if super_heroi.nome == nome_desejado:
+                fraqueza = super_heroi.fraqueza
+                empresa = super_heroi.empresa
+                local_moradia = super_heroi.local_moradia
+                alterego = super_heroi.alterego
+                self.__tela_senciente_gui.close()
+                self.__tela_senciente_gui.show_message("Detalhes do Senciente:", f'Nome: {nome_desejado}, Fraqueza: {fraqueza},  Empresa: {empresa}, Local de moradia: {local_moradia}, Alter ego: {alterego}.')
+
+        for vilao in self.__vilao_dao.get_all():
+            if vilao.nome == nome_desejado:
+                fraqueza = vilao.fraqueza
+                empresa = vilao.empresa
+                local_moradia = vilao.local_moradia
+                periculosidade = vilao.periculosidade
+                self.__tela_senciente_gui.close()
+                self.__tela_senciente_gui.show_message("Detalhes do Senciente:", f'Nome: {nome_desejado}, Fraqueza: {fraqueza},  Empresa: {empresa}, Local de moradia: {local_moradia}, Periculosidade: {periculosidade}.')
+
     def retornar(self, values):
         self.__tela_senciente_gui.close()
         self.__controlador_sistema.abre_tela()
@@ -227,7 +263,8 @@ class ControladorSenciente:
 
     def abre_tela(self):
         lista_opcoes = {"Novo Super-Herói": self.incluir_super_heroi, "Novo Vilão": self.incluir_vilao,
-                        "Alterar": self.alterar_senciente,  "Excluir": self.excluir_senciente, "Retornar": self.retornar
+                        "Alterar": self.alterar_senciente,  "Excluir": self.excluir_senciente,
+                        "Mostrar Detalhes": self.mostrar_detalhes, "Retornar": self.retornar
                         }
 
         continua = True

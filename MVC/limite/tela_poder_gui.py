@@ -13,7 +13,7 @@ class TelaPoderGUI():
             [sg.Text('Poderes:')],
             [sg.Listbox(values=tuple(dados_poderes), size=(30, 3), key='lb_itens')],
             [sg.Submit(button_text='Incluir'), sg.Submit(button_text='Alterar'), sg.Submit(button_text='Excluir'),
-             sg.Submit(button_text='Retornar')]
+             sg.Submit(button_text='Mostrar Detalhes'), sg.Submit(button_text='Retornar')]
         ]
 
         self.__window = sg.Window('TelaPoder', default_element_size=(40, 1)).Layout(layout)

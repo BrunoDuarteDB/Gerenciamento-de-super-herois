@@ -102,17 +102,30 @@ class ControladorMissao:
         return fracasso
 
     def excluir_missao(self, dados_missao):
-        if self.__missao_dao.get_all() == []:
+        try:
+            missoes = []
+            for missao in self.__missao_dao.get_all():
+                missoes.append(missao)
+            if missoes == []:
+                raise ListaVaziaException
+            elif dados_missao['lb_itens'] == []:
+                raise ValueError
+
+            titulo_missao_excluida = dados_missao['lb_itens'][0]
+
+            for missao in self.__missao_dao.get_all():
+                if missao.titulo == titulo_missao_excluida:
+                    self.__missao_dao.remove(missao)
+                    del missao
+
+            self.__tela_missao_gui.close()
+
+        except ListaVaziaException:
+            self.__tela_missao_gui.close()
             self.__tela_missao_gui.show_message("Atenção!", "Ainda não há missão cadastradas.")
-
-        titulo_missao_excluida = dados_missao['lb_itens'][0]
-
-        for missao in self.__missao_dao.get_all():
-            if missao.titulo == titulo_missao_excluida:
-                self.__missao_dao.remove(missao)
-                del missao
-
-        self.__tela_missao_gui.close()
+        except ValueError:
+            self.__tela_missao_gui.close()
+            self.__tela_missao_gui.show_message("Atenção!", "Nenhuma missão selecionada.")
 
     '''def alterar_missao(self):
         if self.__missoes == []:
@@ -240,7 +253,7 @@ class ControladorMissao:
                 resultado = missao.resultado
 
         self.__tela_missao_gui.close()
-        self.__tela_missao_gui.show_message("Detalhes da Missão:", f'Título: {titulo_desejado}, Data: {data}  Local: {local}, Conflito: {conflito}, Clientes: {clientes}, Tarefas: {tarefas}, Super-Herói(s): {super_herois}, Vilão(ões): {viloes}, Resultado: {resultado}')
+        self.__tela_missao_gui.show_message("Detalhes da Missão:", f'Título: {titulo_desejado}, Data: {data},  Local: {local}, Conflito: {conflito}, Clientes: {clientes}, Tarefas: {tarefas}, Super-Herói(s): {super_herois}, Vilão(ões): {viloes}, Resultado: {resultado}')
 
     def retornar(self, values):
         self.__tela_missao_gui.close()

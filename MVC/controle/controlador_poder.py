@@ -2,6 +2,7 @@ from MVC.entidade.poder import Poder
 from MVC.limite.tela_poder_gui import TelaPoderGUI
 from MVC.limite.tela_dados_poder import TelaDadosPoder
 from MVC.persistencia.poder_dao import PoderDAO
+from MVC.exceptions.detentorAlteradoException import DetentorAlteradoException
 
 
 class ControladorPoder:
@@ -18,7 +19,14 @@ class ControladorPoder:
     def inclui_poder(self, nome):
         while True:
             if isinstance(nome, str):
-                button, values = self.__tela_dados_poder.open(nome)
+                try:
+                    button, values = self.__tela_dados_poder.open(nome)
+                    if values['detentor'] != nome:
+                        raise DetentorAlteradoException
+                except:
+                    self.__tela_dados_poder.close()
+                    self.__tela_poder_gui.show_message('Atenção', 'O detentor do poder não pode ser alterado!')
+                    continue
             elif isinstance(nome, dict):
                 button, values = self.__tela_dados_poder.open(
                     dados_poder={"detentor": "", "inteligencia": "", "velocidade": "", "artes_marciais": "",
@@ -156,6 +164,25 @@ class ControladorPoder:
                                "controle_natureza": poder.controle_natureza}
         self.__tela_poder_gui.close()
 
+    def mostrar_detalhes(self, values):
+        detendor_desejado = values['lb_itens'][0]
+        for poder in self.__poder_dao.get_all():
+            if poder.detentor == detendor_desejado:
+                velocidade = poder.velocidade
+                forca = poder.forca
+                poder_magico = poder.poder_magico
+                resistencia = poder.resistencia
+                inteligencia = poder.inteligencia
+                artes_marciais = poder.artes_marciais
+                fator_cura = poder.fator_cura
+                expertise = poder.expertise
+                controle_natureza = poder.controle_natureza
+                media_poder = poder.media_poder
+
+        self.__tela_poder_gui.close()
+        self.__tela_poder_gui.show_message("Detalhes do Poder:", f'Detentor: {detendor_desejado}, Velocidade: {velocidade},  Força: {forca}, Poder Mágico: {poder_magico}, Resistência: {resistencia}, Inteligência: {inteligencia}, Artes Marciais: {artes_marciais}, Fator Cura: {fator_cura}, Expertise: {expertise}, Controle Natureza: {controle_natureza}, Média dos Poderes: {media_poder}')
+
+
     def retornar(self, values):
         self.__tela_poder_gui.close()
         self.__controlador_sistema.abre_tela()
@@ -165,8 +192,8 @@ class ControladorPoder:
             "Incluir": self.inclui_poder,
             "Alterar": self.altera_poder,
             "Excluir": self.exclui_poder,
-            "Retornar": self.retornar,
-            "Incluir em Senciente": self.inclui_poder_em_senciente
+            "Mostrar Detalhes": self.mostrar_detalhes,
+            "Retornar": self.retornar
         }
         continua = True
         while continua:
