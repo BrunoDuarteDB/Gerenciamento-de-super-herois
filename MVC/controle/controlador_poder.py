@@ -127,7 +127,6 @@ class ControladorPoder:
         self.__tela_poder_gui.close()
 
     def exclui_poder(self, dados_poder):
-
         if self.__poder_dao.get_all() == []:
             self.__tela_poder_gui.show_message("Atenção!", "Ainda não há poderes cadastrados.")
         detentor_poder_excluido = dados_poder['lb_itens'][0]
@@ -138,6 +137,10 @@ class ControladorPoder:
         self.__poder_dao.remove(poder_excluido)
         del poder_excluido
         self.__tela_poder_gui.close()
+
+    def exclui_poder_de_senciente(self, poder_excluido):
+        self.__poder_dao.remove(poder_excluido)
+        del poder_excluido
 
     def inclui_poder_em_senciente(self, dados_poder):
         if self.__poder_dao.get_all() == []:

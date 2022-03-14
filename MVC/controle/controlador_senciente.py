@@ -174,13 +174,12 @@ class ControladorSenciente:
         if dados_senciente['lb_itens'] != []:
             nome_super_excluido = dados_senciente['lb_itens'][0]
 
-            lista_poderes = self.__controlador_sistema.controlador_poder.poder_dao.get_all()
+            lista_poderes = self.__controlador_sistema.controlador_poder.poderes
             poder_excluido = ''
             for poder in lista_poderes:
                 if poder.detentor == nome_super_excluido:
                     poder_excluido = poder
-            self.__controlador_sistema.controlador_poder.poder_dao.remove(poder_excluido)
-            del poder_excluido
+            self.__controlador_sistema.controlador_poder.exclui_poder_de_senciente(poder_excluido)
 
             lista_super_herois = self.__super_heroi_dao.get_all()
             super_heroi_excluido = ''
