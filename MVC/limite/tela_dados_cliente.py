@@ -5,7 +5,7 @@ class TelaDadosCliente():
     def __init__(self, controlador_cliente):
         self.__controlador_cliente = controlador_cliente
         self.__window = None
-        self.init_components(dados_cliente={"codigo":"","nome":"","pais_origem":"","local_sede":""})
+        self.init_components(dados_cliente={"codigo": "", "nome": "", "pais_origem": "", "local_sede": ""})
 
     def init_components(self, dados_cliente):
         layout = [
@@ -25,6 +25,3 @@ class TelaDadosCliente():
 
     def close(self):
         self.__window.Close()
-
-    def mostra_opcoes(self):
-        self.open()

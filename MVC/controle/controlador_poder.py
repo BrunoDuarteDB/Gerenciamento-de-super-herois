@@ -75,7 +75,7 @@ class ControladorPoder:
 
     def altera_poder(self, dados_poder):
 
-        if self.__poder_dao.get_all() == []: #Mudar!!!!!!!!!!!!!!!!!!!!!!!!
+        if self.__poder_dao.get_all() == []:  # Mudar!!!!!!!!!!!!!!!!!!!!!!!!
             self.__tela_poder_gui.show_message("Atenção!", "Ainda não há clientes cadastrados.")
 
         detentor_poder_alterado = dados_poder['lb_itens'][0]
@@ -113,7 +113,6 @@ class ControladorPoder:
 
                 for poder in lista_poderes:
                     if poder.detentor == detentor_poder_alterado:
-
                         poder.detentor = values["detentor"]
                         poder.inteligencia = values["inteligencia"]
                         poder.velocidade = values["velocidade"]
@@ -180,8 +179,8 @@ class ControladorPoder:
                 media_poder = poder.media_poder
 
         self.__tela_poder_gui.close()
-        self.__tela_poder_gui.show_message("Detalhes do Poder:", f'Detentor: {detendor_desejado}, Velocidade: {velocidade},  Força: {forca}, Poder Mágico: {poder_magico}, Resistência: {resistencia}, Inteligência: {inteligencia}, Artes Marciais: {artes_marciais}, Fator Cura: {fator_cura}, Expertise: {expertise}, Controle Natureza: {controle_natureza}, Média dos Poderes: {media_poder}')
-
+        self.__tela_poder_gui.show_message("Detalhes do Poder:",
+                                           f'Detentor: {detendor_desejado}, Velocidade: {velocidade},  Força: {forca}, Poder Mágico: {poder_magico}, Resistência: {resistencia}, Inteligência: {inteligencia}, Artes Marciais: {artes_marciais}, Fator Cura: {fator_cura}, Expertise: {expertise}, Controle Natureza: {controle_natureza}, Média dos Poderes: {media_poder}')
 
     def retornar(self, values):
         self.__tela_poder_gui.close()

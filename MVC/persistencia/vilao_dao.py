@@ -1,6 +1,7 @@
 from MVC.persistencia.abstract_dao import DAO
 from MVC.entidade.vilao import Vilao
 
+
 class VilaoDAO(DAO):
 
     def __init__(self):

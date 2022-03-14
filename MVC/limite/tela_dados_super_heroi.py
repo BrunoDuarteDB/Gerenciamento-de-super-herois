@@ -27,6 +27,3 @@ class TelaDadosSuperHeroi():
 
     def close(self):
         self.__window.Close()
-
-    def mostra_opcoes(self):
-        self.open()

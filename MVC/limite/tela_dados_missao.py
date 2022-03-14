@@ -5,7 +5,7 @@ class TelaDadosMissao():
     def __init__(self, controlador_missao):
         self.__controlador_cliente = controlador_missao
         self.__window = None
-        self.init_components(dados_missao={"titulo":"","data":"","local":"","conflito":""})
+        self.init_components(dados_missao={"titulo": "", "data": "", "local": "", "conflito": ""})
 
     def init_components(self, dados_missao):
         layout = [
@@ -25,6 +25,3 @@ class TelaDadosMissao():
 
     def close(self):
         self.__window.Close()
-
-    def mostra_opcoes(self):
-        self.open()

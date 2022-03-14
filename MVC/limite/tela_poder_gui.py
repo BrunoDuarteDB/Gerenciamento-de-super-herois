@@ -19,7 +19,7 @@ class TelaPoderGUI():
         self.__window = sg.Window('TelaPoder', default_element_size=(40, 1)).Layout(layout)
 
     def open(self, dados_poderes=[]):
-        #dados_poderes = []
+        # dados_poderes = []
         self.init_components(dados_poderes)
         button, values = self.__window.Read()
         return button, values

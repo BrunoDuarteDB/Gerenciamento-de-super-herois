@@ -32,8 +32,9 @@ class ControladorCliente:
                         raise BotaoErradoException
                     break
                 except BotaoErradoException:
-                    self.__tela_cliente_gui.show_message('Ops','Você deve clicar em "Incluir mais Clientes" ou "Incluir'
-                                                               'em Missão"!')
+                    self.__tela_cliente_gui.show_message('Ops',
+                                                         'Você deve clicar em "Incluir mais Clientes" ou "Incluir'
+                                                         'em Missão"!')
                     self.__tela_cliente_gui.close()
                     continue
 
@@ -44,14 +45,15 @@ class ControladorCliente:
 
     def incluir_cliente(self, values=None):
         while True:
-            botao, dados_cliente = self.__tela_dados_cliente.open(dados_cliente={"codigo":"","nome":"","pais_origem":"",
-                                                                                 "local_sede":""})
+            botao, dados_cliente = self.__tela_dados_cliente.open(
+                dados_cliente={"codigo": "", "nome": "", "pais_origem": "",
+                               "local_sede": ""})
 
             self.__tela_dados_cliente.close()
 
             try:
                 int(dados_cliente["codigo"])
-                if dados_cliente == {"codigo":"","nome":"","pais_origem":"","local_sede":""} or \
+                if dados_cliente == {"codigo": "", "nome": "", "pais_origem": "", "local_sede": ""} or \
                         (dados_cliente["nome"]).isdigit() == True or (dados_cliente["pais_origem"]).isdigit() == True \
                         or (dados_cliente["local_sede"]).isdigit() == True:
                     raise ValueError
@@ -113,7 +115,7 @@ class ControladorCliente:
                                       '\nPais_origem: ', cliente.pais_origem,
                                       '\nLocal_sede: ', cliente.local_sede,
                                       '\nCódigo: ', cliente.codigo
-                                      ) # CÓDIGO E CHAVE NÃO ESTÃO MUDANDO
+                                      )  # CÓDIGO E CHAVE NÃO ESTÃO MUDANDO
 
                                 self.__cliente_dao.persist(cliente)  # IMPORTANTE
                         break
@@ -158,14 +160,16 @@ class ControladorCliente:
                 codigo = cliente.codigo
 
         self.__tela_cliente_gui.close()
-        self.__tela_cliente_gui.show_message("Detalhes do Cliente:", f'Nome: {nome_desejado}, País de origem: {pais_origem},  Local da sede: {local_sede}, Código: {codigo}.')
+        self.__tela_cliente_gui.show_message("Detalhes do Cliente:",
+                                             f'Nome: {nome_desejado}, País de origem: {pais_origem},  Local da sede: {local_sede}, Código: {codigo}.')
 
     def retornar(self, values):
         self.__tela_cliente_gui.close()
         self.__controlador_sistema.abre_tela()
 
     def abre_tela(self):
-        lista_opcoes = {'Novo Cliente': self.incluir_cliente, 'Alterar': self.alterar_cliente, # 3: self.lista_clientes,
+        lista_opcoes = {'Novo Cliente': self.incluir_cliente, 'Alterar': self.alterar_cliente,
+                        # 3: self.lista_clientes,
                         'Excluir': self.excluir_cliente, 'Retornar': self.retornar,
                         'Mostrar Detalhes': self.mostrar_detalhes}
 

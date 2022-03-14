@@ -35,8 +35,10 @@ class ControladorSenciente:
             button, values = self.__tela_dados_super_heroi.open()
 
             try:
-                if values['nome'] == '' or values['fraqueza'] == '' or values['empresa'] == '' or values['local_moradia']== '' \
-                            or values['alterego']== '' or (values['nome']).isdigit() == True or (values['fraqueza']).isdigit() == True \
+                if values['nome'] == '' or values['fraqueza'] == '' or values['empresa'] == '' or values[
+                    'local_moradia'] == '' \
+                        or values['alterego'] == '' or (values['nome']).isdigit() == True or (
+                values['fraqueza']).isdigit() == True \
                         or (values['empresa']).isdigit() == True or (values['local_moradia']).isdigit() == True or \
                         (values['alterego']).isdigit() == True:
                     raise ValueError
@@ -56,15 +58,17 @@ class ControladorSenciente:
         while True:
             button, values = self.__tela_dados_vilao.open()
             try:
-                values['periculosidade']= int(values['periculosidade'])
-                if values['nome'] == '' or values['fraqueza'] == '' or values['empresa'] == '' or values['local_moradia']== '' \
-                            or values['periculosidade']== '' or (values['nome']).isdigit() == True or (values['fraqueza']).isdigit() == True \
+                values['periculosidade'] = int(values['periculosidade'])
+                if values['nome'] == '' or values['fraqueza'] == '' or values['empresa'] == '' or values[
+                    'local_moradia'] == '' \
+                        or values['periculosidade'] == '' or (values['nome']).isdigit() == True or (
+                values['fraqueza']).isdigit() == True \
                         or (values['empresa']).isdigit() == True or (values['local_moradia']).isdigit() == True:
                     raise ValueError
                 poder = self.__controlador_sistema.controlador_poder.inclui_poder(values['nome'])
                 senciente = Vilao(values['nome'], poder, values['fraqueza'],
-                                       values['empresa'], values['local_moradia'],
-                                       values['periculosidade'])
+                                  values['empresa'], values['local_moradia'],
+                                  values['periculosidade'])
                 self.__vilao_dao.persist(senciente)
                 self.__tela_dados_vilao.close()
                 self.__tela_senciente_gui.close()
@@ -101,8 +105,8 @@ class ControladorSenciente:
                     break
                 except BotaoErradoException:
                     self.__tela_senciente_gui.show_message('Ops',
-                                                         'Você deve clicar em "Incluir mais Sencientes" ou "Incluir'
-                                                         'em Missão"!')
+                                                           'Você deve clicar em "Incluir mais Sencientes" ou "Incluir'
+                                                           'em Missão"!')
                     self.__tela_senciente_gui.close()
                     continue
 
@@ -131,7 +135,8 @@ class ControladorSenciente:
                             'local_moradia'] == '' \
                                 or values['alterego'] == '' or (values['nome']).isdigit() == True or (
                                 values['fraqueza']).isdigit() == True \
-                                or (values['empresa']).isdigit() == True or (values['local_moradia']).isdigit() == True or \
+                                or (values['empresa']).isdigit() == True or (
+                        values['local_moradia']).isdigit() == True or \
                                 (values['alterego']).isdigit() == True:
                             raise ValueError
                         for super_heroi in self.__super_heroi_dao.get_all():
@@ -160,10 +165,11 @@ class ControladorSenciente:
             while True:
                 try:
                     button, values = self.__tela_dados_vilao.open(dados_senciente)
-                    (values['periculosidade'])= int(values['periculosidade'])
+                    (values['periculosidade']) = int(values['periculosidade'])
                     if values['nome'] == '' or values['fraqueza'] == '' or values['empresa'] == '' or values[
-                        'local_moradia'] == '' or values['periculosidade'] == '' or (values['nome']).isdigit() == True or\
-                            (values['fraqueza']).isdigit() == True or (values['empresa']).isdigit() == True or\
+                        'local_moradia'] == '' or values['periculosidade'] == '' or (
+                    values['nome']).isdigit() == True or \
+                            (values['fraqueza']).isdigit() == True or (values['empresa']).isdigit() == True or \
                             (values['local_moradia']).isdigit() == True:
                         raise ValueError
                     for vilao in self.__vilao_dao.get_all():
@@ -235,7 +241,8 @@ class ControladorSenciente:
                 local_moradia = super_heroi.local_moradia
                 alterego = super_heroi.alterego
                 self.__tela_senciente_gui.close()
-                self.__tela_senciente_gui.show_message("Detalhes do Senciente:", f'Nome: {nome_desejado}, Fraqueza: {fraqueza},  Empresa: {empresa}, Local de moradia: {local_moradia}, Alter ego: {alterego}.')
+                self.__tela_senciente_gui.show_message("Detalhes do Senciente:",
+                                                       f'Nome: {nome_desejado}, Fraqueza: {fraqueza},  Empresa: {empresa}, Local de moradia: {local_moradia}, Alter ego: {alterego}.')
 
         for vilao in self.__vilao_dao.get_all():
             if vilao.nome == nome_desejado:
@@ -244,7 +251,8 @@ class ControladorSenciente:
                 local_moradia = vilao.local_moradia
                 periculosidade = vilao.periculosidade
                 self.__tela_senciente_gui.close()
-                self.__tela_senciente_gui.show_message("Detalhes do Senciente:", f'Nome: {nome_desejado}, Fraqueza: {fraqueza},  Empresa: {empresa}, Local de moradia: {local_moradia}, Periculosidade: {periculosidade}.')
+                self.__tela_senciente_gui.show_message("Detalhes do Senciente:",
+                                                       f'Nome: {nome_desejado}, Fraqueza: {fraqueza},  Empresa: {empresa}, Local de moradia: {local_moradia}, Periculosidade: {periculosidade}.')
 
     def retornar(self, values):
         self.__tela_senciente_gui.close()
@@ -263,7 +271,7 @@ class ControladorSenciente:
 
     def abre_tela(self):
         lista_opcoes = {"Novo Super-Herói": self.incluir_super_heroi, "Novo Vilão": self.incluir_vilao,
-                        "Alterar": self.alterar_senciente,  "Excluir": self.excluir_senciente,
+                        "Alterar": self.alterar_senciente, "Excluir": self.excluir_senciente,
                         "Mostrar Detalhes": self.mostrar_detalhes, "Retornar": self.retornar
                         }
 

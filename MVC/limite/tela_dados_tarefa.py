@@ -1,5 +1,6 @@
 import PySimpleGUI as sg
 
+
 class TelaDadosTarefa():
     def __init__(self, controlador_missao):
         self.__controlador_missao = controlador_missao
@@ -22,6 +23,3 @@ class TelaDadosTarefa():
 
     def close(self):
         self.__window.Close()
-
-    def mostra_opcoes(self):
-        self.open()

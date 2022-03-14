@@ -29,11 +29,13 @@ class ControladorMissao:
 
     def incluir_missao(self, values):
         while True:
-            button, values = self.__tela_dados_missao.open(dados_missao={"titulo":"","data":"","local":"","conflito":""})
+            button, values = self.__tela_dados_missao.open(
+                dados_missao={"titulo": "", "data": "", "local": "", "conflito": ""})
             self.__tela_dados_missao.close()
 
             try:
-                if values == {"titulo":"","data":"","local":"","conflito":""} or (values["titulo"]).isdigit() == True \
+                if values == {"titulo": "", "data": "", "local": "", "conflito": ""} or (
+                values["titulo"]).isdigit() == True \
                         or (values["local"]).isdigit() == True or (values["conflito"]).isdigit() == True:
                     raise ValueError
                 break
@@ -44,13 +46,13 @@ class ControladorMissao:
         tarefas = self.incluir_tarefa()
 
         while True:
-            sencientes = self.pede_seleciona_senciente() # BOTAOERRADOEXCEPTION AQUI TAMBÉM AAAAAAAAAAAAAAAAAAA
+            sencientes = self.pede_seleciona_senciente()  # BOTAOERRADOEXCEPTION AQUI TAMBÉM
             try:
                 if sencientes == []:
                     raise ListaVaziaException
                 break
             except ListaVaziaException:
-                self.__tela_missao_gui.show_message('Ops',"Você esqueceu de selecionar algum senciente!")
+                self.__tela_missao_gui.show_message('Ops', "Você esqueceu de selecionar algum senciente!")
                 continue
 
         lista_super_herois = []
@@ -70,7 +72,7 @@ class ControladorMissao:
                     raise ListaVaziaException
                 break
             except ListaVaziaException:
-                self.__tela_missao_gui.show_message('Ops',"Você esqueceu de selecionar algum cliente!")
+                self.__tela_missao_gui.show_message('Ops', "Você esqueceu de selecionar algum cliente!")
                 continue
 
         lista_clientes = []
@@ -253,7 +255,8 @@ class ControladorMissao:
                 resultado = missao.resultado
 
         self.__tela_missao_gui.close()
-        self.__tela_missao_gui.show_message("Detalhes da Missão:", f'Título: {titulo_desejado}, Data: {data},  Local: {local}, Conflito: {conflito}, Clientes: {clientes}, Tarefas: {tarefas}, Super-Herói(s): {super_herois}, Vilão(ões): {viloes}, Resultado: {resultado}')
+        self.__tela_missao_gui.show_message("Detalhes da Missão:",
+                                            f'Título: {titulo_desejado}, Data: {data},  Local: {local}, Conflito: {conflito}, Clientes: {clientes}, Tarefas: {tarefas}, Super-Herói(s): {super_herois}, Vilão(ões): {viloes}, Resultado: {resultado}')
 
     def retornar(self, values):
         self.__tela_missao_gui.close()
