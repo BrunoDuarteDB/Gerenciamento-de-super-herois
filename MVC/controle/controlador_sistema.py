@@ -1,4 +1,3 @@
-from MVC.limite.tela_sistema import TelaSistema
 from MVC.limite.tela_sistema_gui import TelaSistemaGUI
 from MVC.controle.controlador_missao import ControladorMissao
 from MVC.controle.controlador_senciente import ControladorSenciente
@@ -15,7 +14,6 @@ class ControladorSistema:
         self.__controlador_poder = ControladorPoder(self)
         self.__controlador_cliente = ControladorCliente(self)
         self.__tela_sistema_gui = TelaSistemaGUI(self)
-        # self.__tela_sistema = TelaSistema(self)
 
     @property
     def controlador_missao(self):
@@ -40,7 +38,7 @@ class ControladorSistema:
         checagem_super_heroi = self.__controlador_senciente.checar_lista_super_herois()
         checagem_cliente = self.__controlador_cliente.checar_lista_clientes()
         try:
-            if checagem_super_heroi == 0 and checagem_cliente == 0:
+            if checagem_super_heroi == 0 or checagem_cliente == 0:
                 raise MissaoSemIntegrantesException
             self.__controlador_missao.abre_tela()
 
@@ -48,12 +46,6 @@ class ControladorSistema:
             self.__tela_sistema_gui.show_message("Ops!",
                                                  "Você primeiro deve cadastrar pelo menos um Super-Herói e um "
                                                  "cliente!")
-
-        '''if checagem_super_heroi != 0 and checagem_cliente != 0:
-            self.__controlador_missao.abre_tela()
-        else:
-            self.__tela_sistema_gui.show_message("Ops!",
-                "Você primeiro deve cadastrar pelo menos um Super-Herói e um cliente!")'''
 
     def cadastra_senciente(self):
         self.__controlador_senciente.abre_tela()
