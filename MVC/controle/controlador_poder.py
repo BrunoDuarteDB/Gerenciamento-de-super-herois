@@ -3,6 +3,7 @@ from MVC.limite.tela_poder_gui import TelaPoderGUI
 from MVC.limite.tela_dados_poder import TelaDadosPoder
 from MVC.persistencia.poder_dao import PoderDAO
 from MVC.exceptions.detentorAlteradoException import DetentorAlteradoException
+from MVC.exceptions.jaExistenteException import JaExistenteException
 
 
 class ControladorPoder:
@@ -28,10 +29,20 @@ class ControladorPoder:
                     self.__tela_poder_gui.show_message('Atenção', 'O detentor do poder não pode ser alterado!')
                     continue
             elif isinstance(nome, dict):
-                button, values = self.__tela_dados_poder.open(
-                    dados_poder={"detentor": "", "inteligencia": "", "velocidade": "", "artes_marciais": "",
-                                 "forca": "", "fator_cura": "", "poder_magico": "", "expertise": "",
-                                 "resistencia": "", "controle_natureza": ""})
+                try:
+                    button, values = self.__tela_dados_poder.open(
+                        dados_poder={"detentor": "", "inteligencia": "", "velocidade": "", "artes_marciais": "",
+                                     "forca": "", "fator_cura": "", "poder_magico": "", "expertise": "",
+                                     "resistencia": "", "controle_natureza": ""})
+                    for poder in self.__poder_dao.get_all():
+                        if poder.detentor == values['detentor']:
+                            raise JaExistenteException
+                except JaExistenteException:
+                    self.__tela_poder_gui.show_message('Atenção', 'Cliente já existente, tente novamente!')
+                    self.__tela_dados_poder.close()
+                    self.__tela_poder_gui.close()
+                    continue
+
             self.__tela_dados_poder.close()
 
             try:
@@ -65,6 +76,7 @@ class ControladorPoder:
                 return poder
             except ValueError:
                 self.__tela_poder_gui.show_message('Atenção', 'Valores inválidos, tente novamente!')
+                self.__tela_poder_gui.close()
                 continue
 
     def monta_dict_poderes(self):
@@ -75,14 +87,13 @@ class ControladorPoder:
 
     def altera_poder(self, dados_poder):
 
+
         if self.__poder_dao.get_all() == []:  # Mudar!!!!!!!!!!!!!!!!!!!!!!!!
             self.__tela_poder_gui.show_message("Atenção!", "Ainda não há clientes cadastrados.")
 
         detentor_poder_alterado = dados_poder['lb_itens'][0]
 
-        lista_poderes = self.__poder_dao.get_all()
-
-        for poder in lista_poderes:
+        for poder in self.__poder_dao.get_all():
             if poder.detentor == detentor_poder_alterado:
                 dados_poder = {"detentor": poder.detentor, "inteligencia": poder.inteligencia,
                                "velocidade": poder.velocidade,
@@ -109,9 +120,8 @@ class ControladorPoder:
                               'controle_natureza': ''} or \
                         (values['detentor'].isdigit()) == True:
                     raise ValueError
-                lista_poderes = self.__poder_dao.get_all()
 
-                for poder in lista_poderes:
+                for poder in self.__poder_dao.get_all():
                     if poder.detentor == detentor_poder_alterado:
                         poder.detentor = values["detentor"]
                         poder.inteligencia = values["inteligencia"]
@@ -132,6 +142,13 @@ class ControladorPoder:
 
         self.__tela_dados_poder.close()
         self.__tela_poder_gui.close()
+
+    def checar_lista_poderes(self):
+        poderes = []
+        for poder in self.__poder_dao.get_all():
+            poder.append(poderes)
+        if poderes == []:
+            return 0
 
     def exclui_poder(self, dados_poder):
         if self.__poder_dao.get_all() == []:

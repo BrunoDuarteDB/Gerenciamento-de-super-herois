@@ -11,11 +11,11 @@ class TelaDadosVilao():
     def init_components(self, dados_vilao):
         layout = [
             [sg.Text('Dados:')],
-            [sg.Text('Nome:'), sg.InputText(dados_vilao['nome'], key='nome')],
-            [sg.Text('Fraqueza:'), sg.InputText(dados_vilao['fraqueza'], key='fraqueza')],
-            [sg.Text('Empresa:'), sg.InputText(dados_vilao['empresa'], key='empresa')],
-            [sg.Text('Local de Moradia:'), sg.InputText(dados_vilao['local_moradia'], key='local_moradia')],
-            [sg.Text('Periculosidade:'), sg.InputText(dados_vilao['periculosidade'], key='periculosidade')],
+            [sg.Text('Nome:', size=(13, 1)), sg.InputText(dados_vilao['nome'], key='nome')],
+            [sg.Text('Fraqueza:', size=(13, 1)), sg.InputText(dados_vilao['fraqueza'], key='fraqueza')],
+            [sg.Text('Empresa:', size=(13, 1)), sg.InputText(dados_vilao['empresa'], key='empresa')],
+            [sg.Text('Local de Moradia:', size=(13, 1)), sg.InputText(dados_vilao['local_moradia'], key='local_moradia')],
+            [sg.Text('Periculosidade:', size=(13, 1)), sg.InputText(dados_vilao['periculosidade'], key='periculosidade')],
             [sg.Submit(button_text="Salvar")]
         ]
         self.__window = sg.Window('Dados dos Poderes').Layout(layout)

@@ -117,8 +117,10 @@ class ControladorMissao:
 
             for missao in self.__missao_dao.get_all():
                 if missao.titulo == titulo_missao_excluida:
-                    self.__missao_dao.remove(missao)
-                    del missao
+                    missao_excluida = missao
+
+            self.__missao_dao.remove(missao_excluida)
+            del missao
 
             self.__tela_missao_gui.close()
 
@@ -229,11 +231,18 @@ class ControladorMissao:
         return sencientes
 
     def mostrar_detalhes(self, values):
+        print('values: ', values)
         clientes = []
         tarefas = []
         super_herois = []
         viloes = []
-        titulo_desejado = values['lb_itens'][0]
+
+        if values['lb_itens'] != []:
+            titulo_desejado = values['lb_itens'][0]
+
+        elif values['lb_itens0'] != []:
+            titulo_desejado = values['lb_itens0'][0]
+
         for missao in self.__missao_dao.get_all():
             if missao.titulo == titulo_desejado:
                 data = missao.data

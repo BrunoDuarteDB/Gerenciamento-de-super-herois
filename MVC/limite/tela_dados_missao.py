@@ -10,10 +10,10 @@ class TelaDadosMissao():
     def init_components(self, dados_missao):
         layout = [
             [sg.Text('Dados da Missão:')],
-            [sg.Text("Título:"), sg.InputText(dados_missao["titulo"], key='titulo')],
-            [sg.Text("Data:"), sg.InputText(dados_missao["data"], key='data')],
-            [sg.Text("Local:"), sg.InputText(dados_missao["local"], key='local')],
-            [sg.Text("Conflito:"), sg.InputText(dados_missao["conflito"], key='conflito')],
+            [sg.Text("Título:", size=(5, 1)), sg.InputText(dados_missao["titulo"], key='titulo')],
+            [sg.Text("Data:", size=(5, 1)), sg.InputText(dados_missao["data"], key='data')],
+            [sg.Text("Local:", size=(5, 1)), sg.InputText(dados_missao["local"], key='local')],
+            [sg.Text("Conflito:", size=(5, 1)), sg.InputText(dados_missao["conflito"], key='conflito')],
             [sg.Submit(button_text="Salvar")]
         ]
         self.__window = sg.Window('Dados da Missão').Layout(layout)

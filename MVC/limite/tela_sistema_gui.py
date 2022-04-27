@@ -9,6 +9,7 @@ class TelaSistemaGUI():
         self.init_components()
 
     def init_components(self):
+        sg.theme('Dark Teal 12')
         layout = [
             [sg.Text('Sistema de Gerenciamento de Super-Heróis')],
             [sg.Text('Atenção: antes de cadastrar uma missão, cadastre os integrantes dela (sencientes e clientes).')],

@@ -10,8 +10,8 @@ class TelaDadosTarefa():
     def init_components(self):
         layout = [
             [sg.Text('Dados da Tarefa:')],
-            [sg.Text("ID:"), sg.InputText(key='id')],
-            [sg.Text("Descrição:"), sg.InputText(key='descricao')],
+            [sg.Text("ID:", size=(8, 1)), sg.InputText(key='id')],
+            [sg.Text("Descrição:", size=(8, 1)), sg.InputText(key='descricao')],
             [sg.Submit(button_text="Salvar"), sg.Submit(button_text="Salvar e incluir +1 tarefa")]
         ]
         self.__window = sg.Window('Dados da Tarefa').Layout(layout)

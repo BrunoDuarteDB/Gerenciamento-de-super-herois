@@ -11,11 +11,11 @@ class TelaDadosSuperHeroi():
     def init_components(self, dados_super_heroi):
         layout = [
             [sg.Text('Dados:')],
-            [sg.Text('Nome:'), sg.InputText(dados_super_heroi['nome'], key='nome')],
-            [sg.Text('Fraqueza:'), sg.InputText(dados_super_heroi['fraqueza'], key='fraqueza')],
-            [sg.Text('Empresa:'), sg.InputText(dados_super_heroi['empresa'], key='empresa')],
-            [sg.Text('Local de Moradia:'), sg.InputText(dados_super_heroi['local_moradia'], key='local_moradia')],
-            [sg.Text('Alter Ego:'), sg.InputText(dados_super_heroi['alterego'], key='alterego')],
+            [sg.Text('Nome:', size=(13, 1)), sg.InputText(dados_super_heroi['nome'], key='nome')],
+            [sg.Text('Fraqueza:', size=(13, 1)), sg.InputText(dados_super_heroi['fraqueza'], key='fraqueza')],
+            [sg.Text('Empresa:', size=(13, 1)), sg.InputText(dados_super_heroi['empresa'], key='empresa')],
+            [sg.Text('Local de Moradia:', size=(13, 1)), sg.InputText(dados_super_heroi['local_moradia'], key='local_moradia')],
+            [sg.Text('Alter Ego:', size=(13, 1)), sg.InputText(dados_super_heroi['alterego'], key='alterego')],
             [sg.Submit(button_text="Salvar")]
         ]
         self.__window = sg.Window('Dados do Super-Herói').Layout(layout)
